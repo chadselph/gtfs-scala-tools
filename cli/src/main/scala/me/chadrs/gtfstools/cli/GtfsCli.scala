@@ -4,7 +4,7 @@ import java.nio.file.{Path, Paths}
 
 import better.files._
 import me.chadrs.gtfstools.csv.{CsvParser, CsvReader}
-import me.chadrs.gtfstools.types.{Agency, RouteId, Routes, StopTimes, Stops, TripId, Trips}
+import me.chadrs.gtfstools.types.{Agency, Calendar, CalendarDates, RouteId, Routes, StopTimes, Stops, TripId, Trips}
 
 import scala.reflect.ClassTag
 
@@ -90,6 +90,8 @@ class GtfsZipFile(filePath: Path) {
   lazy val routes = parseFile[Routes]("routes.txt")
   lazy val stops = parseFile[Stops]("stops.txt")
   lazy val agencies = parseFile[Agency]("agency.txt")
+  lazy val calendarDates = parseFile[CalendarDates]("calendar_dates.txt")
+  lazy val calendar = parseFile[Calendar]("calendar.txt")
 
   def tripsForRoute(routeId: String): Either[String, Seq[Trips]] = {
     trips.map { t => t.filter(_.routeId == RouteId(routeId)) }

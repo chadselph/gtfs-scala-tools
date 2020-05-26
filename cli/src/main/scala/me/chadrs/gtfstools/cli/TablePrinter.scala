@@ -19,12 +19,21 @@ object TablePrinter {
   def printTable[T <: Product: ClassTag](
       headers: Seq[String],
       s: Seq[T],
-      skipHeaders: Set[String]
+      includedOnly: List[String]
   ) = {
-    FlipTable.of(
-      headers.toArray,
-      s.toArray.map(t => t.productIterator.toArray.map(toStringHideOptions))
-    )
+    if (includedOnly.isEmpty) {
+      // default include all
+      FlipTable.of(
+        headers.toArray,
+        s.toArray.map(t => t.productIterator.toArray.map(toStringHideOptions))
+      )
+    } else {
+      val includeIndices = includedOnly.map(h => headers.indexOf(h))
+      FlipTable.of(includedOnly.toArray, s.toArray.map { t =>
+        val a = t.productIterator.toArray
+        includeIndices.map(a(_)).map(toStringHideOptions).toArray
+      })
+    }
 
   }
 

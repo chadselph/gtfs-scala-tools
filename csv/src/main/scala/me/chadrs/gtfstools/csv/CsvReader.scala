@@ -73,7 +73,7 @@ trait CsvCursor {
 
 object CsvFromString {
 
-  implicit val stringFromString: CsvFromString[String] = s => Right(Option(s).filter(_.nonEmpty))
+  implicit val stringFromString: CsvFromString[String] = s => Right(Option(s.trim).filter(_.nonEmpty))
 
   implicit val intFromString: CsvFromString[Int] =
     stringFromString.flatmapF(

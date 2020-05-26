@@ -26,13 +26,13 @@ lazy val cli = project
   .in(file("cli"))
   .enablePlugins(GraalVMNativeImagePlugin, JlinkPlugin)
   .settings(
+    resolvers += Resolver.sonatypeRepo("releases"),
     commonSettings,
     module("cli"),
     libraryDependencies ++= Seq(
-      "com.github.pathikrit" %% "better-files" % "3.8.0",
+      "com.github.pathikrit" %% "better-files" % "3.9.1",
       "com.jakewharton.fliptables" % "fliptables" % "1.1.0",
-      "org.backuity.clist" %% "clist-core" % "3.5.1",
-      "org.backuity.clist" %% "clist-macros" % "3.5.1" % "provided"
+      "com.github.alexarchambault" %% "case-app" % "2.0.0-M16"
     ),
     graalVMNativeImageOptions ++= Seq(
       "--report-unsupported-elements-at-runtime",

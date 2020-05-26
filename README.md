@@ -4,16 +4,24 @@ I basically wrote this to learn GTFS (static). I learn best by doing so
 
 ### CLI Tools
 
-* gtfs-hash
-* gtfs-cat
+```bash
+$ gtfs --help
 
-#### gtfs-cat
+Usage: gtfs [options] [command] [command-options]
+
+Available commands: agency, hash, routes, stops, stoptimes, trips
+```
+
+* agency - read agency.txt
+* hash - hash each file in feed (for comparing files)
+* routes - read routes.txt
+* stops - read stops.txt
+* stoptimes - read stoptimes.txt
+* trips - read trips.txt
 
 Install:
 
 tbd, using jitpack + coursier
-
-Usage:
 
 
 ### Codegen

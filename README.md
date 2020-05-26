@@ -4,7 +4,7 @@ I basically wrote this to learn GTFS (static). I learn best by doing so
 
 ### CLI Tools
 
-```bash
+```console
 $ gtfs --help
 
 Usage: gtfs [options] [command] [command-options]
@@ -21,8 +21,13 @@ Available commands: agency, hash, routes, stops, stoptimes, trips
 
 Install:
 
-tbd, using jitpack + coursier
+First, install [coursier](https://get-coursier.io/docs/cli-installation)
 
+then use it to bootstrap gtfs command
+
+```console
+$ cs bootstrap -r jitpack me.chadrs.gtfs-scala-tools:gtfs-tools-cli_2.13:0.0.1 -M me.chadrs.gtfstools.cli.Launcher -o gtfs
+```
 
 ### Codegen
 

@@ -8,10 +8,8 @@ import java.net.http.HttpResponse.BodyHandlers
 import java.nio.file.{Path, Paths}
 import java.util.zip.ZipInputStream
 
-import me.chadrs.gtfstools.csv.{CsvParser, CsvReader}
-import me.chadrs.gtfstools.types.{
-  Agency, Calendar, CalendarDates, RouteId, Routes, StopTimes, Stops, Trips
-}
+import me.chadrs.gtfstools.csv.{CsvFile, CsvParser, CsvReader, CsvRowViewer}
+import me.chadrs.gtfstools.types.{Agency, AgencyFileRow, Calendar, CalendarDates, RouteId, Routes, StopTimes, StopTimesFileRow, Stops, Trips, TripsFileRow}
 
 import scala.jdk.CollectionConverters._
 import scala.util.Try
@@ -86,51 +84,37 @@ object GtfsInput {
 
 class GtfsZipFile(inputStream: InputStream) {
 
-  val files: Map[String, Array[Byte]] = {
+  lazy val loadFiles: Map[String, Array[Byte]] = {
     val zis = inputStream.asZipInputStream
     zis.mapEntries { entry =>
       entry.getName -> zis.readAllBytes()
     }.toMap
   }
 
-  def rawFile(path: String): Either[String, String] = {
-    files
-      .get(path)
-      .toRight(s"$path is missing")
-      .flatMap(CsvParser.parseFile)
-      .left
-      .map(_.toString)
-      .map(csv => csv.headers.mkString(",") ++ csv.rows.map(_.mkString(",")).mkString("\n"))
-  }
+  def loadFile(path: String): Either[String, Array[Byte]] =
+    loadFiles.get(path).toRight(s"$path is missing")
+
+  def mapRows[T](csvFile: CsvFile)(mapper: Seq[String] => T): Seq[T] = csvFile.rows.map(mapper)
 
   def parseFile[T: CsvReader](path: String): Either[String, Seq[T]] = {
-    files
-      .get(path)
-      .toRight(s"$path is missing")
-      .flatMap(CsvParser.parseFile)
+    loadFile(path)
+      .map(UnivocityCsvParser.parseFile)
       .map(CsvReader.parseAs[T])
-      .map { lines =>
-        lines.collect {
-          case Left(err) => println(s"Warning $err")
-        }
-        lines.collect {
-          case Right(t) => t
-        }
-      }
-      .left
-      .map(_.toString())
+      .map(_.collect { case Right(t) => t })
   }
 
-  lazy val trips = parseFile[Trips]("trips.txt")
-  lazy val stopTimes = parseFile[StopTimes]("stop_times.txt")
-  lazy val routes = parseFile[Routes]("routes.txt")
-  lazy val stops = parseFile[Stops]("stops.txt")
-  lazy val agencies = parseFile[Agency]("agency.txt")
-  lazy val calendarDates = parseFile[CalendarDates]("calendar_dates.txt")
-  lazy val calendar = parseFile[Calendar]("calendar.txt")
+  def parseFileView[T: CsvRowViewer](path: String): Either[String, Seq[T]] = {
+    loadFile(path)
+      .map(UnivocityCsvParser.parseFile)
+      .map(CsvRowViewer.mapFile[T])
+  }
 
-  def tripsForRoute(routeId: String): Either[String, Seq[Trips]] = {
-    trips.map { t => t.filter(_.routeId == RouteId(routeId)) }
+  lazy val stopTimes = parseFileView[StopTimesFileRow]("stop_times.txt")
+  lazy val trips = parseFileView[TripsFileRow]("trips.txt")
+  lazy val agencies = parseFileView[AgencyFileRow]("agency.txt")
+
+  def tripsForRoute(routeId: String): Either[String, Seq[TripsFileRow]] = {
+    trips.map { t => t.filter(_.routeId.contains(RouteId(routeId))) }
   }
 
 }

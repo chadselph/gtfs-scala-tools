@@ -23,7 +23,7 @@ object PickupType {
 case class TripId(override val toString: String) extends AnyVal
 object TripId {
   implicit val csvFromString: CsvFromString[TripId] =
-    CsvFromString.stringFromString.map(TripId.apply)
+    CsvFromString.fromTrimmedString.map(TripId.apply)
 }
 case class TransferType(toValue: Int) extends AnyVal {
   override def toString: String = {
@@ -64,12 +64,12 @@ object TableName {
 case class ShapeId(override val toString: String) extends AnyVal
 object ShapeId {
   implicit val csvFromString: CsvFromString[ShapeId] =
-    CsvFromString.stringFromString.map(ShapeId.apply)
+    CsvFromString.fromTrimmedString.map(ShapeId.apply)
 }
 case class RecordId(override val toString: String) extends AnyVal
 object RecordId {
   implicit val csvFromString: CsvFromString[RecordId] =
-    CsvFromString.stringFromString.map(RecordId.apply)
+    CsvFromString.fromTrimmedString.map(RecordId.apply)
 }
 case class PaymentMethod(toValue: Int) extends AnyVal {
   override def toString: String = {
@@ -83,7 +83,7 @@ object PaymentMethod {
 case class RouteId(override val toString: String) extends AnyVal
 object RouteId {
   implicit val csvFromString: CsvFromString[RouteId] =
-    CsvFromString.stringFromString.map(RouteId.apply)
+    CsvFromString.fromTrimmedString.map(RouteId.apply)
 }
 case class ExceptionType(toValue: Int) extends AnyVal {
   override def toString: String = {
@@ -97,7 +97,7 @@ object ExceptionType {
 case class AttributionId(override val toString: String) extends AnyVal
 object AttributionId {
   implicit val csvFromString: CsvFromString[AttributionId] =
-    CsvFromString.stringFromString.map(AttributionId.apply)
+    CsvFromString.fromTrimmedString.map(AttributionId.apply)
 }
 case class WheelchairAccessible(toValue: Int) extends AnyVal {
   override def toString: String = {
@@ -120,32 +120,32 @@ object WheelchairBoarding {
 case class BlockId(override val toString: String) extends AnyVal
 object BlockId {
   implicit val csvFromString: CsvFromString[BlockId] =
-    CsvFromString.stringFromString.map(BlockId.apply)
+    CsvFromString.fromTrimmedString.map(BlockId.apply)
 }
 case class PathwayId(override val toString: String) extends AnyVal
 object PathwayId {
   implicit val csvFromString: CsvFromString[PathwayId] =
-    CsvFromString.stringFromString.map(PathwayId.apply)
+    CsvFromString.fromTrimmedString.map(PathwayId.apply)
 }
 case class FareId(override val toString: String) extends AnyVal
 object FareId {
   implicit val csvFromString: CsvFromString[FareId] =
-    CsvFromString.stringFromString.map(FareId.apply)
+    CsvFromString.fromTrimmedString.map(FareId.apply)
 }
 case class ServiceId(override val toString: String) extends AnyVal
 object ServiceId {
   implicit val csvFromString: CsvFromString[ServiceId] =
-    CsvFromString.stringFromString.map(ServiceId.apply)
+    CsvFromString.fromTrimmedString.map(ServiceId.apply)
 }
 case class AgencyId(override val toString: String) extends AnyVal
 object AgencyId {
   implicit val csvFromString: CsvFromString[AgencyId] =
-    CsvFromString.stringFromString.map(AgencyId.apply)
+    CsvFromString.fromTrimmedString.map(AgencyId.apply)
 }
 case class RecordSubId(override val toString: String) extends AnyVal
 object RecordSubId {
   implicit val csvFromString: CsvFromString[RecordSubId] =
-    CsvFromString.stringFromString.map(RecordSubId.apply)
+    CsvFromString.fromTrimmedString.map(RecordSubId.apply)
 }
 case class LocationType(toValue: Int) extends AnyVal {
   override def toString: String = {
@@ -177,7 +177,7 @@ object RouteType {
 case class LevelId(override val toString: String) extends AnyVal
 object LevelId {
   implicit val csvFromString: CsvFromString[LevelId] =
-    CsvFromString.stringFromString.map(LevelId.apply)
+    CsvFromString.fromTrimmedString.map(LevelId.apply)
 }
 case class ExactTimes(toValue: Int) extends AnyVal {
   override def toString: String = {
@@ -191,12 +191,12 @@ object ExactTimes {
 case class StopId(override val toString: String) extends AnyVal
 object StopId {
   implicit val csvFromString: CsvFromString[StopId] =
-    CsvFromString.stringFromString.map(StopId.apply)
+    CsvFromString.fromTrimmedString.map(StopId.apply)
 }
 case class ZoneId(override val toString: String) extends AnyVal
 object ZoneId {
   implicit val csvFromString: CsvFromString[ZoneId] =
-    CsvFromString.stringFromString.map(ZoneId.apply)
+    CsvFromString.fromTrimmedString.map(ZoneId.apply)
 }
 case class BikesAllowed(toValue: Int) extends AnyVal {
   override def toString: String = {

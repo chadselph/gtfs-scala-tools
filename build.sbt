@@ -32,6 +32,7 @@ lazy val cli = project
     libraryDependencies ++= Seq(
       "com.github.pathikrit" %% "better-files" % "3.9.1",
       "com.jakewharton.fliptables" % "fliptables" % "1.1.0",
+      "com.univocity" % "univocity-parsers" % "2.8.4",
       "com.github.alexarchambault" %% "case-app" % "2.0.0-M16"
     ),
     graalVMNativeImageOptions ++= Seq(

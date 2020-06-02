@@ -16,7 +16,8 @@ object GtfsOptions {
 
   case class CommonFileOptions(
       @HelpMessage("Output format. Can be table or csv") format: Option[String],
-      @HelpMessage("Columns to include") col: List[String]
+      @HelpMessage("Columns to include") col: List[String],
+      @HelpMessage("Log how long it took") time: Boolean = false
   )
 
   sealed trait FileCommandOptions {
@@ -31,5 +32,7 @@ object GtfsOptions {
   case class Stoptimes(@Recurse args: CommonFileOptions, trip: String)
       extends GtfsOptions
       with FileCommandOptions
+  case class Calendar(@Recurse args: CommonFileOptions) extends GtfsOptions with FileCommandOptions
+  case class CalendarDates(@Recurse args: CommonFileOptions) extends GtfsOptions with FileCommandOptions
 
 }

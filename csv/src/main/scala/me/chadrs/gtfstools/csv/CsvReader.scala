@@ -13,7 +13,7 @@ trait CsvReader[F] {
     file.rows.zipWithIndex.map {
       case (row, rowNum) =>
         // TODO get extra columns
-        readRow(new IndexSeqCsvCursor(indices, row.toIndexedSeq, rowNum + 2))
+        readRow(new IndexedSeqCsvCursor(indices, row.toIndexedSeq, rowNum + 2))
     }
   }
 
@@ -27,7 +27,29 @@ object CsvReader {
 
   def parseAs[T](file: CsvFile)(implicit reader: CsvReader[T]): Seq[Result[T]] =
     reader.readFile(file)
+}
 
+/**
+ * Similar to [[CsvReader]] but the validation is deferred
+ * so [[CsvRowViewer]].fromCsvCursor cannot fail, but actually
+ * reading the column might. This makes more lenient apps possible
+ * since we can just skip validation on columns we don't care about.
+ */
+trait CsvRowViewer[F] {
+
+  def mapFile(file: CsvFile): Seq[F] = {
+    val indices = file.headers.zipWithIndex.toMap
+    file.rows.zipWithIndex.map {
+      case (row, rowNum) =>
+        fromCsvCursor(new IndexedSeqCsvCursor(indices, row.toIndexedSeq, rowNum + 2))
+    }
+  }
+
+  def fromCsvCursor(cursor: IndexedSeqCsvCursor): F
+}
+
+object CsvRowViewer {
+  def mapFile[F: CsvRowViewer](file: CsvFile): Seq[F] = implicitly[CsvRowViewer[F]].mapFile(file)
 }
 
 trait CsvFromString[T] {
@@ -46,9 +68,10 @@ trait CsvFromString[T] {
 trait CsvCursor {
   def required[T: CsvFromString](key: String): CsvReader.Result[T]
   def optionally[T: CsvFromString](key: String): CsvReader.Result[Option[T]]
+  def toMap: Map[String, String]
 }
 
-class IndexSeqCsvCursor(indices: Map[String, Int], row: IndexedSeq[String], rowNumber: Int)
+class IndexedSeqCsvCursor(indices: Map[String, Int], row: IndexedSeq[String], rowNumber: Int)
     extends CsvCursor {
 
   override def required[T: CsvFromString](key: String): CsvReader.Result[T] =
@@ -67,6 +90,9 @@ class IndexSeqCsvCursor(indices: Map[String, Int], row: IndexedSeq[String], rowN
       .left
       .map(error => s"Row $rowNumber column $key: $error")
   }
+
+  override def toMap: Map[String, String] = indices.view.mapValues(row.apply).toMap
+
   protected def readValue[T](s: String)(implicit reader: CsvFromString[T]): Result[Option[T]] =
     reader.fromString(s)
 

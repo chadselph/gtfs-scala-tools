@@ -1,5 +1,7 @@
 package me.chadrs.gtfstools.csv
 
+import java.io.{ByteArrayInputStream, InputStream}
+
 import org.parboiled2._
 
 sealed trait IsRequired
@@ -46,7 +48,7 @@ class CsvParser(val input: ParserInput) extends Parser {
 object CsvParser {
   import org.parboiled2.Parser.DeliveryScheme.Either
   def parseFile(bytes: Array[Byte]) = {
-    val parser = new CsvParser(ParserInput(bytes))
+    val parser = new CsvParser(ParserInput(new String(bytes)))
     parser.csvFile.run()
   }
 }

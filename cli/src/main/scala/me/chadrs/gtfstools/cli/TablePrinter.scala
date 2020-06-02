@@ -29,10 +29,28 @@ object TablePrinter {
       )
     } else {
       val includeIndices = includedOnly.map(h => headers.indexOf(h))
-      FlipTable.of(includedOnly.toArray, s.toArray.map { t =>
-        val a = t.productIterator.toArray
-        includeIndices.map(a(_)).map(toStringHideOptions).toArray
-      })
+      FlipTable.of(
+        includedOnly.toArray,
+        s.toArray.map { t =>
+          val a = t.productIterator.toArray
+          includeIndices.map(a(_)).map(toStringHideOptions).toArray
+        }
+      )
+    }
+
+  }
+  def printTableRaw(headers: Seq[String], s: Array[Array[String]], includedOnly: List[String]) = {
+    if (includedOnly.isEmpty) {
+      // default include all
+      FlipTable.of(headers.toArray, s)
+    } else {
+      val includeIndices = includedOnly.map(h => headers.indexOf(h))
+      FlipTable.of(
+        includedOnly.toArray,
+        s.map { t =>
+          includeIndices.map(t(_)).map(toStringHideOptions).toArray
+        }
+      )
     }
 
   }

@@ -10,46 +10,81 @@ import scala.reflect.ClassTag
 
 object FileCmd {
 
+  private val started = System.currentTimeMillis()
+
   def run(options: FileCommandOptions, remainingArgs: RemainingArgs): Unit = {
     remainingArgs.remaining.map(GtfsInput.fromString).foreach { errorOrFile =>
       errorOrFile
         .flatMap { input =>
           val loadedFile = input.toGtfsZipFile
           options match {
-            case GtfsOptions.Trips(args, routeId) =>
-              routeId.fold(ifEmpty = runCommand(loadedFile.trips, Trips.Fields, args)) { routeId =>
-                runCommand(loadedFile.tripsForRoute(routeId), Trips.Fields, args)
+            case GtfsOptions.Trips(args, None) =>
+              loadedFile.trips.flatMap { ts =>
+                runCommand(ts.map(_.toMap), Trips.Fields, args)
+              }
+            case GtfsOptions.Trips(args, Some(routeId)) =>
+              loadedFile.trips.flatMap { ts =>
+                runCommand(
+                  ts.filter(_.routeId.contains(RouteId(routeId))).map(_.toMap),
+                  Trips.Fields,
+                  args
+                )
               }
             case GtfsOptions.Routes(args) =>
-              runCommand(loadedFile.routes, Routes.Fields, args)
+              loadedFile.parseFileView[RoutesFileRow]("routes.txt").flatMap { routes =>
+                runCommand(routes.map(_.toMap), Routes.Fields, args)
+              }
             case GtfsOptions.Agency(args) =>
-              runCommand(loadedFile.agencies, Agency.Fields, args)
+              loadedFile.agencies.flatMap { agency =>
+                runCommand(agency.map(_.toMap), Agency.Fields, args)
+              }
             case GtfsOptions.Stops(args) =>
-              runCommand(loadedFile.stops, Stops.Fields, args)
+              loadedFile.parseFileView[StopTimesFileRow]("stops.txt").flatMap { stops =>
+                runCommand(stops.map(_.toMap), Stops.Fields, args)
+              }
             case GtfsOptions.Stoptimes(args, tripSearch) =>
               val tripId = loadedFile.trips.toOption
                 .flatMap(_.collectFirst {
                   case trip if trip.tripShortName.contains(tripSearch) => trip.tripId
                 })
                 .getOrElse(TripId(tripSearch))
-              runCommand(
-                loadedFile.stopTimes.map(st => st.filter(s => s.tripId == tripId)),
-                StopTimes.Fields,
-                args
-              )
+              loadedFile.stopTimes.map(st => st.filter(s => s.tripId.contains(tripId))).flatMap { input =>
+                runCommand(input.map(_.toMap), StopTimes.Fields, args)
+              }
+            case GtfsOptions.Calendar(args) =>
+              loadedFile.parseFileView[CalendarFileRow]("calendar.txt")
+                .flatMap(input => runCommand(input.map(_.toMap), Calendar.Fields, args))
+            case GtfsOptions.CalendarDates(args) =>
+              loadedFile.parseFileView[CalendarDatesFileRow]("calendar_dates.txt")
+                .flatMap(input => runCommand(input.map(_.toMap), CalendarDates.Fields, args))
           }
         }
-        .fold(println, println)
+        .fold(
+          (err: String) => {
+            System.err.println(err)
+            System.exit(255)
+          },
+          (s: String) => {
+            println(s)
+            if (options.args.time) {
+              println(s"Took ${System.currentTimeMillis() - started}ms")
+            }
+          }
+        )
     }
   }
-
-  def runCommand[T <: Product: ClassTag](
-      input: CsvReader.Result[Seq[T]],
+  def runCommand[T: ClassTag](
+      input: Seq[Map[String, String]],
       headers: Seq[String],
       commonFileOptions: CommonFileOptions
   ): Either[String, String] = {
     if (commonFileOptions.col.forall(headers.contains)) {
-      input.map(s => TablePrinter.printTable(headers ++ Array("Extra"), s, commonFileOptions.col))
+      val inputAsArrays = input.map(x => headers.map(x.getOrElse(_, "")).toArray).toArray
+      if (commonFileOptions.format.contains("csv")) {
+        Left("Unknown format")
+      } else {
+        Right(TablePrinter.printTableRaw(headers, inputAsArrays, commonFileOptions.col))
+      }
     } else {
       val missing = (commonFileOptions.col.toSet diff headers.toSet).mkString(", ")
       Left(s"Invalid columns: $missing. Expected one of: ${headers.mkString(",")}")

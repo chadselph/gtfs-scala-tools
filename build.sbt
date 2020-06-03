@@ -48,6 +48,20 @@ lazy val cli = project
       "shapeless" -> "scala.tools",
       "better.files" -> "scala.reflect",
       "org.parboiled2" -> "scala.reflect"
-    )
+    ),
+    initialCommands in console :=
+      """import me.chadrs.gtfstools._;
+        |import me.chadrs.gtfstools.cli._;
+        |import me.chadrs.gtfstools.types._""".stripMargin
   )
   .dependsOn(types)
+
+lazy val benchmarks = project
+  .in(file("benchmarks"))
+  .settings(
+    commonSettings,
+    module("benchmarks"),
+    libraryDependencies += "com.univocity" % "univocity-parsers" % "2.8.4"
+  )
+  .dependsOn(types)
+  .enablePlugins(JmhPlugin)

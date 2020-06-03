@@ -31,7 +31,7 @@ object FileCmd {
                 )
               }
             case GtfsOptions.Routes(args) =>
-              loadedFile.parseFileView[RoutesFileRow]("routes.txt").flatMap { routes =>
+              loadedFile.parseFile[RoutesFileRow]("routes.txt").flatMap { routes =>
                 runCommand(routes.map(_.toMap), Routes.Fields, args)
               }
             case GtfsOptions.Agency(args) =>
@@ -39,7 +39,7 @@ object FileCmd {
                 runCommand(agency.map(_.toMap), Agency.Fields, args)
               }
             case GtfsOptions.Stops(args) =>
-              loadedFile.parseFileView[StopTimesFileRow]("stops.txt").flatMap { stops =>
+              loadedFile.parseFile[StopTimesFileRow]("stops.txt").flatMap { stops =>
                 runCommand(stops.map(_.toMap), Stops.Fields, args)
               }
             case GtfsOptions.Stoptimes(args, tripSearch) =>
@@ -52,10 +52,10 @@ object FileCmd {
                 runCommand(input.map(_.toMap), StopTimes.Fields, args)
               }
             case GtfsOptions.Calendar(args) =>
-              loadedFile.parseFileView[CalendarFileRow]("calendar.txt")
+              loadedFile.parseFile[CalendarFileRow]("calendar.txt")
                 .flatMap(input => runCommand(input.map(_.toMap), Calendar.Fields, args))
             case GtfsOptions.CalendarDates(args) =>
-              loadedFile.parseFileView[CalendarDatesFileRow]("calendar_dates.txt")
+              loadedFile.parseFile[CalendarDatesFileRow]("calendar_dates.txt")
                 .flatMap(input => runCommand(input.map(_.toMap), CalendarDates.Fields, args))
           }
         }

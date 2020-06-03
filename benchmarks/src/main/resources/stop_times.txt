@@ -1,0 +1,619 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type
+49414817-DEC19-D07CAR-3_Sunday,05:26:00,05:26:00,16535,1,37 - Beverly - Pico,1,1
+49414817-DEC19-D07CAR-3_Sunday,05:27:00,05:27:00,16530,2,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:28:00,05:28:00,55,3,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:28:00,05:28:00,7481,4,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:29:00,05:29:00,7461,5,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:30:00,05:30:00,7467,6,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:30:00,05:30:00,7476,7,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:31:00,05:31:00,7474,8,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:32:00,05:32:00,7471,9,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:33:00,05:33:00,15807,10,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:34:00,05:34:00,7482,11,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:35:00,05:35:00,8213,12,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:35:00,05:35:00,7464,13,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:36:00,05:36:00,7457,14,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:37:00,05:37:00,7451,15,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:38:00,05:38:00,7449,16,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:39:00,05:39:00,7453,17,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:39:00,05:39:00,7456,18,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:40:00,05:40:00,7477,19,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:41:00,05:41:00,7479,20,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:42:00,05:42:00,7462,21,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:42:00,05:42:00,7460,22,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:43:00,05:43:00,7475,23,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:44:00,05:44:00,7465,24,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:45:00,05:45:00,56,25,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:46:00,05:46:00,7463,26,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:47:00,05:47:00,7473,27,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:48:00,05:48:00,7480,28,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:49:00,05:49:00,7455,29,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:49:00,05:49:00,7468,30,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:50:00,05:50:00,7459,31,37 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:51:00,05:51:00,16950,32,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:52:00,05:52:00,5376,33,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:53:00,05:53:00,5389,34,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:54:00,05:54:00,6952,35,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:55:00,05:55:00,5388,36,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:57:00,05:57:00,99,37,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:58:00,05:58:00,5383,38,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,05:59:00,05:59:00,9264,39,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:00:00,06:00:00,5378,40,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:02:00,06:02:00,4105,41,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:03:00,06:03:00,70500013,42,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:05:00,06:05:00,7257,43,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:08:00,06:08:00,407,44,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:08:00,06:08:00,428,45,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:10:00,06:10:00,413,46,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:11:00,06:11:00,9029,47,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:12:00,06:12:00,415,48,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:13:00,06:13:00,427,49,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:13:00,06:13:00,419,50,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:15:00,06:15:00,433,51,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:16:00,06:16:00,432,52,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:17:00,06:17:00,420,53,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:18:00,06:18:00,425,54,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:19:00,06:19:00,404,55,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:19:00,06:19:00,434,56,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:20:00,06:20:00,140893,57,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:21:00,06:21:00,140894,58,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:21:00,06:21:00,140895,59,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:22:00,06:22:00,140896,60,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:23:00,06:23:00,12340,61,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:24:00,06:24:00,140897,62,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:25:00,06:25:00,140898,63,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:26:00,06:26:00,140899,64,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:26:00,06:26:00,421,65,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:27:00,06:27:00,140901,66,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:27:00,06:27:00,140902,67,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:28:00,06:28:00,140903,68,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:29:00,06:29:00,140906,69,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:30:00,06:30:00,140907,70,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:31:00,06:31:00,140908,71,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:31:00,06:31:00,140909,72,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:32:00,06:32:00,140910,73,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:33:00,06:33:00,36588,74,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:34:00,06:34:00,100,75,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:35:00,06:35:00,140911,76,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:36:00,06:36:00,140912,77,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:37:00,06:37:00,140913,78,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:37:00,06:37:00,140914,79,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:38:00,06:38:00,140915,80,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:41:00,06:41:00,4459,81,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:43:00,06:43:00,140916,82,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:43:00,06:43:00,13184,83,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:44:00,06:44:00,13185,84,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:45:00,06:45:00,9030,85,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:47:00,06:47:00,4731,86,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:48:00,06:48:00,4729,87,Change to Route 14 - Beverly - Pico,0,0
+49414817-DEC19-D07CAR-3_Sunday,06:48:00,06:48:00,1728,88,Change to Route 14 - Beverly - Pico,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:00:00,07:00:00,9028,1,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:01:00,07:01:00,9014,2,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:01:00,07:01:00,9019,3,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:02:00,07:02:00,8998,4,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:03:00,07:03:00,8999,5,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:04:00,07:04:00,8989,6,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:05:00,07:05:00,8988,7,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:05:00,07:05:00,9001,8,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:05:00,07:05:00,9012,9,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:06:00,07:06:00,9015,10,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:07:00,07:07:00,9007,11,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:08:00,07:08:00,9011,12,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:08:00,07:08:00,9002,13,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:09:00,07:09:00,9004,14,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:11:00,07:11:00,9018,15,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:12:00,07:12:00,140918,16,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:13:00,07:13:00,9026,17,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:13:00,07:13:00,9021,18,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:14:00,07:14:00,9025,19,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:15:00,07:15:00,442,20,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:16:00,07:16:00,8990,21,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:17:00,07:17:00,9013,22,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:18:00,07:18:00,9005,23,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:19:00,07:19:00,429,24,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:20:00,07:20:00,8987,25,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:21:00,07:21:00,9003,26,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:22:00,07:22:00,9016,27,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:23:00,07:23:00,8994,28,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:24:00,07:24:00,426,29,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:25:00,07:25:00,8993,30,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:27:00,07:27:00,9020,31,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:27:00,07:27:00,8992,32,14 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:30:00,07:30:00,15610,33,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:32:00,07:32:00,15613,34,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:32:00,07:32:00,142453,35,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:34:00,07:34:00,13560,36,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:35:00,07:35:00,13561,37,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:36:00,07:36:00,13562,38,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:37:00,07:37:00,13567,39,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:37:00,07:37:00,13568,40,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:39:00,07:39:00,13572,41,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:39:00,07:39:00,13551,42,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:41:00,07:41:00,10802,43,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:42:00,07:42:00,13549,44,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:44:00,07:44:00,13576,45,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:45:00,07:45:00,13573,46,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:47:00,07:47:00,10809,47,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:48:00,07:48:00,15819,48,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:49:00,07:49:00,15808,49,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:49:00,07:49:00,8656,50,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:51:00,07:51:00,15824,51,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:52:00,07:52:00,15814,52,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:53:00,07:53:00,15832,53,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:54:00,07:54:00,15815,54,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:55:00,07:55:00,4574,55,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:55:00,07:55:00,8654,56,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:56:00,07:56:00,15813,57,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:57:00,07:57:00,15833,58,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:57:00,07:57:00,15830,59,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:58:00,07:58:00,15809,60,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:59:00,07:59:00,15806,61,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,07:59:00,07:59:00,15803,62,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:00:00,08:00:00,15804,63,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:01:00,08:01:00,15801,64,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:02:00,08:02:00,15802,65,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:02:00,08:02:00,15810,66,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:03:00,08:03:00,15835,67,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:04:00,08:04:00,7454,68,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:05:00,08:05:00,15822,69,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:06:00,08:06:00,15825,70,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:07:00,08:07:00,15829,71,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:08:00,08:08:00,15817,72,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:09:00,08:09:00,15812,73,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:10:00,08:10:00,15834,74,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:11:00,08:11:00,15818,75,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:12:00,08:12:00,13406,76,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414818-DEC19-D07CAR-3_Sunday,08:13:00,08:13:00,16535,77,Change to Route 37 - Washington / Fairfax Transit Hub,1,1
+49414819-DEC19-D07CAR-3_Sunday,08:43:00,08:43:00,16535,1,37 - Beverly - Pico,1,1
+49414819-DEC19-D07CAR-3_Sunday,08:44:00,08:44:00,16530,2,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:45:00,08:45:00,55,3,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:46:00,08:46:00,7481,4,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:47:00,08:47:00,7461,5,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:48:00,08:48:00,7467,6,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:49:00,08:49:00,7476,7,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:50:00,08:50:00,7474,8,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:51:00,08:51:00,7471,9,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:53:00,08:53:00,15807,10,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:54:00,08:54:00,7482,11,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:55:00,08:55:00,8213,12,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:55:00,08:55:00,7464,13,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:56:00,08:56:00,7457,14,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:58:00,08:58:00,7451,15,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:58:00,08:58:00,7449,16,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,08:59:00,08:59:00,7453,17,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:00:00,09:00:00,7456,18,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:01:00,09:01:00,7477,19,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:02:00,09:02:00,7479,20,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:03:00,09:03:00,7462,21,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:04:00,09:04:00,7460,22,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:05:00,09:05:00,7475,23,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:06:00,09:06:00,7465,24,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:07:00,09:07:00,56,25,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:08:00,09:08:00,7463,26,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:09:00,09:09:00,7473,27,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:10:00,09:10:00,7480,28,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:11:00,09:11:00,7455,29,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:12:00,09:12:00,7468,30,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:13:00,09:13:00,7459,31,37 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:14:00,09:14:00,16950,32,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:15:00,09:15:00,5376,33,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:17:00,09:17:00,5389,34,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:18:00,09:18:00,6952,35,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:19:00,09:19:00,5388,36,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:21:00,09:21:00,99,37,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:23:00,09:23:00,5383,38,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:24:00,09:24:00,9264,39,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:25:00,09:25:00,5378,40,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:27:00,09:27:00,4105,41,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:29:00,09:29:00,70500013,42,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:31:00,09:31:00,7257,43,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:34:00,09:34:00,407,44,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:35:00,09:35:00,428,45,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:36:00,09:36:00,413,46,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:38:00,09:38:00,9029,47,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:39:00,09:39:00,415,48,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:40:00,09:40:00,427,49,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:41:00,09:41:00,419,50,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:42:00,09:42:00,433,51,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:44:00,09:44:00,432,52,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:45:00,09:45:00,420,53,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:46:00,09:46:00,425,54,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:48:00,09:48:00,404,55,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:49:00,09:49:00,434,56,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:50:00,09:50:00,140893,57,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:50:00,09:50:00,140894,58,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:51:00,09:51:00,140895,59,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:53:00,09:53:00,140896,60,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:53:00,09:53:00,12340,61,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:56:00,09:56:00,140897,62,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:57:00,09:57:00,140898,63,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:57:00,09:57:00,140899,64,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:58:00,09:58:00,421,65,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,09:59:00,09:59:00,140901,66,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:00:00,10:00:00,140902,67,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:00:00,10:00:00,140903,68,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:02:00,10:02:00,140906,69,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:03:00,10:03:00,140907,70,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:04:00,10:04:00,140908,71,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:05:00,10:05:00,140909,72,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:06:00,10:06:00,140910,73,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:07:00,10:07:00,36588,74,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:08:00,10:08:00,100,75,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:09:00,10:09:00,140911,76,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:10:00,10:10:00,140912,77,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:11:00,10:11:00,140913,78,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:12:00,10:12:00,140914,79,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:13:00,10:13:00,140915,80,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:17:00,10:17:00,4459,81,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:18:00,10:18:00,140916,82,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:19:00,10:19:00,13184,83,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:20:00,10:20:00,13185,84,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:21:00,10:21:00,9030,85,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:23:00,10:23:00,4731,86,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:24:00,10:24:00,4729,87,Change to Route 14 - Beverly - Pico,0,0
+49414819-DEC19-D07CAR-3_Sunday,10:25:00,10:25:00,1728,88,Change to Route 14 - Beverly - Pico,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:07:00,10:07:00,9028,1,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:08:00,10:08:00,9014,2,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:09:00,10:09:00,9019,3,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:10:00,10:10:00,8998,4,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:11:00,10:11:00,8999,5,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:12:00,10:12:00,8989,6,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:13:00,10:13:00,8988,7,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:13:00,10:13:00,9001,8,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:14:00,10:14:00,9012,9,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:15:00,10:15:00,9015,10,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:16:00,10:16:00,9007,11,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:17:00,10:17:00,9011,12,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:18:00,10:18:00,9002,13,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:19:00,10:19:00,9004,14,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:21:00,10:21:00,9018,15,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:22:00,10:22:00,140918,16,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:23:00,10:23:00,9026,17,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:24:00,10:24:00,9021,18,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:25:00,10:25:00,9025,19,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:26:00,10:26:00,442,20,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:27:00,10:27:00,8990,21,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:28:00,10:28:00,9013,22,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:29:00,10:29:00,9005,23,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:31:00,10:31:00,429,24,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:33:00,10:33:00,8987,25,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:34:00,10:34:00,9003,26,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:35:00,10:35:00,9016,27,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:36:00,10:36:00,8994,28,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:37:00,10:37:00,426,29,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:38:00,10:38:00,8993,30,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:40:00,10:40:00,9020,31,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:41:00,10:41:00,8992,32,14 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:44:00,10:44:00,15610,33,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:46:00,10:46:00,15613,34,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:46:00,10:46:00,142453,35,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:48:00,10:48:00,13560,36,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:50:00,10:50:00,13561,37,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:50:00,10:50:00,13562,38,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:51:00,10:51:00,13567,39,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:52:00,10:52:00,13568,40,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:53:00,10:53:00,13572,41,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:54:00,10:54:00,13551,42,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:55:00,10:55:00,10802,43,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:57:00,10:57:00,13549,44,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,10:59:00,10:59:00,13576,45,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:01:00,11:01:00,13573,46,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:02:00,11:02:00,10809,47,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:04:00,11:04:00,15819,48,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:05:00,11:05:00,15808,49,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:05:00,11:05:00,8656,50,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:07:00,11:07:00,15824,51,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:08:00,11:08:00,15814,52,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:09:00,11:09:00,15832,53,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:10:00,11:10:00,15815,54,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:11:00,11:11:00,4574,55,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:12:00,11:12:00,8654,56,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:13:00,11:13:00,15813,57,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:14:00,11:14:00,15833,58,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:14:00,11:14:00,15830,59,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:15:00,11:15:00,15809,60,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:16:00,11:16:00,15806,61,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:17:00,11:17:00,15803,62,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:18:00,11:18:00,15804,63,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:19:00,11:19:00,15801,64,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:20:00,11:20:00,15802,65,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:21:00,11:21:00,15810,66,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:21:00,11:21:00,15835,67,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:22:00,11:22:00,7454,68,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:24:00,11:24:00,15822,69,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:25:00,11:25:00,15825,70,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:26:00,11:26:00,15829,71,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:27:00,11:27:00,15817,72,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:28:00,11:28:00,15812,73,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:29:00,11:29:00,15834,74,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:30:00,11:30:00,15818,75,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:31:00,11:31:00,13406,76,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414820-DEC19-D07CAR-3_Sunday,11:32:00,11:32:00,16535,77,Change to Route 37 - Washington / Fairfax Transit Hub,1,1
+49414821-DEC19-D07CAR-3_Sunday,15:07:00,15:07:00,16535,1,37 - Beverly Center,1,1
+49414821-DEC19-D07CAR-3_Sunday,15:08:00,15:08:00,16530,2,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:10:00,15:10:00,55,3,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:11:00,15:11:00,7481,4,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:12:00,15:12:00,7461,5,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:13:00,15:13:00,7467,6,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:14:00,15:14:00,7476,7,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:15:00,15:15:00,7474,8,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:16:00,15:16:00,7471,9,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:18:00,15:18:00,15807,10,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:19:00,15:19:00,7482,11,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:20:00,15:20:00,8213,12,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:20:00,15:20:00,7464,13,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:21:00,15:21:00,7457,14,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:23:00,15:23:00,7451,15,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:23:00,15:23:00,7449,16,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:24:00,15:24:00,7453,17,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:25:00,15:25:00,7456,18,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:26:00,15:26:00,7477,19,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:27:00,15:27:00,7479,20,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:28:00,15:28:00,7462,21,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:29:00,15:29:00,7460,22,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:30:00,15:30:00,7475,23,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:31:00,15:31:00,7465,24,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:32:00,15:32:00,56,25,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:33:00,15:33:00,7463,26,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:34:00,15:34:00,7473,27,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:35:00,15:35:00,7480,28,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:36:00,15:36:00,7455,29,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:37:00,15:37:00,7468,30,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:38:00,15:38:00,7459,31,37 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:39:00,15:39:00,16950,32,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:40:00,15:40:00,5376,33,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:42:00,15:42:00,5389,34,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:43:00,15:43:00,6952,35,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:44:00,15:44:00,5388,36,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:46:00,15:46:00,99,37,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:48:00,15:48:00,5383,38,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:49:00,15:49:00,9264,39,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:50:00,15:50:00,5378,40,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:53:00,15:53:00,4105,41,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:55:00,15:55:00,70500013,42,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,15:57:00,15:57:00,7257,43,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:00:00,16:00:00,407,44,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:01:00,16:01:00,428,45,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:02:00,16:02:00,413,46,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:04:00,16:04:00,9029,47,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:05:00,16:05:00,415,48,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:06:00,16:06:00,427,49,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:07:00,16:07:00,419,50,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:08:00,16:08:00,433,51,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:10:00,16:10:00,432,52,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:11:00,16:11:00,420,53,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:12:00,16:12:00,425,54,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:14:00,16:14:00,404,55,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:15:00,16:15:00,434,56,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:16:00,16:16:00,140893,57,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:17:00,16:17:00,140894,58,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:18:00,16:18:00,140895,59,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:19:00,16:19:00,140896,60,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:20:00,16:20:00,12340,61,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:22:00,16:22:00,140897,62,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:23:00,16:23:00,140898,63,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:24:00,16:24:00,140899,64,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:25:00,16:25:00,421,65,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:26:00,16:26:00,140901,66,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:27:00,16:27:00,140902,67,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:27:00,16:27:00,140903,68,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:29:00,16:29:00,140906,69,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:29:00,16:29:00,140907,70,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:31:00,16:31:00,140908,71,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:32:00,16:32:00,140909,72,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:32:00,16:32:00,140910,73,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:34:00,16:34:00,12146,74,Change to Route 14 - Beverly Center,0,0
+49414821-DEC19-D07CAR-3_Sunday,16:35:00,16:35:00,5898,75,Change to Route 14 - Beverly Center,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:38:00,18:38:00,16535,1,37 - Beverly - Pico,1,1
+49414822-DEC19-D07CAR-3_Sunday,18:39:00,18:39:00,16530,2,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:40:00,18:40:00,55,3,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:41:00,18:41:00,7481,4,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:42:00,18:42:00,7461,5,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:43:00,18:43:00,7467,6,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:44:00,18:44:00,7476,7,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:45:00,18:45:00,7474,8,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:46:00,18:46:00,7471,9,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:48:00,18:48:00,15807,10,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:48:00,18:48:00,7482,11,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:49:00,18:49:00,8213,12,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:50:00,18:50:00,7464,13,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:51:00,18:51:00,7457,14,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:52:00,18:52:00,7451,15,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:53:00,18:53:00,7449,16,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:54:00,18:54:00,7453,17,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:55:00,18:55:00,7456,18,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:56:00,18:56:00,7477,19,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:56:00,18:56:00,7479,20,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:57:00,18:57:00,7462,21,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:58:00,18:58:00,7460,22,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,18:59:00,18:59:00,7475,23,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:00:00,19:00:00,7465,24,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:01:00,19:01:00,56,25,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:02:00,19:02:00,7463,26,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:03:00,19:03:00,7473,27,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:04:00,19:04:00,7480,28,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:05:00,19:05:00,7455,29,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:05:00,19:05:00,7468,30,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:06:00,19:06:00,7459,31,37 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:07:00,19:07:00,16950,32,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:08:00,19:08:00,5376,33,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:09:00,19:09:00,5389,34,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:10:00,19:10:00,6952,35,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:11:00,19:11:00,5388,36,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:13:00,19:13:00,99,37,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:15:00,19:15:00,5383,38,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:16:00,19:16:00,9264,39,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:17:00,19:17:00,5378,40,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:19:00,19:19:00,4105,41,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:21:00,19:21:00,70500013,42,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:23:00,19:23:00,7257,43,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:26:00,19:26:00,407,44,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:26:00,19:26:00,428,45,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:28:00,19:28:00,413,46,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:29:00,19:29:00,9029,47,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:30:00,19:30:00,415,48,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:31:00,19:31:00,427,49,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:32:00,19:32:00,419,50,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:34:00,19:34:00,433,51,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:35:00,19:35:00,432,52,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:36:00,19:36:00,420,53,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:37:00,19:37:00,425,54,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:38:00,19:38:00,404,55,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:39:00,19:39:00,434,56,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:40:00,19:40:00,140893,57,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:40:00,19:40:00,140894,58,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:41:00,19:41:00,140895,59,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:42:00,19:42:00,140896,60,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:42:00,19:42:00,12340,61,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:44:00,19:44:00,140897,62,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:45:00,19:45:00,140898,63,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:46:00,19:46:00,140899,64,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:46:00,19:46:00,421,65,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:47:00,19:47:00,140901,66,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:48:00,19:48:00,140902,67,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:48:00,19:48:00,140903,68,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:49:00,19:49:00,140906,69,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:50:00,19:50:00,140907,70,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:51:00,19:51:00,140908,71,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:52:00,19:52:00,140909,72,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:53:00,19:53:00,140910,73,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:54:00,19:54:00,36588,74,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:55:00,19:55:00,100,75,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:56:00,19:56:00,140911,76,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:57:00,19:57:00,140912,77,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:58:00,19:58:00,140913,78,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,19:59:00,19:59:00,140914,79,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:00:00,20:00:00,140915,80,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:04:00,20:04:00,4459,81,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:05:00,20:05:00,140916,82,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:06:00,20:06:00,13184,83,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:07:00,20:07:00,13185,84,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:08:00,20:08:00,9030,85,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:10:00,20:10:00,4731,86,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:11:00,20:11:00,4729,87,Change to Route 14 - Beverly - Pico,0,0
+49414822-DEC19-D07CAR-3_Sunday,20:12:00,20:12:00,1728,88,Change to Route 14 - Beverly - Pico,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:09:00,20:09:00,1728,1,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:11:00,20:11:00,4728,2,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:12:00,20:12:00,4727,3,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:13:00,20:13:00,4726,4,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:14:00,20:14:00,28265,5,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:14:00,20:14:00,4424,6,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:17:00,20:17:00,5985,7,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:19:00,20:19:00,6004,8,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:20:00,20:20:00,11882,9,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:21:00,20:21:00,11881,10,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:22:00,20:22:00,9008,11,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:23:00,20:23:00,140917,12,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:24:00,20:24:00,137,13,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:26:00,20:26:00,9028,14,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:27:00,20:27:00,9014,15,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:28:00,20:28:00,9019,16,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:29:00,20:29:00,8998,17,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:31:00,20:31:00,8999,18,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:32:00,20:32:00,8989,19,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:33:00,20:33:00,8988,20,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:33:00,20:33:00,9001,21,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:34:00,20:34:00,9012,22,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:35:00,20:35:00,9015,23,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:36:00,20:36:00,9007,24,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:37:00,20:37:00,9011,25,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:37:00,20:37:00,9002,26,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:38:00,20:38:00,9004,27,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:40:00,20:40:00,9018,28,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:42:00,20:42:00,140918,29,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:43:00,20:43:00,9026,30,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:44:00,20:44:00,9021,31,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:44:00,20:44:00,9025,32,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:45:00,20:45:00,442,33,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:46:00,20:46:00,8990,34,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:48:00,20:48:00,9013,35,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:49:00,20:49:00,9005,36,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:50:00,20:50:00,429,37,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:51:00,20:51:00,8987,38,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:52:00,20:52:00,9003,39,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:53:00,20:53:00,9016,40,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:54:00,20:54:00,8994,41,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:55:00,20:55:00,426,42,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:56:00,20:56:00,8993,43,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:58:00,20:58:00,9020,44,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,20:58:00,20:58:00,8992,45,14 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:01:00,21:01:00,15610,46,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:02:00,21:02:00,15613,47,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:03:00,21:03:00,142453,48,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:04:00,21:04:00,13560,49,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:05:00,21:05:00,13561,50,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:05:00,21:05:00,13562,51,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:06:00,21:12:00,13567,52,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:12:00,21:12:00,13568,53,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:13:00,21:13:00,13572,54,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:15:00,21:15:00,10802,55,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:16:00,21:16:00,13549,56,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:18:00,21:18:00,13576,57,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:19:00,21:19:00,13573,58,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:21:00,21:21:00,10809,59,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:22:00,21:22:00,15819,60,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:23:00,21:23:00,15808,61,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:23:00,21:23:00,8656,62,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:24:00,21:24:00,15824,63,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:25:00,21:25:00,15814,64,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:26:00,21:26:00,15832,65,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:27:00,21:27:00,15815,66,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:28:00,21:28:00,4574,67,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:28:00,21:28:00,8654,68,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:29:00,21:29:00,15813,69,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:30:00,21:30:00,15833,70,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:31:00,21:31:00,15830,71,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:32:00,21:32:00,15809,72,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:32:00,21:32:00,15806,73,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:33:00,21:33:00,15803,74,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:34:00,21:34:00,15804,75,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:35:00,21:35:00,15801,76,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:36:00,21:36:00,15802,77,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:36:00,21:36:00,15810,78,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:37:00,21:37:00,15835,79,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:38:00,21:38:00,7454,80,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:39:00,21:39:00,15822,81,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:40:00,21:40:00,15825,82,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:41:00,21:41:00,15829,83,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:42:00,21:42:00,15817,84,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:42:00,21:42:00,15812,85,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:43:00,21:43:00,15834,86,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:44:00,21:44:00,15818,87,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:45:00,21:45:00,13406,88,Change to Route 37 - Washington / Fairfax Transit Hub,0,0
+49414823-DEC19-D07CAR-3_Sunday,21:46:00,21:46:00,16535,89,Change to Route 37 - Washington / Fairfax Transit Hub,1,1
+49414824-DEC19-D07CAR-3_Sunday,04:40:00,04:40:00,16535,1,37 - Beverly - Pico,1,1
+49414824-DEC19-D07CAR-3_Sunday,04:41:00,04:41:00,16530,2,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:42:00,04:42:00,55,3,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:42:00,04:42:00,7481,4,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:43:00,04:43:00,7461,5,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:44:00,04:44:00,7467,6,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:44:00,04:44:00,7476,7,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:45:00,04:45:00,7474,8,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:46:00,04:46:00,7471,9,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:47:00,04:47:00,15807,10,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:47:00,04:47:00,7482,11,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:48:00,04:48:00,8213,12,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:48:00,04:48:00,7464,13,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:49:00,04:49:00,7457,14,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:50:00,04:50:00,7451,15,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:50:00,04:50:00,7449,16,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:51:00,04:51:00,7453,17,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:52:00,04:52:00,7456,18,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:52:00,04:52:00,7477,19,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:53:00,04:53:00,7479,20,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:53:00,04:53:00,7462,21,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:54:00,04:54:00,7460,22,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:54:00,04:54:00,7475,23,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:55:00,04:55:00,7465,24,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:56:00,04:56:00,56,25,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:57:00,04:57:00,7463,26,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:58:00,04:58:00,7473,27,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:58:00,04:58:00,7480,28,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,04:59:00,04:59:00,7455,29,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,05:00:00,05:00:00,7468,30,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,05:01:00,05:01:00,7459,31,37 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,05:01:00,05:01:00,16950,32,Change to Route 14 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,05:02:00,05:02:00,5376,33,Change to Route 14 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,05:03:00,05:03:00,5389,34,Change to Route 14 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,05:04:00,05:04:00,6952,35,Change to Route 14 - Beverly - Pico,0,0
+49414824-DEC19-D07CAR-3_Sunday,05:05:00,05:05:00,5388,36,Change to Route 14 - Beverly - Pico,0,0

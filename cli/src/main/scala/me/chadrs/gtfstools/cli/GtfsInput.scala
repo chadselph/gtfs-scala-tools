@@ -96,22 +96,15 @@ class GtfsZipFile(inputStream: InputStream) {
 
   def mapRows[T](csvFile: CsvFile)(mapper: Seq[String] => T): Seq[T] = csvFile.rows.map(mapper)
 
-  def parseFile[T: CsvReader](path: String): Either[String, Seq[T]] = {
-    loadFile(path)
-      .map(UnivocityCsvParser.parseFile)
-      .map(CsvReader.parseAs[T])
-      .map(_.collect { case Right(t) => t })
-  }
-
-  def parseFileView[T: CsvRowViewer](path: String): Either[String, Seq[T]] = {
+  def parseFile[T: CsvRowViewer](path: String): Either[String, Seq[T]] = {
     loadFile(path)
       .map(UnivocityCsvParser.parseFile)
       .map(CsvRowViewer.mapFile[T])
   }
 
-  lazy val stopTimes = parseFileView[StopTimesFileRow]("stop_times.txt")
-  lazy val trips = parseFileView[TripsFileRow]("trips.txt")
-  lazy val agencies = parseFileView[AgencyFileRow]("agency.txt")
+  lazy val stopTimes = parseFile[StopTimesFileRow]("stop_times.txt")
+  lazy val trips = parseFile[TripsFileRow]("trips.txt")
+  lazy val agencies = parseFile[AgencyFileRow]("agency.txt")
 
   def tripsForRoute(routeId: String): Either[String, Seq[TripsFileRow]] = {
     trips.map { t => t.filter(_.routeId.contains(RouteId(routeId))) }

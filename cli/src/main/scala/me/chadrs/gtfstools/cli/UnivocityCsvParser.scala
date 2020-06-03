@@ -1,12 +1,11 @@
 package me.chadrs.gtfstools.cli
 
-import java.io.{ByteArrayInputStream, InputStream}
+import java.io.ByteArrayInputStream
 
+import com.univocity.parsers.csv._
 import me.chadrs.gtfstools.csv.CsvFile
 
 import scala.collection.immutable.ArraySeq
-import com.univocity.parsers.csv._
-
 import scala.jdk.CollectionConverters._
 
 object UnivocityCsvParser {

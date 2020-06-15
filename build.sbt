@@ -33,7 +33,9 @@ lazy val cli = project
       "com.github.pathikrit" %% "better-files" % "3.9.1",
       "com.jakewharton.fliptables" % "fliptables" % "1.1.0",
       "com.univocity" % "univocity-parsers" % "2.8.4",
-      "com.github.alexarchambault" %% "case-app" % "2.0.0-M16"
+      "com.github.alexarchambault" %% "case-app" % "2.0.0-M16",
+      "com.googlecode.lanterna" % "lanterna" % "3.0.3",
+      "org.typelevel" %% "cats-core" % "2.0.0"
     ),
     graalVMNativeImageOptions ++= Seq(
       "--report-unsupported-elements-at-runtime",
@@ -52,9 +54,11 @@ lazy val cli = project
     initialCommands in console :=
       """import me.chadrs.gtfstools._;
         |import me.chadrs.gtfstools.cli._;
-        |import me.chadrs.gtfstools.types._""".stripMargin
+        |import me.chadrs.gtfstools.types._""".stripMargin,
+    packMain := Map("gtfs" -> "me.chadrs.gtfstools.cli.Launcher")
   )
   .dependsOn(types)
+  .enablePlugins(PackPlugin)
 
 lazy val benchmarks = project
   .in(file("benchmarks"))

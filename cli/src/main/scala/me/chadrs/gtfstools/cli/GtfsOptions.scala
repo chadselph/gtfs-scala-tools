@@ -35,4 +35,6 @@ object GtfsOptions {
   case class Calendar(@Recurse args: CommonFileOptions) extends GtfsOptions with FileCommandOptions
   case class CalendarDates(@Recurse args: CommonFileOptions) extends GtfsOptions with FileCommandOptions
 
+  case class Browse() extends GtfsOptions
+
 }

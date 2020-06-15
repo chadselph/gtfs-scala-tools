@@ -37,19 +37,20 @@ object CsvReader {
  */
 trait CsvRowViewer[F] {
 
-  def mapFile(file: CsvFile): Seq[F] = {
+  def mapFile(file: CsvFile): IndexedSeq[F] = {
     val indices = file.headers.zipWithIndex.toMap
     file.rows.zipWithIndex.map {
       case (row, rowNum) =>
         fromCsvCursor(new IndexedSeqCsvCursor(indices, row.toIndexedSeq, rowNum + 2))
     }
-  }
+  }.toIndexedSeq
 
   def fromCsvCursor(cursor: IndexedSeqCsvCursor): F
 }
 
 object CsvRowViewer {
-  def mapFile[F: CsvRowViewer](file: CsvFile): Seq[F] = implicitly[CsvRowViewer[F]].mapFile(file)
+  def mapFile[F: CsvRowViewer](file: CsvFile): IndexedSeq[F] =
+    implicitly[CsvRowViewer[F]].mapFile(file)
 }
 
 trait CsvFromString[T] {
@@ -132,7 +133,7 @@ object CsvFromString {
     Try(java.net.URI.create(s)).toEither.left.map(_ => "Not a URL")
   }
 
-  private val gtfsDateFormat = DateTimeFormatter.ofPattern("yyyYMMdd")
+  private val gtfsDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd")
   implicit val localDateFromString: CsvFromString[LocalDate] = fromTrimmedString.flatmapF { s =>
     Try(LocalDate.parse(s, gtfsDateFormat)).toEither.left.map(_ => "Not a date in YYYYMMDD format")
   }

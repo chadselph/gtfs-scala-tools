@@ -9,7 +9,10 @@ import java.nio.file.{Path, Paths}
 import java.util.zip.ZipInputStream
 
 import me.chadrs.gtfstools.csv.{CsvFile, CsvParser, CsvReader, CsvRowViewer}
-import me.chadrs.gtfstools.types.{Agency, AgencyFileRow, Calendar, CalendarDates, RouteId, Routes, StopTimes, StopTimesFileRow, Stops, Trips, TripsFileRow}
+import me.chadrs.gtfstools.types.{
+  Agency, AgencyFileRow, Calendar, CalendarDates, RouteId, Routes, StopTimes, StopTimesFileRow,
+  Stops, Trips, TripsFileRow
+}
 
 import scala.jdk.CollectionConverters._
 import scala.util.Try
@@ -96,7 +99,7 @@ class GtfsZipFile(inputStream: InputStream) {
 
   def mapRows[T](csvFile: CsvFile)(mapper: Seq[String] => T): Seq[T] = csvFile.rows.map(mapper)
 
-  def parseFile[T: CsvRowViewer](path: String): Either[String, Seq[T]] = {
+  def parseFile[T: CsvRowViewer](path: String): Either[String, IndexedSeq[T]] = {
     loadFile(path)
       .map(UnivocityCsvParser.parseFile)
       .map(CsvRowViewer.mapFile[T])

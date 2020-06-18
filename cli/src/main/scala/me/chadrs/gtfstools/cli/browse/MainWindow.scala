@@ -46,10 +46,12 @@ class MainWindow(gtfsFile: GtfsZipFile) extends BasicWindow("Main Window") with 
       .orElse(OptionT(route.routeShortName))
       .getOrElseF(route.routeId.map(_.toString))
       .getOrElse("Unnamed Route")
-    val buttons = Seq("Find Trips" -> { r: RoutesFileRow =>
+    val buttons: RoutesFileRow => Seq[(String, Runnable)] = { r: RoutesFileRow =>
       val matchingTrips = gtfsFile.trips.getOrElse(Nil).filter(_.routeId == r.routeId).toIndexedSeq
-      popCsvRowTableWindow(s"$name trips", CsvRowTableView.tripsTableRaw, matchingTrips)
-    })
+      Seq(
+        (s"List ${matchingTrips.size} Trips", () => popCsvRowTableWindow(s"$name trips", CsvRowTableView.tripsTableRaw, matchingTrips))
+      )
+    }
     val w = new CsvRowDetailViewWindow[RoutesFileRow](
       name, CsvRowTableView.fromMapsLike(Routes.Fields.toIndexedSeq, _.toMap), route, buttons)
     this.getTextGUI.addWindowAndWait(w)

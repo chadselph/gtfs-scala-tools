@@ -1,10 +1,14 @@
 package me.chadrs.gtfstools.cli.browse
 
+import cats.data.{EitherT, OptionT}
 import com.googlecode.lanterna.gui2.table.{Table, TableCellRenderer}
 import com.googlecode.lanterna.gui2.{BasicWindow, Button, Direction, GridLayout, Label, LinearLayout, Panel, TextGUIGraphics}
 import com.googlecode.lanterna.input.{KeyStroke, KeyType}
-import com.googlecode.lanterna.{TerminalSize, TerminalTextUtils}
-import me.chadrs.gtfstools.types.{AgencyFileRow, CalendarDatesFileRow, CalendarFileRow, Routes, RoutesFileRow, Trips, TripsFileRow}
+import com.googlecode.lanterna.{TerminalSize, TerminalTextUtils, TextColor}
+import me.chadrs.gtfstools.types.{AgencyFileRow, CalendarDatesFileRow, CalendarFileRow, Color, Routes, RoutesFileRow, Trips, TripsFileRow}
+import cats.implicits._
+
+import scala.util.Try
 
 /**
  * @tparam T the type of CSV row we're displaying in a table.
@@ -12,6 +16,7 @@ import me.chadrs.gtfstools.types.{AgencyFileRow, CalendarDatesFileRow, CalendarF
 trait CsvRowTableView[T] {
   def columns: IndexedSeq[CsvRowTableView.Column[T]]
   def renderColumn(obj: T, columnIndex: Int): String = columns(columnIndex).content(obj)
+  def customizeRowStyle(graphics: TextGUIGraphics, obj: T,  colIndex: Int): Unit = ()
 }
 
 object CsvRowTableView {
@@ -34,6 +39,12 @@ object CsvRowTableView {
     }
   }
 
+  def withColumnsStyled[T](doStyle: (TextGUIGraphics, T, Int) => Unit, cols: Column[T]*): CsvRowTableView[T] =
+    new CsvRowTableView[T] {
+      override def columns: IndexedSeq[Column[T]] = cols.toIndexedSeq
+      override def customizeRowStyle(graphics: TextGUIGraphics, obj: T, col: Int): Unit = doStyle(graphics, obj, col)
+    }
+
   def withColumns[T](cols: Column[T]*): CsvRowTableView[T] =
     new CsvRowTableView[T] {
       override def columns: IndexedSeq[Column[T]] = cols.toIndexedSeq
@@ -55,7 +66,18 @@ object CsvRowTableView {
         }
     }
 
-  val routesTable: CsvRowTableView[RoutesFileRow] = CsvRowTableView.withColumns[RoutesFileRow](
+  val routesTable: CsvRowTableView[RoutesFileRow] = CsvRowTableView.withColumnsStyled[RoutesFileRow](
+    (graphics, route, col) => {
+      def parseHex(s: String): Option[Int] = Try(Integer.parseInt(s, 16)).toOption
+      def colorToLaterna(color: Color): Option[TextColor.RGB] = {
+        color.toValue.grouped(2).map(parseHex).toList match {
+          case List(Some(r), Some(g), Some(b)) => Option(new TextColor.RGB(r, g, b))
+          case _ => None
+        }
+      }
+      OptionT(route.routeColor).subflatMap(colorToLaterna).map(rgb => graphics.setBackgroundColor(rgb))
+      OptionT(route.routeTextColor).subflatMap(colorToLaterna).map(rgb => graphics.setForegroundColor(rgb))
+    },
     Column.validated("route_id", _.routeId),
     Column.validatedOpt("route_short_name", _.routeShortName),
     Column.validatedOpt("route_long_name", _.routeLongName)
@@ -125,6 +147,7 @@ class CsvRowTableViewWindow[T](name: String, tableView: CsvRowTableView[T], rows
    ): Unit = {
       val theme = if (t.getSelectedRow == rowIndex) t.getThemeDefinition.getActive else t.getThemeDefinition.getNormal
       textGUIGraphics.applyThemeStyle(theme)
+      tableView.customizeRowStyle(textGUIGraphics, cell, columnIndex)
       textGUIGraphics.putString(0, 0, tableView.renderColumn(cell, columnIndex))
     }
 
@@ -147,10 +170,9 @@ class CsvRowTableViewWindow[T](name: String, tableView: CsvRowTableView[T], rows
 
 }
 
-class CsvRowDetailViewWindow[T](name: String, tableView: CsvRowTableView[T], item: T, buttons: Seq[(String, T => ())])
+class CsvRowDetailViewWindow[T](name: String, tableView: CsvRowTableView[T], item: T, buttons: T => Seq[(String, Runnable)])
   extends BasicWindow(name) with VimArrows {
   // re-use existing tableview logic but flip the table
-  val t = new Table[String]("", "")
   val mainPanel = new Panel(new LinearLayout(Direction.VERTICAL))
   val detailsPanel = new Panel(new GridLayout(2))
   val buttonsPanel = new Panel(new LinearLayout(Direction.HORIZONTAL))
@@ -161,8 +183,8 @@ class CsvRowDetailViewWindow[T](name: String, tableView: CsvRowTableView[T], ite
     detailsPanel.addComponent(new Label(row.content(item)))
   }
 
-  buttons.foreach { b =>
-    buttonsPanel.addComponent(new Button(b._1, () => b._2(item)))
+  buttons(item).foreach { b =>
+    buttonsPanel.addComponent(new Button(b._1, b._2))
   }
   setComponent(mainPanel)
   setCloseWindowWithEscape(true)

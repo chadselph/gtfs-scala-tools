@@ -2,7 +2,7 @@ package me.chadrs.gtfstools.cli
 
 import java.io.ByteArrayInputStream
 
-import com.univocity.parsers.csv._
+import com.univocity.parsers.csv.{CsvWriter, _}
 import me.chadrs.gtfstools.csv.CsvFile
 
 import scala.collection.immutable.ArraySeq
@@ -21,6 +21,11 @@ object UnivocityCsvParser {
     val headers = ArraySeq.unsafeWrapArray(parser.parseNext())
     val rows = parser.parseAll()
     CsvFile(headers, rows.asScala.toIndexedSeq.map(ArraySeq.unsafeWrapArray))
+  }
+
+  def writeCsv(data: Array[Array[String]]): Iterable[String] = {
+    val w = new CsvWriter(new CsvWriterSettings())
+    w.writeRowsToString(data.asInstanceOf[Array[Array[AnyRef]]]).asScala
   }
 
 }

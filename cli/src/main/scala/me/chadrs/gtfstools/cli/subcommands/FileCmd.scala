@@ -2,7 +2,7 @@ package me.chadrs.gtfstools.cli.subcommands
 
 import caseapp.RemainingArgs
 import me.chadrs.gtfstools.cli.GtfsOptions.{CommonFileOptions, FileCommandOptions}
-import me.chadrs.gtfstools.cli.{GtfsInput, GtfsOptions, TablePrinter}
+import me.chadrs.gtfstools.cli.{GtfsInput, GtfsOptions, TablePrinter, UnivocityCsvParser}
 import me.chadrs.gtfstools.csv.CsvReader
 import me.chadrs.gtfstools.types._
 
@@ -48,15 +48,33 @@ object FileCmd {
                   case trip if trip.tripShortName.contains(tripSearch) => trip.tripId
                 })
                 .getOrElse(TripId(tripSearch))
-              loadedFile.stopTimes.map(st => st.filter(s => s.tripId.contains(tripId))).flatMap { input =>
-                runCommand(input.map(_.toMap), StopTimes.Fields, args)
+              loadedFile.stopTimes.map(st => st.filter(s => s.tripId.contains(tripId))).flatMap {
+                input =>
+                  runCommand(input.map(_.toMap), StopTimes.Fields, args)
               }
             case GtfsOptions.Calendar(args) =>
-              loadedFile.parseFile[CalendarFileRow]("calendar.txt")
+              loadedFile
+                .parseFile[CalendarFileRow]("calendar.txt")
                 .flatMap(input => runCommand(input.map(_.toMap), Calendar.Fields, args))
             case GtfsOptions.CalendarDates(args) =>
-              loadedFile.parseFile[CalendarDatesFileRow]("calendar_dates.txt")
+              loadedFile
+                .parseFile[CalendarDatesFileRow]("calendar_dates.txt")
                 .flatMap(input => runCommand(input.map(_.toMap), CalendarDates.Fields, args))
+            case GtfsOptions.Shapes(args, Some(shapeId)) =>
+              loadedFile
+                .parseFile[ShapesFileRow]("shapes.txt")
+                .flatMap(
+                  input =>
+                    runCommand(
+                      input.filter(_.shapeId.contains(ShapeId(shapeId))).map(_.toMap),
+                      Shapes.Fields,
+                      args
+                    )
+                )
+            case GtfsOptions.Shapes(args, None) =>
+              loadedFile
+                .parseFile[ShapesFileRow]("shapes.txt")
+                .flatMap(input => runCommand(input.map(_.toMap), Shapes.Fields, args))
           }
         }
         .fold(
@@ -79,11 +97,16 @@ object FileCmd {
       commonFileOptions: CommonFileOptions
   ): Either[String, String] = {
     if (commonFileOptions.col.forall(headers.contains)) {
-      val inputAsArrays = input.map(x => headers.map(x.getOrElse(_, "")).toArray).toArray
-      if (commonFileOptions.format.contains("csv")) {
-        Left("Unknown format")
-      } else {
-        Right(TablePrinter.printTableRaw(headers, inputAsArrays, commonFileOptions.col))
+      val includedHeaders = if (commonFileOptions.col.isEmpty) headers else commonFileOptions.col
+      val inputAsArrays = input.map(x => includedHeaders.map(x.getOrElse(_, "")).toArray).toArray
+      commonFileOptions.format match {
+        case Some("csv") =>
+          Right(
+            UnivocityCsvParser.writeCsv(includedHeaders.toArray +: inputAsArrays).mkString("\n")
+          )
+        case None | Some("table") =>
+          Right(TablePrinter.printTableRaw(includedHeaders, inputAsArrays, commonFileOptions.col))
+        case _ => Left("Unknown format")
       }
     } else {
       val missing = (commonFileOptions.col.toSet diff headers.toSet).mkString(", ")

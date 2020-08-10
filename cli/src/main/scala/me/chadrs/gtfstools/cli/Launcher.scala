@@ -16,7 +16,7 @@ object Launcher extends CommandApp[GtfsOptions] {
       case fileOptions: FileCommandOptions =>
         FileCmd.run(fileOptions, remainingArgs)
       case b: Browse => BrowseCmd.run(b, remainingArgs)
-      case _ => println("Why not a match error")
+      case _         => println("Why not a match error")
     }
   }
 }

@@ -2,8 +2,8 @@ package me.chadrs.gtfstools.cli
 
 import caseapp.core.RemainingArgs
 import caseapp.core.app.CommandApp
-import me.chadrs.gtfstools.cli.GtfsOptions.{Browse, FileCommandOptions, HashOptions}
-import me.chadrs.gtfstools.cli.subcommands.{BrowseCmd, FileCmd, HashCmd}
+import me.chadrs.gtfstools.cli.GtfsOptions.{Browse, FileCommandOptions, HashOptions, Rt}
+import me.chadrs.gtfstools.cli.subcommands.{BrowseCmd, FileCmd, HashCmd, RealtimeCmd}
 
 object Launcher extends CommandApp[GtfsOptions] {
 
@@ -16,6 +16,7 @@ object Launcher extends CommandApp[GtfsOptions] {
       case fileOptions: FileCommandOptions =>
         FileCmd.run(fileOptions, remainingArgs)
       case b: Browse => BrowseCmd.run(b, remainingArgs)
+      case rt: Rt    => RealtimeCmd.run(rt, remainingArgs)
       case _         => println("Why not a match error")
     }
   }

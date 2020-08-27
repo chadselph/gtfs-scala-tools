@@ -55,7 +55,8 @@ lazy val cli = project
       """import me.chadrs.gtfstools._;
         |import me.chadrs.gtfstools.cli._;
         |import me.chadrs.gtfstools.types._""".stripMargin,
-    packMain := Map("gtfs" -> "me.chadrs.gtfstools.cli.Launcher")
+    packMain := Map("gtfs" -> "me.chadrs.gtfstools.cli.Launcher"),
+    PB.targets in Compile := Seq(scalapb.gen() -> (sourceManaged in Compile).value / "scalapb")
   )
   .dependsOn(types)
   .enablePlugins(PackPlugin)

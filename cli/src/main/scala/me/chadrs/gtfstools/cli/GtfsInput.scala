@@ -17,12 +17,14 @@ import me.chadrs.gtfstools.types.{
 import scala.jdk.CollectionConverters._
 import scala.util.Try
 import better.files._
+import com.google.transit.realtime.gtfs_realtime.FeedMessage
 
 trait GtfsInput {
   def is: InputStream
   def description: String
   def zis: ZipInputStream = new ZipInputStream(is)
   def toGtfsZipFile: GtfsZipFile = new GtfsZipFile(is)
+  def toGtfsRtFeed: FeedMessage = FeedMessage.parseFrom(is)
 }
 
 object GtfsInput {

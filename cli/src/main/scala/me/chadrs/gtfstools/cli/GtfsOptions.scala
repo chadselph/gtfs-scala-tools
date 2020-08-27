@@ -42,4 +42,6 @@ object GtfsOptions {
 
   case class Browse() extends GtfsOptions
 
+  case class Rt() extends GtfsOptions
+
 }

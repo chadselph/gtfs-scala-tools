@@ -110,6 +110,25 @@ class GtfsZipFile(inputStream: InputStream) {
   lazy val stops = parseFile[StopsFileRow]("stops.txt")
   lazy val trips = parseFile[TripsFileRow]("trips.txt")
 
+  def parseFilteredFile[T: CsvRowViewer](
+      path: String,
+      colName: String,
+      colValue: String
+  ): Either[String, IndexedSeq[T]] = {
+    loadFile(path)
+      .map(UnivocityCsvParser.parseFile)
+      .map(csv => filterFile(csv, colName, colValue))
+      .map(CsvRowViewer.mapFile[T])
+  }
+
+  def filterFile(file: CsvFile, colName: String, colValue: String): CsvFile = {
+    val filterIndex = file.headers.indexOf(colName, 0)
+    file.copy(rows =
+      file.rows
+        .filter(row => row.isDefinedAt(filterIndex) && row.apply(filterIndex) == colValue)
+    )
+  }
+
   def tripsForRoute(routeId: String): Either[String, Seq[TripsFileRow]] = {
     trips.map { t => t.filter(_.routeId.contains(RouteId(routeId))) }
   }

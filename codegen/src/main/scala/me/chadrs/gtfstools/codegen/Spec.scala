@@ -2,12 +2,13 @@ package me.chadrs.gtfstools.codegen
 
 object Spec {
 
-  val text = """agency.txt,,,
+  val text =
+    """agency.txt,,,
                |,,,
                |File: Required,,,
                |,,,
                |Field Name,Type,Required,Description
-               |agency_id,ID,Conditionally Required,"Identifies a transit brandwhich is often synonymous with a transit agency. Note that in some cases, such as when a single agency operates multiple separate services, agencies and brands are distinct. This document uses the term ""agency"" in place of ""brand"". A dataset may contain data from multiple agencies. This field is required when the dataset contains data for multiple transit agencies, otherwise it is optional."
+               |agency_id,ID,Conditionally Required,"Identifies a transit brand which is often synonymous with a transit agency. Note that in some cases, such as when a single agency operates multiple separate services, agencies and brands are distinct. This document uses the term ""agency"" in place of ""brand"". A dataset may contain data from multiple agencies. This field is required when the dataset contains data for multiple transit agencies, otherwise it is optional."
                |agency_name,Text,Required,Full name of the transit agency.
                |agency_url,URL,Required,URL of the transit agency.
                |agency_timezone,Timezone,Required,"Timezone where the transit agency is located. If multiple agencies are specified in the dataset, each must have the same agency_timezone."
@@ -459,6 +460,5 @@ object Spec {
                |attribution_url,URL,Optional,The URL of the organization.
                |attribution_email,Email,Optional,The email of the organization.
                |attribution_phone,Phone number,Optional,The phone number of the organization.""".stripMargin
-
 
 }

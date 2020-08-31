@@ -113,5 +113,4 @@ object ScalaCaseClassGtfsGenerator extends GtfsTypesGenerator {
        ..${fileTypes.map(_.generateCompanion).toList}
        """.syntax
   }
-
 }

@@ -110,8 +110,8 @@ class IndexedSeqCsvCursor(indices: Map[String, Int], row: IndexedSeq[String], ro
 
 object CsvFromString {
 
-  implicit val stringfromString: CsvFromString[String] = s => Right(Option(s).filter(_.nonEmpty))
-  val fromTrimmedString: CsvFromString[String] = stringfromString.map(_.trim)
+  implicit val stringFromString: CsvFromString[String] = s => Right(Option(s).filter(_.nonEmpty))
+  val fromTrimmedString: CsvFromString[String] = stringFromString.map(_.trim)
 
   implicit val intFromString: CsvFromString[Int] =
     fromTrimmedString.flatmapF(

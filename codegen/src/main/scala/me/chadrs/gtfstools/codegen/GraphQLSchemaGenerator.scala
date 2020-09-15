@@ -25,7 +25,67 @@ object GraphQLSchemaGenerator extends GtfsTypesGenerator {
       referencedFile: String,
       referencedField: String,
       fieldSpec: GtfsFieldSpec
-  )
+  ) {
+
+    /**
+     * If, for example, [[file]] has a field like "route_id", this adds a field caleld "route"
+     * that resolves the corresponding route row from that file.
+     */
+    def toJoinField = {
+      val (name, isList) = field match {
+        case "shape_id" =>
+          // shape_id is a special case where we have a one-to-many join
+          ("shape", true)
+        case "parent_station" =>
+          // hack to avoid name collision
+          ("parent_station_stop", false)
+        case _ =>
+          (field.stripSuffix("_id"), false)
+      }
+      val listGetter: Term =
+        q"""t.ctx.filterFileBy[${referencedFile.fileRowCls}](
+         ${referencedFile.toLitString},
+         ${referencedField.toLitString},
+         t.value.toMap.apply(${field})
+         ).getOrElse(Nil)"""
+      val (fieldType, getter) =
+        if (isList) (q"ListType(${referencedFile.toSchemaVarName})", q"t => $listGetter")
+        else (q"OptionType(${referencedFile.toSchemaVarName})", q"t => $listGetter.headOption")
+      q"""Field($name, $fieldType, Some(${Lit.String(
+        fieldSpec.description
+      )}), resolve = $getter) """
+    }
+
+    /**
+     * If, for example [[file]] has a field like "route_id", this adds a field on routes that
+     * will get all the corresponding rows from [[file]]. This make it possible to do queries like
+     *
+     * route("38") {
+     *   trips {
+     *    ..
+     *   }
+     * }
+     *
+     */
+    def toReverseJoinField = {
+      val name =
+        if (field == referencedField) Lit.String(file.stripSuffix(".txt"))
+        // disambiguate when we have two references to the same file in the same class
+        else Lit.String(field.stripSuffix("id") + file.stripSuffix(".txt"))
+      val fieldType = file.toSchemaVarName
+      // TODO: handle t.value.toMap(ref.field) doesn't have a value
+      val description =
+        s"Rows from $file where $field matches this object's $referencedField.".toLitString
+      val getter: Term =
+        q""" t => t.ctx.filterFileBy[${file.fileRowCls}](
+         ${file.toLitString},
+         ${field.toLitString},
+         t.value.toMap.apply($referencedField)
+         ).getOrElse(Nil)"""
+      q"""Field($name, ListType($fieldType), Some($description), resolve = $getter) """
+    }
+
+  }
 
   case class Connections(input: Seq[GtfsFileSpec]) {
     val connections = input.flatMap(
@@ -63,57 +123,20 @@ object GraphQLSchemaGenerator extends GtfsTypesGenerator {
     val schemaVarName = Pat.Var(spec.filename.toSchemaVarName)
     val description = Lit.String(spec.description)
     val fields =
-      spec.fields.map(forField).toList ++ referencing.map(foreignKey) ++ referencedBy.map(oneToMany)
+      spec.fields.map(forField).toList ++ referencing.map(_.toJoinField) ++ referencedBy.map(
+        _.toReverseJoinField
+      )
     val code =
-      q"""implicit lazy val $schemaVarName: ObjectType[GtfsRepo, ${spec.filename.fileRowCls}]  = ObjectType(
-         $schemaName, $description, () => fields[GtfsRepo, ${spec.filename.fileRowCls}](
+      q"""implicit lazy val $schemaVarName: ObjectType[GtfsContext, ${spec.filename.fileRowCls}]  = ObjectType(
+         $schemaName, $description, () => fields[GtfsContext, ${spec.filename.fileRowCls}](
            ..$fields
          ))"""
     code.toString()
   }
 
-  def foreignKey(ref: ForeignRef): Term = {
-    val name =
-      if (ref.field == "parent_station")
-        Lit.String("parent_station_stop") // hack for naming conflict
-      else Lit.String(ref.field.stripSuffix("_id"))
-    val fieldType = ref.referencedFile.toSchemaVarName
-    // TODO: handle t.value.toMap(ref.field) doesn't have a value
-    val getter: Term =
-      q""" t => t.ctx.parseAndFilter[${ref.referencedFile.fileRowCls}](
-         ${ref.referencedFile.toLitString},
-         ${ref.referencedField.toLitString},
-         t.value.toMap.apply(${ref.field})
-         ).getOrElse(Nil).headOption"""
-    q"""Field($name, OptionType($fieldType), Some(${Lit.String(
-      ref.fieldSpec.description
-    )}), resolve = $getter) """
-  }
-
-  // Get the reverse of the references, for example so we can do routes { trips { ... } }
-  def oneToMany(ref: ForeignRef): Term = {
-    val name =
-      if (ref.field == ref.referencedField) Lit.String(ref.file.stripSuffix(".txt"))
-      // disambiguate when we have two references to the same file in the same class
-      else Lit.String(ref.field.stripSuffix("id") + ref.file.stripSuffix(".txt"))
-    val fieldType = ref.file.toSchemaVarName
-    // TODO: handle t.value.toMap(ref.field) doesn't have a value
-    val description =
-      s"Rows from ${ref.file} where ${ref.field} matches this object's ${ref.referencedField}.".toLitString
-    val getter: Term =
-      q""" t => t.ctx.parseAndFilter[${ref.file.fileRowCls}](
-         ${ref.file.toLitString},
-         ${ref.field.toLitString},
-         t.value.toMap.apply(${ref.referencedField})
-         ).getOrElse(Nil)"""
-    q"""Field($name, ListType($fieldType), Some($description), resolve = $getter) """
-
-  }
-
   def forField(field: GtfsFieldSpec): Term = {
     // TODO: actually determine type
     // TODO: enums for enum types
-    // TODO: foreign keys
     val name = Lit.String(field.name)
     val getter: Term = q""" _.value.toMap.get($name) """
     q"""Field($name, OptionType(StringType), Some(${Lit.String(

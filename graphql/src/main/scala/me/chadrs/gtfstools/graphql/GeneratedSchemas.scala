@@ -1,16 +1,16 @@
 package me.chadrs.gtfstools.graphql
 
-import me.chadrs.gtfstools.graphql.Test.GtfsRepo
+import me.chadrs.gtfstools.graphql.Test.{GtfsContext, GtfsRepo}
 import me.chadrs.gtfstools.types._
 import sangria.schema._
 
 object GeneratedSchemas {
 
-  implicit lazy val agencySchema: ObjectType[GtfsRepo, AgencyFileRow] = ObjectType(
+  implicit lazy val agencySchema: ObjectType[GtfsContext, AgencyFileRow] = ObjectType(
     "agency",
     "",
     () =>
-      fields[GtfsRepo, AgencyFileRow](
+      fields[GtfsContext, AgencyFileRow](
         Field(
           "agency_id",
           OptionType(StringType),
@@ -77,7 +77,7 @@ object GeneratedSchemas {
           Some("Rows from routes.txt where agency_id matches this object's agency_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[RoutesFileRow](
+              .filterFileBy[RoutesFileRow](
                 "routes.txt",
                 "agency_id",
                 t.value.toMap.apply("agency_id")
@@ -90,7 +90,7 @@ object GeneratedSchemas {
           Some("Rows from fare_attributes.txt where agency_id matches this object's agency_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[FareAttributesFileRow](
+              .filterFileBy[FareAttributesFileRow](
                 "fare_attributes.txt",
                 "agency_id",
                 t.value.toMap.apply("agency_id")
@@ -103,7 +103,7 @@ object GeneratedSchemas {
           Some("Rows from attributions.txt where agency_id matches this object's agency_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[AttributionsFileRow](
+              .filterFileBy[AttributionsFileRow](
                 "attributions.txt",
                 "agency_id",
                 t.value.toMap.apply("agency_id")
@@ -112,11 +112,11 @@ object GeneratedSchemas {
         )
       )
   )
-  implicit lazy val stopsSchema: ObjectType[GtfsRepo, StopsFileRow] = ObjectType(
+  implicit lazy val stopsSchema: ObjectType[GtfsContext, StopsFileRow] = ObjectType(
     "stops",
     "",
     () =>
-      fields[GtfsRepo, StopsFileRow](
+      fields[GtfsContext, StopsFileRow](
         Field(
           "stop_id",
           OptionType(StringType),
@@ -283,7 +283,7 @@ Conditionally Required:
 • Forbidden for stations (location_type=1)."""),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
+              .filterFileBy[StopsFileRow](
                 "stops.txt",
                 "stop_id",
                 t.value.toMap.apply("parent_station")
@@ -297,7 +297,7 @@ Conditionally Required:
           Some("Level of the location. The same level can be used by multiple unlinked stations."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[LevelsFileRow](
+              .filterFileBy[LevelsFileRow](
                 "levels.txt",
                 "level_id",
                 t.value.toMap.apply("level_id")
@@ -311,7 +311,7 @@ Conditionally Required:
           Some("Rows from stop_times.txt where stop_id matches this object's stop_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopTimesFileRow](
+              .filterFileBy[StopTimesFileRow](
                 "stop_times.txt",
                 "stop_id",
                 t.value.toMap.apply("stop_id")
@@ -324,7 +324,7 @@ Conditionally Required:
           Some("Rows from fare_rules.txt where origin_id matches this object's zone_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[FareRulesFileRow](
+              .filterFileBy[FareRulesFileRow](
                 "fare_rules.txt",
                 "origin_id",
                 t.value.toMap.apply("zone_id")
@@ -337,7 +337,7 @@ Conditionally Required:
           Some("Rows from fare_rules.txt where destination_id matches this object's zone_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[FareRulesFileRow](
+              .filterFileBy[FareRulesFileRow](
                 "fare_rules.txt",
                 "destination_id",
                 t.value.toMap.apply("zone_id")
@@ -350,7 +350,7 @@ Conditionally Required:
           Some("Rows from fare_rules.txt where contains_id matches this object's zone_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[FareRulesFileRow](
+              .filterFileBy[FareRulesFileRow](
                 "fare_rules.txt",
                 "contains_id",
                 t.value.toMap.apply("zone_id")
@@ -363,7 +363,7 @@ Conditionally Required:
           Some("Rows from transfers.txt where from_stop_id matches this object's stop_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[TransfersFileRow](
+              .filterFileBy[TransfersFileRow](
                 "transfers.txt",
                 "from_stop_id",
                 t.value.toMap.apply("stop_id")
@@ -376,7 +376,7 @@ Conditionally Required:
           Some("Rows from transfers.txt where to_stop_id matches this object's stop_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[TransfersFileRow](
+              .filterFileBy[TransfersFileRow](
                 "transfers.txt",
                 "to_stop_id",
                 t.value.toMap.apply("stop_id")
@@ -389,7 +389,7 @@ Conditionally Required:
           Some("Rows from pathways.txt where from_stop_id matches this object's stop_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[PathwaysFileRow](
+              .filterFileBy[PathwaysFileRow](
                 "pathways.txt",
                 "from_stop_id",
                 t.value.toMap.apply("stop_id")
@@ -402,7 +402,7 @@ Conditionally Required:
           Some("Rows from pathways.txt where to_stop_id matches this object's stop_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[PathwaysFileRow](
+              .filterFileBy[PathwaysFileRow](
                 "pathways.txt",
                 "to_stop_id",
                 t.value.toMap.apply("stop_id")
@@ -411,11 +411,11 @@ Conditionally Required:
         )
       )
   )
-  implicit lazy val routesSchema: ObjectType[GtfsRepo, RoutesFileRow] = ObjectType(
+  implicit lazy val routesSchema: ObjectType[GtfsContext, RoutesFileRow] = ObjectType(
     "routes",
     "",
     () =>
-      fields[GtfsRepo, RoutesFileRow](
+      fields[GtfsContext, RoutesFileRow](
         Field(
           "route_id",
           OptionType(StringType),
@@ -511,7 +511,7 @@ Conditionally Required:
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[AgencyFileRow](
+              .filterFileBy[AgencyFileRow](
                 "agency.txt",
                 "agency_id",
                 t.value.toMap.apply("agency_id")
@@ -525,11 +525,7 @@ Conditionally Required:
           Some("Rows from trips.txt where route_id matches this object's route_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[TripsFileRow](
-                "trips.txt",
-                "route_id",
-                t.value.toMap.apply("route_id")
-              )
+              .filterFileBy[TripsFileRow]("trips.txt", "route_id", t.value.toMap.apply("route_id"))
               .getOrElse(Nil)
         ),
         Field(
@@ -538,7 +534,7 @@ Conditionally Required:
           Some("Rows from fare_rules.txt where route_id matches this object's route_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[FareRulesFileRow](
+              .filterFileBy[FareRulesFileRow](
                 "fare_rules.txt",
                 "route_id",
                 t.value.toMap.apply("route_id")
@@ -551,7 +547,7 @@ Conditionally Required:
           Some("Rows from attributions.txt where route_id matches this object's route_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[AttributionsFileRow](
+              .filterFileBy[AttributionsFileRow](
                 "attributions.txt",
                 "route_id",
                 t.value.toMap.apply("route_id")
@@ -560,11 +556,11 @@ Conditionally Required:
         )
       )
   )
-  implicit lazy val tripsSchema: ObjectType[GtfsRepo, TripsFileRow] = ObjectType(
+  implicit lazy val tripsSchema: ObjectType[GtfsContext, TripsFileRow] = ObjectType(
     "trips",
     "",
     () =>
-      fields[GtfsRepo, TripsFileRow](
+      fields[GtfsContext, TripsFileRow](
         Field(
           "route_id",
           OptionType(StringType),
@@ -651,7 +647,7 @@ trip_id,...,trip_headsign,direction_id
           Some("Identifies a route."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[RoutesFileRow](
+              .filterFileBy[RoutesFileRow](
                 "routes.txt",
                 "route_id",
                 t.value.toMap.apply("route_id")
@@ -661,17 +657,16 @@ trip_id,...,trip_headsign,direction_id
         ),
         Field(
           "shape",
-          OptionType(shapesSchema),
+          ListType(shapesSchema),
           Some("Identifies a geospatial shape describing the vehicle travel path for a trip."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[ShapesFileRow](
+              .filterFileBy[ShapesFileRow](
                 "shapes.txt",
                 "shape_id",
                 t.value.toMap.apply("shape_id")
               )
               .getOrElse(Nil)
-              .headOption
         ),
         Field(
           "stop_times",
@@ -679,7 +674,7 @@ trip_id,...,trip_headsign,direction_id
           Some("Rows from stop_times.txt where trip_id matches this object's trip_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopTimesFileRow](
+              .filterFileBy[StopTimesFileRow](
                 "stop_times.txt",
                 "trip_id",
                 t.value.toMap.apply("trip_id")
@@ -692,7 +687,7 @@ trip_id,...,trip_headsign,direction_id
           Some("Rows from frequencies.txt where trip_id matches this object's trip_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[FrequenciesFileRow](
+              .filterFileBy[FrequenciesFileRow](
                 "frequencies.txt",
                 "trip_id",
                 t.value.toMap.apply("trip_id")
@@ -705,7 +700,7 @@ trip_id,...,trip_headsign,direction_id
           Some("Rows from attributions.txt where trip_id matches this object's trip_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[AttributionsFileRow](
+              .filterFileBy[AttributionsFileRow](
                 "attributions.txt",
                 "trip_id",
                 t.value.toMap.apply("trip_id")
@@ -714,11 +709,11 @@ trip_id,...,trip_headsign,direction_id
         )
       )
   )
-  implicit lazy val stopTimesSchema: ObjectType[GtfsRepo, StopTimesFileRow] = ObjectType(
+  implicit lazy val stopTimesSchema: ObjectType[GtfsContext, StopTimesFileRow] = ObjectType(
     "stopTimes",
     "",
     () =>
-      fields[GtfsRepo, StopTimesFileRow](
+      fields[GtfsContext, StopTimesFileRow](
         Field(
           "trip_id",
           OptionType(StringType),
@@ -816,7 +811,7 @@ A stop_headsign value specified for one stop_time does not apply to subsequent s
           Some("Identifies a trip."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[TripsFileRow]("trips.txt", "trip_id", t.value.toMap.apply("trip_id"))
+              .filterFileBy[TripsFileRow]("trips.txt", "trip_id", t.value.toMap.apply("trip_id"))
               .getOrElse(Nil)
               .headOption
         ),
@@ -828,17 +823,17 @@ A stop_headsign value specified for one stop_time does not apply to subsequent s
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow]("stops.txt", "stop_id", t.value.toMap.apply("stop_id"))
+              .filterFileBy[StopsFileRow]("stops.txt", "stop_id", t.value.toMap.apply("stop_id"))
               .getOrElse(Nil)
               .headOption
         )
       )
   )
-  implicit lazy val calendarSchema: ObjectType[GtfsRepo, CalendarFileRow] = ObjectType(
+  implicit lazy val calendarSchema: ObjectType[GtfsContext, CalendarFileRow] = ObjectType(
     "calendar",
     "",
     () =>
-      fields[GtfsRepo, CalendarFileRow](
+      fields[GtfsContext, CalendarFileRow](
         Field(
           "service_id",
           OptionType(StringType),
@@ -908,7 +903,7 @@ A stop_headsign value specified for one stop_time does not apply to subsequent s
         )
       )
   )
-  implicit lazy val calendarDatesSchema: ObjectType[GtfsRepo, CalendarDatesFileRow] = ObjectType(
+  implicit lazy val calendarDatesSchema: ObjectType[GtfsContext, CalendarDatesFileRow] = ObjectType(
     "calendarDates",
     """
 The calendar_dates.txt table can explicitly activate or disable service by date. It can be used in two ways.
@@ -916,7 +911,7 @@ The calendar_dates.txt table can explicitly activate or disable service by date.
 Recommended: Use calendar_dates.txt in conjunction with calendar.txt to define exceptions to the default service patterns defined in calendar.txt. If service is generally regular, with a few changes on explicit dates (for instance, to accommodate special event services, or a school schedule), this is a good approach. In this case calendar_dates.service_id is an ID referencing calendar.service_id.
 Alternate: Omit calendar.txt, and specify each date of service in calendar_dates.txt. This allows for considerable service variation and accommodates service without normal weekly schedules. In this case service_id is an ID.""",
     () =>
-      fields[GtfsRepo, CalendarDatesFileRow](
+      fields[GtfsContext, CalendarDatesFileRow](
         Field(
           "service_id",
           OptionType(StringType),
@@ -944,97 +939,98 @@ Alternate: Omit calendar.txt, and specify each date of service in calendar_dates
         )
       )
   )
-  implicit lazy val fareAttributesSchema: ObjectType[GtfsRepo, FareAttributesFileRow] = ObjectType(
-    "fareAttributes",
-    "",
-    () =>
-      fields[GtfsRepo, FareAttributesFileRow](
-        Field(
-          "fare_id",
-          OptionType(StringType),
-          Some("Identifies a fare class."),
-          resolve = _.value.toMap.get("fare_id")
-        ),
-        Field(
-          "price",
-          OptionType(StringType),
-          Some("Fare price, in the unit specified by currency_type."),
-          resolve = _.value.toMap.get("price")
-        ),
-        Field(
-          "currency_type",
-          OptionType(StringType),
-          Some("Currency used to pay the fare."),
-          resolve = _.value.toMap.get("currency_type")
-        ),
-        Field(
-          "payment_method",
-          OptionType(StringType),
-          Some("""Indicates when the fare must be paid. Valid options are:
+  implicit lazy val fareAttributesSchema: ObjectType[GtfsContext, FareAttributesFileRow] =
+    ObjectType(
+      "fareAttributes",
+      "",
+      () =>
+        fields[GtfsContext, FareAttributesFileRow](
+          Field(
+            "fare_id",
+            OptionType(StringType),
+            Some("Identifies a fare class."),
+            resolve = _.value.toMap.get("fare_id")
+          ),
+          Field(
+            "price",
+            OptionType(StringType),
+            Some("Fare price, in the unit specified by currency_type."),
+            resolve = _.value.toMap.get("price")
+          ),
+          Field(
+            "currency_type",
+            OptionType(StringType),
+            Some("Currency used to pay the fare."),
+            resolve = _.value.toMap.get("currency_type")
+          ),
+          Field(
+            "payment_method",
+            OptionType(StringType),
+            Some("""Indicates when the fare must be paid. Valid options are:
 
 0 - Fare is paid on board.
 1 - Fare must be paid before boarding."""),
-          resolve = _.value.toMap.get("payment_method")
-        ),
-        Field(
-          "transfers",
-          OptionType(StringType),
-          Some("""Indicates the number of transfers permitted on this fare. The fact that this field can be left empty is an exception to the requirement that a Required field must not be empty. Valid options are:
+            resolve = _.value.toMap.get("payment_method")
+          ),
+          Field(
+            "transfers",
+            OptionType(StringType),
+            Some("""Indicates the number of transfers permitted on this fare. The fact that this field can be left empty is an exception to the requirement that a Required field must not be empty. Valid options are:
 
 0 - No transfers permitted on this fare.
 1 - Riders may transfer once.
 2 - Riders may transfer twice.
 empty - Unlimited transfers are permitted."""),
-          resolve = _.value.toMap.get("transfers")
-        ),
-        Field(
-          "agency_id",
-          OptionType(StringType),
-          Some(
-            "Identifies the relevant agency for a fare. This field is required for datasets with multiple agencies defined in agency.txt, otherwise it is optional."
+            resolve = _.value.toMap.get("transfers")
           ),
-          resolve = _.value.toMap.get("agency_id")
-        ),
-        Field(
-          "transfer_duration",
-          OptionType(StringType),
-          Some(
-            "Length of time in seconds before a transfer expires. When transfers=0 this field can be used to indicate how long a ticket is valid for or it can can be left empty."
+          Field(
+            "agency_id",
+            OptionType(StringType),
+            Some(
+              "Identifies the relevant agency for a fare. This field is required for datasets with multiple agencies defined in agency.txt, otherwise it is optional."
+            ),
+            resolve = _.value.toMap.get("agency_id")
           ),
-          resolve = _.value.toMap.get("transfer_duration")
-        ),
-        Field(
-          "agency",
-          OptionType(agencySchema),
-          Some(
-            "Identifies the relevant agency for a fare. This field is required for datasets with multiple agencies defined in agency.txt, otherwise it is optional."
+          Field(
+            "transfer_duration",
+            OptionType(StringType),
+            Some(
+              "Length of time in seconds before a transfer expires. When transfers=0 this field can be used to indicate how long a ticket is valid for or it can can be left empty."
+            ),
+            resolve = _.value.toMap.get("transfer_duration")
           ),
-          resolve = t =>
-            t.ctx
-              .parseAndFilter[AgencyFileRow](
-                "agency.txt",
-                "agency_id",
-                t.value.toMap.apply("agency_id")
-              )
-              .getOrElse(Nil)
-              .headOption
-        ),
-        Field(
-          "fare_rules",
-          ListType(fareRulesSchema),
-          Some("Rows from fare_rules.txt where fare_id matches this object's fare_id."),
-          resolve = t =>
-            t.ctx
-              .parseAndFilter[FareRulesFileRow](
-                "fare_rules.txt",
-                "fare_id",
-                t.value.toMap.apply("fare_id")
-              )
-              .getOrElse(Nil)
+          Field(
+            "agency",
+            OptionType(agencySchema),
+            Some(
+              "Identifies the relevant agency for a fare. This field is required for datasets with multiple agencies defined in agency.txt, otherwise it is optional."
+            ),
+            resolve = t =>
+              t.ctx
+                .filterFileBy[AgencyFileRow](
+                  "agency.txt",
+                  "agency_id",
+                  t.value.toMap.apply("agency_id")
+                )
+                .getOrElse(Nil)
+                .headOption
+          ),
+          Field(
+            "fare_rules",
+            ListType(fareRulesSchema),
+            Some("Rows from fare_rules.txt where fare_id matches this object's fare_id."),
+            resolve = t =>
+              t.ctx
+                .filterFileBy[FareRulesFileRow](
+                  "fare_rules.txt",
+                  "fare_id",
+                  t.value.toMap.apply("fare_id")
+                )
+                .getOrElse(Nil)
+          )
         )
-      )
-  )
-  implicit lazy val fareRulesSchema: ObjectType[GtfsRepo, FareRulesFileRow] = ObjectType(
+    )
+  implicit lazy val fareRulesSchema: ObjectType[GtfsContext, FareRulesFileRow] = ObjectType(
     "fareRules",
     """
 The fare_rules.txt table specifies how fares in fare_attributes.txt apply to an itinerary. Most fare structures use some combination of the following rules:
@@ -1046,7 +1042,7 @@ Fare depends on which route the itinerary uses.
 For examples that demonstrate how to specify a fare structure with fare_rules.txt and fare_attributes.txt, see https://code.google.com/p/googletransitdatafeed/wiki/FareExamples in the GoogleTransitDataFeed open source project wiki.
 """,
     () =>
-      fields[GtfsRepo, FareRulesFileRow](
+      fields[GtfsContext, FareRulesFileRow](
         Field(
           "fare_id",
           OptionType(StringType),
@@ -1099,7 +1095,7 @@ Because all contains_id zones must be matched for the fare to apply, an itinerar
           Some("Identifies a fare class."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[FareAttributesFileRow](
+              .filterFileBy[FareAttributesFileRow](
                 "fare_attributes.txt",
                 "fare_id",
                 t.value.toMap.apply("fare_id")
@@ -1116,7 +1112,7 @@ b,TSW
 b,TSE"""),
           resolve = t =>
             t.ctx
-              .parseAndFilter[RoutesFileRow](
+              .filterFileBy[RoutesFileRow](
                 "routes.txt",
                 "route_id",
                 t.value.toMap.apply("route_id")
@@ -1133,11 +1129,7 @@ b,...,2
 b,...,8"""),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
-                "stops.txt",
-                "zone_id",
-                t.value.toMap.apply("origin_id")
-              )
+              .filterFileBy[StopsFileRow]("stops.txt", "zone_id", t.value.toMap.apply("origin_id"))
               .getOrElse(Nil)
               .headOption
         ),
@@ -1150,7 +1142,7 @@ b,...,3,4
 b,...,3,5"""),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
+              .filterFileBy[StopsFileRow](
                 "stops.txt",
                 "zone_id",
                 t.value.toMap.apply("destination_id")
@@ -1171,7 +1163,7 @@ Because all contains_id zones must be matched for the fare to apply, an itinerar
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
+              .filterFileBy[StopsFileRow](
                 "stops.txt",
                 "zone_id",
                 t.value.toMap.apply("contains_id")
@@ -1181,13 +1173,13 @@ Because all contains_id zones must be matched for the fare to apply, an itinerar
         )
       )
   )
-  implicit lazy val shapesSchema: ObjectType[GtfsRepo, ShapesFileRow] = ObjectType(
+  implicit lazy val shapesSchema: ObjectType[GtfsContext, ShapesFileRow] = ObjectType(
     "shapes",
     """
 Shapes describe the path that a vehicle travels along a route alignment, and are defined in the file shapes.txt. Shapes are associated with Trips, and consist of a sequence of points through which the vehicle passes in order. Shapes do not need to intercept the location of Stops exactly, but all Stops on a trip should lie within a small distance of the shape for that trip, i.e. close to straight line segments connecting the shape points.
 """,
     () =>
-      fields[GtfsRepo, ShapesFileRow](
+      fields[GtfsContext, ShapesFileRow](
         Field(
           "shape_id",
           OptionType(StringType),
@@ -1234,16 +1226,12 @@ A_shp,37.65863,-122.30839,11,15.8765"""),
           Some("Rows from trips.txt where shape_id matches this object's shape_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[TripsFileRow](
-                "trips.txt",
-                "shape_id",
-                t.value.toMap.apply("shape_id")
-              )
+              .filterFileBy[TripsFileRow]("trips.txt", "shape_id", t.value.toMap.apply("shape_id"))
               .getOrElse(Nil)
         )
       )
   )
-  implicit lazy val frequenciesSchema: ObjectType[GtfsRepo, FrequenciesFileRow] = ObjectType(
+  implicit lazy val frequenciesSchema: ObjectType[GtfsContext, FrequenciesFileRow] = ObjectType(
     "frequencies",
     """
 Frequencies.txt represents trips that operate on regular headways (time between trips). This file can be used to represent two different types of service.
@@ -1251,7 +1239,7 @@ Frequencies.txt represents trips that operate on regular headways (time between 
 Frequency-based service (exact_times=0) in which service does not follow a fixed schedule throughout the day. Instead, operators attempt to strictly maintain predetermined headways for trips.
 A compressed representation of schedule-based service (exact_times=1) that has the exact same headway for trips over specified time period(s). In schedule-based service operators try to strictly adhere to a schedule.""",
     () =>
-      fields[GtfsRepo, FrequenciesFileRow](
+      fields[GtfsContext, FrequenciesFileRow](
         Field(
           "trip_id",
           OptionType(StringType),
@@ -1299,19 +1287,19 @@ A compressed representation of schedule-based service (exact_times=1) that has t
           Some("Identifies a trip to which the specified headway of service applies."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[TripsFileRow]("trips.txt", "trip_id", t.value.toMap.apply("trip_id"))
+              .filterFileBy[TripsFileRow]("trips.txt", "trip_id", t.value.toMap.apply("trip_id"))
               .getOrElse(Nil)
               .headOption
         )
       )
   )
-  implicit lazy val transfersSchema: ObjectType[GtfsRepo, TransfersFileRow] = ObjectType(
+  implicit lazy val transfersSchema: ObjectType[GtfsContext, TransfersFileRow] = ObjectType(
     "transfers",
     """
 When calculating an itinerary, GTFS-consuming applications interpolate transfers based on allowable time and stop proximity. Transfers.txt specifies additional rules and overrides for selected transfers.
 """,
     () =>
-      fields[GtfsRepo, TransfersFileRow](
+      fields[GtfsContext, TransfersFileRow](
         Field(
           "from_stop_id",
           OptionType(StringType),
@@ -1355,7 +1343,7 @@ When calculating an itinerary, GTFS-consuming applications interpolate transfers
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
+              .filterFileBy[StopsFileRow](
                 "stops.txt",
                 "stop_id",
                 t.value.toMap.apply("from_stop_id")
@@ -1371,17 +1359,13 @@ When calculating an itinerary, GTFS-consuming applications interpolate transfers
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
-                "stops.txt",
-                "stop_id",
-                t.value.toMap.apply("to_stop_id")
-              )
+              .filterFileBy[StopsFileRow]("stops.txt", "stop_id", t.value.toMap.apply("to_stop_id"))
               .getOrElse(Nil)
               .headOption
         )
       )
   )
-  implicit lazy val pathwaysSchema: ObjectType[GtfsRepo, PathwaysFileRow] = ObjectType(
+  implicit lazy val pathwaysSchema: ObjectType[GtfsContext, PathwaysFileRow] = ObjectType(
     "pathways",
     """
 The GTFS-Pathways extension uses a graph representation to describe subway or train, with nodes (the locations) and edges (the pathways).
@@ -1394,7 +1378,7 @@ No dangling location: If any location within a station has a pathway, then all l
 No locked platforms: Each platform must be connected to at least one entrance via some chain of pathways. There are very rare stations in the real life where you cannot go outside.
 No pathways for a platform with boarding areas: A platform that has boarding areas is treated as a parent object, not a point. It may not have pathways assigned. All pathways should be for boarding areas.""",
     () =>
-      fields[GtfsRepo, PathwaysFileRow](
+      fields[GtfsContext, PathwaysFileRow](
         Field(
           "pathway_id",
           OptionType(StringType),
@@ -1526,7 +1510,7 @@ This field is highly recommended if the minimum width is less than 1 meter."""),
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
+              .filterFileBy[StopsFileRow](
                 "stops.txt",
                 "stop_id",
                 t.value.toMap.apply("from_stop_id")
@@ -1542,23 +1526,19 @@ This field is highly recommended if the minimum width is less than 1 meter."""),
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
-                "stops.txt",
-                "stop_id",
-                t.value.toMap.apply("to_stop_id")
-              )
+              .filterFileBy[StopsFileRow]("stops.txt", "stop_id", t.value.toMap.apply("to_stop_id"))
               .getOrElse(Nil)
               .headOption
         )
       )
   )
-  implicit lazy val levelsSchema: ObjectType[GtfsRepo, LevelsFileRow] = ObjectType(
+  implicit lazy val levelsSchema: ObjectType[GtfsContext, LevelsFileRow] = ObjectType(
     "levels",
     """
 Describe the different levels of a station. Is mostly useful when used in conjunction with pathways.txt, and is required for elevator (pathway_mode=5) to ask the user to take the elevator to the “Mezzanine” or the “Platform” level.
 """,
     () =>
-      fields[GtfsRepo, LevelsFileRow](
+      fields[GtfsContext, LevelsFileRow](
         Field(
           "level_id",
           OptionType(StringType),
@@ -1589,22 +1569,18 @@ Ground level should have index 0, with levels above ground indicated by positive
           Some("Rows from stops.txt where level_id matches this object's level_id."),
           resolve = t =>
             t.ctx
-              .parseAndFilter[StopsFileRow](
-                "stops.txt",
-                "level_id",
-                t.value.toMap.apply("level_id")
-              )
+              .filterFileBy[StopsFileRow]("stops.txt", "level_id", t.value.toMap.apply("level_id"))
               .getOrElse(Nil)
         )
       )
   )
-  implicit lazy val feedInfoSchema: ObjectType[GtfsRepo, FeedInfoFileRow] = ObjectType(
+  implicit lazy val feedInfoSchema: ObjectType[GtfsContext, FeedInfoFileRow] = ObjectType(
     "feedInfo",
     """
 This file contains information about the dataset itself, rather than the services the dataset describes. In some cases, the publisher of the dataset differs from the agencies. If translations.txt is provided, this file is required.
 """,
     () =>
-      fields[GtfsRepo, FeedInfoFileRow](
+      fields[GtfsContext, FeedInfoFileRow](
         Field(
           "feed_publisher_name",
           OptionType(StringType),
@@ -1684,11 +1660,11 @@ English: "Geneva," "Zurich," and "Biel/Bienne"."""),
         )
       )
   )
-  implicit lazy val translationsSchema: ObjectType[GtfsRepo, TranslationsFileRow] = ObjectType(
+  implicit lazy val translationsSchema: ObjectType[GtfsContext, TranslationsFileRow] = ObjectType(
     "translations",
     "",
     () =>
-      fields[GtfsRepo, TranslationsFileRow](
+      fields[GtfsContext, TranslationsFileRow](
         Field(
           "table_name",
           OptionType(StringType),
@@ -1763,11 +1739,11 @@ Required if record_id is empty."""),
         )
       )
   )
-  implicit lazy val attributionsSchema: ObjectType[GtfsRepo, AttributionsFileRow] = ObjectType(
+  implicit lazy val attributionsSchema: ObjectType[GtfsContext, AttributionsFileRow] = ObjectType(
     "attributions",
     "",
     () =>
-      fields[GtfsRepo, AttributionsFileRow](
+      fields[GtfsContext, AttributionsFileRow](
         Field(
           "attribution_id",
           OptionType(StringType),
@@ -1857,7 +1833,7 @@ At least one of the fields, either is_producer, is_operator, or is_authority, mu
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[AgencyFileRow](
+              .filterFileBy[AgencyFileRow](
                 "agency.txt",
                 "agency_id",
                 t.value.toMap.apply("agency_id")
@@ -1873,7 +1849,7 @@ At least one of the fields, either is_producer, is_operator, or is_authority, mu
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[RoutesFileRow](
+              .filterFileBy[RoutesFileRow](
                 "routes.txt",
                 "route_id",
                 t.value.toMap.apply("route_id")
@@ -1889,7 +1865,7 @@ At least one of the fields, either is_producer, is_operator, or is_authority, mu
           ),
           resolve = t =>
             t.ctx
-              .parseAndFilter[TripsFileRow]("trips.txt", "trip_id", t.value.toMap.apply("trip_id"))
+              .filterFileBy[TripsFileRow]("trips.txt", "trip_id", t.value.toMap.apply("trip_id"))
               .getOrElse(Nil)
               .headOption
         )

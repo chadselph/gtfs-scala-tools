@@ -46,7 +46,8 @@ lazy val graphql = (project in file("graphql"))
       "org.sangria-graphql" %% "sangria-circe" % "1.3.0",
       "com.typesafe.akka" %% "akka-stream" % "2.6.8",
       "com.typesafe.akka" %% "akka-http" % "10.2.0",
-      "de.heikoseeberger" %% "akka-http-circe" % "1.31.0"
+      "de.heikoseeberger" %% "akka-http-circe" % "1.31.0",
+      "com.github.ben-manes.caffeine" % "caffeine" % "2.8.5"
     )
   )
   .dependsOn(csv, types, cli)

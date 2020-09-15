@@ -6,7 +6,8 @@ import akka.http.scaladsl.Http
 import io.circe.{Decoder, Json, JsonObject}
 import sangria.parser.QueryParser
 import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport._
-import sangria.execution.Executor
+import me.chadrs.gtfstools.graphql.Test.GtfsCache
+import sangria.execution.{Executor, ValidationError}
 
 import scala.concurrent.Future
 import sangria.marshalling.circe._
@@ -22,16 +23,22 @@ object GraphQLRequest {
 
 object Server {
 
+  private val gtfsCache = GtfsCache.init()
+
   implicit val system: ActorSystem = ActorSystem("sangria-server")
   import system.dispatcher
 
+  implicit def excHandler: ExceptionHandler =
+    ExceptionHandler {
+      case e: ValidationError => complete((400, e.getMessage()))
+    }
+
   def main(args: Array[String]): Unit = {
-    val route: Route =
-      (post & path("graphql")) {
-        entity(as[GraphQLRequest]) { requestJson ⇒
-          complete(graphQLEndpoint(requestJson))
-        }
+    val route: Route = Route.seal((post & path("graphql")) {
+      entity(as[GraphQLRequest]) { requestJson ⇒
+        complete(graphQLEndpoint(requestJson))
       }
+    })
 
     Http().newServerAt("0.0.0.0", 8010).bindFlow(route)
   }
@@ -42,7 +49,7 @@ object Server {
         .execute(
           Test.schema,
           value,
-          new Test.GtfsRepo,
+          gtfsCache,
           variables = body.variables,
           operationName = body.operationName
         )

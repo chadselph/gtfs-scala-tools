@@ -1,83 +1,37 @@
 package me.chadrs.gtfstools.graphql
 
-import java.io.FileInputStream
+import java.util.concurrent.TimeUnit
 
-import cats.implicits._
-import me.chadrs.gtfstools.cli.GtfsZipFile
-import sangria.schema._
-import sangria.macros.derive._
-import sangria.execution._
-import me.chadrs.gtfstools.types.{RouteId, Routes, RoutesFileRow, TripId, TripsFileRow}
-import sangria.macros._
-import io.circe.Json
+import com.github.benmanes.caffeine.cache.{Caffeine, LoadingCache}
+import me.chadrs.gtfstools.cli.GtfsInput
 import me.chadrs.gtfstools.csv.CsvRowViewer
-
-import scala.concurrent.duration._
-import sangria.marshalling.circe._
-
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.{Await, Future}
+import me.chadrs.gtfstools.types.{RouteId, RoutesFileRow, TripId, TripsFileRow}
+import sangria.schema._
 
 object Schemas {
 
   // implicit val routeIdType = ScalarType[RouteId]
 
-  val RouteType = ObjectType(
-    "Route",
-    "From routes.txt",
-    fields[Unit, Routes](
-      Field(
-        "route_id",
-        StringType,
-        Some("The id of this route"),
-        resolve = _.value.routeId.toString
-      ),
-      Field(
-        "agency_id",
-        OptionType(StringType),
-        Some("agency from agencies.txt"),
-        resolve = _.value.agencyId.map(_.toString)
-      ),
-      Field(
-        "route_short_name",
-        OptionType(StringType),
-        Some("Short name for this route!"),
-        resolve = _.value.routeShortName
-      )
-    )
-  )
-
-  val routeType3 = ObjectType(
-    "Route",
-    "from routes.txt",
-    fields[Unit, RoutesFileRow](
-      Field(
-        "route_id",
-        StringType,
-        Some("The id of the route"),
-        resolve = _.value.routeId.map(_.toString).leftMap(new Exception(_)).toTry
-      ),
-      Field(
-        "route_short_name",
-        OptionType(StringType),
-        Some("The short name route"),
-        resolve = _.value.routeShortName.leftMap(new Exception(_)).toTry
-      )
-    )
-  )
-
-  /*
-  implicit val RouteType2 = deriveObjectType[Unit, Routes](
-    ObjectTypeDescription("A route from routes.txt"),
-    DocumentField("routeId", "Unique id for the route")
-  )
-   */
 }
 
 object Test {
 
-  class GtfsRepo {
-    val zipFile = new GtfsZipFile(new FileInputStream("gtfs.zip"))
+  trait GtfsContext {
+    def filterFileBy[T: CsvRowViewer](
+        path: String,
+        filterCol: String,
+        filterValue: String
+    ): Either[String, IndexedSeq[T]]
+
+    def filterFileBy[T: CsvRowViewer](
+        path: String,
+        predicate: T => Boolean
+    ): Either[String, IndexedSeq[T]]
+  }
+
+  class GtfsRepo(zipPath: String) extends GtfsContext {
+    val zipFile =
+      GtfsInput.fromString(zipPath).getOrElse(throw new Exception("Invalid url")).toGtfsZipFile
 
     def parseFile[T: CsvRowViewer](f: String): Either[String, IndexedSeq[T]] =
       zipFile.parseFile[T](f)
@@ -94,47 +48,107 @@ object Test {
           trip
       }
 
-    def parseAndFilter[T: CsvRowViewer](path: String, filterCol: String, filterValue: String) = {
+    override def filterFileBy[T: CsvRowViewer](
+        path: String,
+        filterCol: String,
+        filterValue: String
+    ): Either[String, IndexedSeq[T]] = {
       zipFile.parseFilteredFile[T](path, filterCol, filterValue)
+    }
+
+    override def filterFileBy[T: CsvRowViewer](
+        path: String,
+        predicate: T => Boolean
+    ): Either[String, IndexedSeq[T]] = {
+      zipFile.parseFile[T](path).map(_.filter(predicate))
     }
   }
 
+  object GtfsCache {
+
+    def logTime[T](s: String)(body: => T): T = {
+      val start = System.currentTimeMillis()
+      val result = body
+      println(s"Took ${System.currentTimeMillis() - start}ms to load $s")
+      result
+    }
+
+    def init(): GtfsCache = {
+      val cache: LoadingCache[String, GtfsRepo] = Caffeine
+        .newBuilder()
+        .maximumSize(10)
+        .expireAfterWrite(1, TimeUnit.HOURS)
+        .build(url => {
+          logTime(url) {
+            new GtfsRepo(url)
+          }
+        })
+      GtfsCache(cache, None)
+    }
+  }
+
+  case class GtfsCache(cache: LoadingCache[String, GtfsRepo], active: Option[String])
+      extends GtfsContext {
+
+    private val activeFeed = active.toRight("No active url!").map(forUrl)
+
+    def forUrl(s: String): GtfsRepo = cache.get(s)
+
+    override def filterFileBy[T: CsvRowViewer](
+        path: String,
+        filterCol: String,
+        filterValue: String
+    ): Either[String, IndexedSeq[T]] =
+      activeFeed.flatMap(_.filterFileBy(path, filterCol, filterValue))
+
+    override def filterFileBy[T: CsvRowViewer](
+        path: String,
+        predicate: T => Boolean
+    ): Either[String, IndexedSeq[T]] =
+      activeFeed.flatMap(_.filterFileBy(path, predicate))
+  }
+
   val Id = Argument("id", StringType)
-  val QueryType = ObjectType(
-    "Query",
-    fields[GtfsRepo, Unit](
+  val gtfsUrl = Argument("url", StringType)
+  val FeedType: ObjectType[GtfsCache, GtfsRepo] = ObjectType(
+    "Feed",
+    fields[GtfsCache, GtfsRepo](
       Field(
         "routes",
         ListType(GeneratedSchemas.routesSchema),
-        resolve = _.ctx.parseFile[RoutesFileRow]("routes.txt").getOrElse(Nil)
+        resolve = _.value.parseFile[RoutesFileRow]("routes.txt").getOrElse(Nil)
       ),
       Field(
         "route",
         OptionType(GeneratedSchemas.routesSchema),
         Some("Select a specific route by id or short name"),
         List(Id),
-        resolve = c => c.ctx.getRoute(c.arg(Id))
+        resolve = c => c.value.getRoute(c.arg(Id))
       ),
       Field(
         "trip",
         OptionType(GeneratedSchemas.tripsSchema),
         Some("Select a specfic trip by id or trip short name"),
         List(Id),
-        resolve = c => c.ctx.getTrip(c.arg(Id))
+        resolve = c => c.value.getTrip(c.arg(Id))
       )
     )
   )
-  val schema = Schema(QueryType)
-
-  val query = graphql"""
-    {
-      routes {
-        route_id
-        route_short_name
-        route_color
-        route_url
-      }
-    }
-  """
+  val QueryFile: ObjectType[GtfsCache, Any] = ObjectType(
+    "Query",
+    fields[GtfsCache, Any](
+      Field(
+        "feed",
+        FeedType,
+        Some("Query a GTFS feed by URL"),
+        List(gtfsUrl),
+        resolve = c =>
+          UpdateCtx(c.ctx.forUrl(c.arg(gtfsUrl))) { _ =>
+            c.ctx.copy(active = Some(c.arg(gtfsUrl)))
+          }
+      )
+    )
+  )
+  val schema = Schema(QueryFile)
 
 }

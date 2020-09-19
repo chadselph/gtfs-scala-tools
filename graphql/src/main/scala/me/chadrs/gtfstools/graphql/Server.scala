@@ -1,16 +1,16 @@
 package me.chadrs.gtfstools.graphql
 import akka.actor.ActorSystem
-import akka.http.scaladsl.server._
-import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.Http
-import io.circe.{Decoder, Json, JsonObject}
-import sangria.parser.QueryParser
+import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.server._
 import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport._
-import me.chadrs.gtfstools.graphql.Test.GtfsCache
+import io.circe.{Decoder, Json}
+import me.chadrs.gtfstools.graphql.Schemas.GtfsCache
 import sangria.execution.{Executor, ValidationError}
+import sangria.marshalling.circe._
+import sangria.parser.{QueryParser, SyntaxError}
 
 import scala.concurrent.Future
-import sangria.marshalling.circe._
 
 case class GraphQLRequest(query: String, operationName: Option[String], varOpt: Option[Json]) {
   def variables: Json = varOpt.getOrElse(Json.obj())
@@ -31,23 +31,26 @@ object Server {
   implicit def excHandler: ExceptionHandler =
     ExceptionHandler {
       case e: ValidationError => complete((400, e.getMessage()))
+      case e: SyntaxError     => complete((400, e.getMessage()))
     }
 
   def main(args: Array[String]): Unit = {
+    val port = sys.env.getOrElse("PORT", "5000").toInt
+    println(s"Starting up on port $port")
     val route: Route = Route.seal((post & path("graphql")) {
       entity(as[GraphQLRequest]) { requestJson ⇒
         complete(graphQLEndpoint(requestJson))
       }
     })
 
-    Http().newServerAt("0.0.0.0", 8010).bindFlow(route)
+    Http().newServerAt("0.0.0.0", port).bindFlow(route)
   }
 
   def graphQLEndpoint(body: GraphQLRequest): Future[Json] = {
     Future.fromTry(QueryParser.parse(body.query)).flatMap { value =>
       Executor
         .execute(
-          Test.schema,
+          Schemas.schema,
           value,
           gtfsCache,
           variables = body.variables,

@@ -1,5 +1,5 @@
 val commonSettings =
-  Seq(scalaVersion := "2.13.2", version := "0.1.0", organization := "com.goswiftly")
+  Seq(scalaVersion := "2.13.3", version := "0.1.0", organization := "me.chadrs")
 
 def module(name: String) = moduleName := s"gtfs-tools-$name"
 
@@ -23,6 +23,7 @@ lazy val codegen = (project in file("codegen"))
   .dependsOn(csv, types)
 
 lazy val graphql = (project in file("graphql"))
+  .enablePlugins(JavaAppPackaging, AshScriptPlugin)
   .settings(
     commonSettings,
     module("graphql"),
@@ -33,7 +34,9 @@ lazy val graphql = (project in file("graphql"))
       "com.typesafe.akka" %% "akka-http" % "10.2.0",
       "de.heikoseeberger" %% "akka-http-circe" % "1.31.0",
       "com.github.ben-manes.caffeine" % "caffeine" % "2.8.5"
-    )
+    ),
+    dockerBaseImage := "adoptopenjdk/openjdk11:alpine-jre",
+    dockerExposedPorts += 5000
   )
   .dependsOn(csv, types, cli)
 

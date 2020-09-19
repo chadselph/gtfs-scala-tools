@@ -1,6 +1,6 @@
 package me.chadrs.gtfstools.graphql
 
-import me.chadrs.gtfstools.graphql.Test.{GtfsContext, GtfsRepo}
+import me.chadrs.gtfstools.graphql.Schemas.GtfsContext
 import me.chadrs.gtfstools.types._
 import sangria.schema._
 

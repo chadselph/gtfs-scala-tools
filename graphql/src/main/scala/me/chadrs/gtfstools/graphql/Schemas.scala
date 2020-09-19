@@ -10,12 +10,6 @@ import sangria.schema._
 
 object Schemas {
 
-  // implicit val routeIdType = ScalarType[RouteId]
-
-}
-
-object Test {
-
   trait GtfsContext {
     def filterFileBy[T: CsvRowViewer](
         path: String,
@@ -150,5 +144,9 @@ object Test {
     )
   )
   val schema = Schema(QueryFile)
+  /*
+   * TODO: types. everything is Option[String]/List[String]
+   * TODO: link service/calendar/calendar_days from trips
+   */
 
 }

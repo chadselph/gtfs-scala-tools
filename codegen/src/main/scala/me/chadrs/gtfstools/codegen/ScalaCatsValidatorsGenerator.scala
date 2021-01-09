@@ -14,7 +14,7 @@ object ScalaCatsValidatorsGenerator extends GtfsTypesGenerator {
         q"""def ${filename.toMethodNameTerm}(csv: ${spec.filename.fileRowCls}): ValidationResult[${filename.toClassNameType}] = {
             (..${fieldTerms.map(generateValidated)}).mapN {
               case (..${fieldTerms.map(Pat.Var(_))})=>
-                ${filename.toClassNameTerm}(..$fieldTerms)
+                ${filename.toClassNameTerm}(..$fieldTerms, csv.toMap.removedAll(${filename.toClassNameTerm}.Fields))
             }
           }"""
           .toString()

@@ -44,4 +44,6 @@ object GtfsOptions {
 
   case class Rt() extends GtfsOptions
 
+  case class DrawShape(shapeId: String) extends GtfsOptions
+
 }

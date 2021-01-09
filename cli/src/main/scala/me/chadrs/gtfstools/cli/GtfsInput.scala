@@ -99,8 +99,6 @@ class GtfsZipFile(inputStream: InputStream) {
   def loadFile(path: String): Either[String, Array[Byte]] =
     loadFiles.get(path).toRight(s"$path is missing")
 
-  def mapRows[T](csvFile: CsvFile)(mapper: Seq[String] => T): Seq[T] = csvFile.rows.map(mapper)
-
   def parseFile[T: CsvRowViewer](path: String): Either[String, IndexedSeq[T]] = {
     loadFile(path)
       .map(UnivocityCsvParser.parseFile)

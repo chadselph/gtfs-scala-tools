@@ -80,10 +80,8 @@ class StopTimesFileRow(cursor: me.chadrs.gtfstools.csv.CsvCursor) {
   lazy val toMap: Map[String, String] = cursor.toMap
   def get(field: String): Option[String] = toMap.get(field)
   lazy val tripId: Either[String, TripId] = cursor.required[TripId]("trip_id")
-  lazy val arrivalTime: Either[String, Option[java.time.LocalTime]] =
-    cursor.optionally[java.time.LocalTime]("arrival_time")
-  lazy val departureTime: Either[String, Option[java.time.LocalTime]] =
-    cursor.optionally[java.time.LocalTime]("departure_time")
+  lazy val arrivalTime: Either[String, Option[Time]] = cursor.optionally[Time]("arrival_time")
+  lazy val departureTime: Either[String, Option[Time]] = cursor.optionally[Time]("departure_time")
   lazy val stopId: Either[String, StopId] = cursor.required[StopId]("stop_id")
   lazy val stopSequence: Either[String, Int] = cursor.required[Int]("stop_sequence")
   lazy val stopHeadsign: Either[String, Option[String]] = cursor.optionally[String]("stop_headsign")
@@ -157,10 +155,8 @@ class FrequenciesFileRow(cursor: me.chadrs.gtfstools.csv.CsvCursor) {
   lazy val toMap: Map[String, String] = cursor.toMap
   def get(field: String): Option[String] = toMap.get(field)
   lazy val tripId: Either[String, TripId] = cursor.required[TripId]("trip_id")
-  lazy val startTime: Either[String, java.time.LocalTime] =
-    cursor.required[java.time.LocalTime]("start_time")
-  lazy val endTime: Either[String, java.time.LocalTime] =
-    cursor.required[java.time.LocalTime]("end_time")
+  lazy val startTime: Either[String, Time] = cursor.required[Time]("start_time")
+  lazy val endTime: Either[String, Time] = cursor.required[Time]("end_time")
   lazy val headwaySecs: Either[String, Int] = cursor.required[Int]("headway_secs")
   lazy val exactTimes: Either[String, Option[ExactTimes]] =
     cursor.optionally[ExactTimes]("exact_times")

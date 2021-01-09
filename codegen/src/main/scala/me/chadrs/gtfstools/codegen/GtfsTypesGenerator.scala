@@ -47,8 +47,8 @@ trait GtfsTypesGenerator {
       case _ if field.name.endsWith("_id")   => field.name.toClassName
       case "Text" | "Email" | "Phone number" => Type.Name("String")
       case "Date"                            => Type.Select(q"java.time", Type.Name("LocalDate"))
-      // TODO: LocalTime doesn't work for the weird gtfs way of saying "next day" (24:02)
-      case "Time"     => Type.Select(q"java.time", Type.Name("LocalTime"))
+      // LocalTime doesn't work for the weird gtfs way of saying "next day" (24:02)
+      case "Time"     => t"Time"
       case "Timezone" => Type.Select(q"java.time", Type.Name("ZoneId"))
       case "Float" | "Positive Float" | "Non-negative float" | "Non-negative Float" =>
         Type.Name("Double")

@@ -308,8 +308,8 @@ case class Trips(
 )
 case class StopTimes(
     tripId: TripId,
-    arrivalTime: Option[java.time.LocalTime],
-    departureTime: Option[java.time.LocalTime],
+    arrivalTime: Option[Time],
+    departureTime: Option[Time],
     stopId: StopId,
     stopSequence: Int,
     stopHeadsign: Option[String],
@@ -366,8 +366,8 @@ case class Shapes(
 )
 case class Frequencies(
     tripId: TripId,
-    startTime: java.time.LocalTime,
-    endTime: java.time.LocalTime,
+    startTime: Time,
+    endTime: Time,
     headwaySecs: Int,
     exactTimes: Option[ExactTimes],
     extra: Map[String, String] = Map.empty
@@ -598,8 +598,8 @@ object StopTimes {
   implicit val csvReader: CsvReader[StopTimes] = (c: CsvCursor) =>
     for {
       tripId <- c.required[TripId]("trip_id")
-      arrivalTime <- c.optionally[java.time.LocalTime]("arrival_time")
-      departureTime <- c.optionally[java.time.LocalTime]("departure_time")
+      arrivalTime <- c.optionally[Time]("arrival_time")
+      departureTime <- c.optionally[Time]("departure_time")
       stopId <- c.required[StopId]("stop_id")
       stopSequence <- c.required[Int]("stop_sequence")
       stopHeadsign <- c.optionally[String]("stop_headsign")
@@ -735,8 +735,8 @@ object Frequencies {
   implicit val csvReader: CsvReader[Frequencies] = (c: CsvCursor) =>
     for {
       tripId <- c.required[TripId]("trip_id")
-      startTime <- c.required[java.time.LocalTime]("start_time")
-      endTime <- c.required[java.time.LocalTime]("end_time")
+      startTime <- c.required[Time]("start_time")
+      endTime <- c.required[Time]("end_time")
       headwaySecs <- c.required[Int]("headway_secs")
       exactTimes <- c.optionally[ExactTimes]("exact_times")
     } yield Frequencies.apply(tripId, startTime, endTime, headwaySecs, exactTimes)

@@ -46,4 +46,6 @@ object GtfsOptions {
 
   case class DrawShape(shapeId: String) extends GtfsOptions
 
+  case class Validate() extends GtfsOptions
+
 }

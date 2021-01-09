@@ -1,23 +1,19 @@
 package me.chadrs.gtfstools.cli
 
+import better.files._
+import com.google.transit.realtime.gtfs_realtime.FeedMessage
+import me.chadrs.gtfstools.csv.CsvRowViewer
+import me.chadrs.gtfstools.types._
+
 import java.io.{FileInputStream, InputStream}
 import java.net.URI
 import java.net.http.HttpClient.Redirect
-import java.net.http.{HttpClient, HttpRequest, HttpResponse}
 import java.net.http.HttpResponse.BodyHandlers
+import java.net.http.{HttpClient, HttpRequest, HttpResponse}
 import java.nio.file.{Path, Paths}
 import java.util.zip.ZipInputStream
-
-import me.chadrs.gtfstools.csv.{CsvFile, CsvParser, CsvReader, CsvRowViewer}
-import me.chadrs.gtfstools.types.{
-  Agency, AgencyFileRow, Calendar, CalendarDates, RouteId, Routes, StopTimes, StopTimesFileRow,
-  Stops, Trips, TripsFileRow
-}
-
 import scala.jdk.CollectionConverters._
 import scala.util.Try
-import better.files._
-import com.google.transit.realtime.gtfs_realtime.FeedMessage
 
 trait GtfsInput {
   def is: InputStream
@@ -106,8 +102,13 @@ class GtfsZipFile(inputStream: InputStream) {
   }
 
   lazy val stopTimes = parseFile[StopTimesFileRow]("stop_times.txt")
+  lazy val stops = parseFile[StopsFileRow]("stops.txt")
   lazy val trips = parseFile[TripsFileRow]("trips.txt")
   lazy val agencies = parseFile[AgencyFileRow]("agency.txt")
+  lazy val shapes = parseFile[ShapesFileRow]("shapes.txt")
+  lazy val routes = parseFile[RoutesFileRow]("routes.txt")
+  lazy val calendars = parseFile[CalendarFileRow]("calendar.txt")
+  lazy val calendarDates = parseFile[CalendarDatesFileRow]("calendar_dates.txt")
 
   def tripsForRoute(routeId: String): Either[String, Seq[TripsFileRow]] = {
     trips.map { t => t.filter(_.routeId.contains(RouteId(routeId))) }

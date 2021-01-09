@@ -21,6 +21,8 @@ object CodeGenUtil {
   implicit class StringOps(val s: String) extends AnyVal {
     def toClassName: Type.Name = Type.Name(PascalCase(s))
     def toClassNameTerm: Term.Name = Term.Name(PascalCase(s))
+    def toClassNameType: Type.Name = Type.Name(PascalCase(s))
+    def toMethodNameTerm: Term.Name = Term.Name(camelCase(s))
   }
 }
 

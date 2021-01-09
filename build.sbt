@@ -3,6 +3,8 @@ val commonSettings =
 
 def module(name: String) = moduleName := s"gtfs-tools-$name"
 
+val catsVersion = "2.3.1"
+
 lazy val csv = (project in file("csv")).settings(
   commonSettings,
   module("csv"),
@@ -22,6 +24,14 @@ lazy val codegen = (project in file("codegen"))
   )
   .dependsOn(csv, types)
 
+lazy val validators = (project in file("validators"))
+  .settings(
+    commonSettings,
+    module("validators"),
+    libraryDependencies += "org.typelevel" %% "cats-core" % catsVersion
+  )
+  .dependsOn(types)
+
 lazy val cli = project
   .in(file("cli"))
   .enablePlugins(GraalVMNativeImagePlugin, JlinkPlugin)
@@ -35,7 +45,7 @@ lazy val cli = project
       "com.univocity" % "univocity-parsers" % "2.8.4",
       "com.github.alexarchambault" %% "case-app" % "2.0.0-M16",
       "com.googlecode.lanterna" % "lanterna" % "3.0.3",
-      "org.typelevel" %% "cats-core" % "2.0.0"
+      "org.typelevel" %% "cats-core" % catsVersion
     ),
     graalVMNativeImageOptions ++= Seq(
       "--report-unsupported-elements-at-runtime",
@@ -58,7 +68,7 @@ lazy val cli = project
     packMain := Map("gtfs" -> "me.chadrs.gtfstools.cli.Launcher"),
     PB.targets in Compile := Seq(scalapb.gen() -> (sourceManaged in Compile).value / "scalapb")
   )
-  .dependsOn(types)
+  .dependsOn(types, validators)
   .enablePlugins(PackPlugin)
 
 lazy val benchmarks = project

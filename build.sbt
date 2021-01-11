@@ -1,5 +1,5 @@
 val commonSettings =
-  Seq(scalaVersion := "2.13.2", version := "0.1.0", organization := "com.goswiftly")
+  Seq(scalaVersion := "2.13.2", version := "0.0.4", organization := "com.goswiftly")
 
 def module(name: String) = moduleName := s"gtfs-tools-$name"
 

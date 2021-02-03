@@ -2,11 +2,14 @@ package me.chadrs.gtfstools.cli.subcommands
 
 import caseapp.core.RemainingArgs
 import caseapp.core.app.CaseApp
-import cats.data.ValidatedNec
+import cats.data.{NonEmptyChain, Validated, ValidatedNec}
 import cats.implicits._
+import cats.kernel.Order
 import me.chadrs.gtfstools.cli.GtfsOptions.Validate
 import me.chadrs.gtfstools.cli.{GtfsInput, GtfsZipFile}
-import me.chadrs.gtfstools.types.{RoutesFileRow, StopTimesFileRow, TripsFileRow}
+import me.chadrs.gtfstools.types.{
+  Agency, AgencyFileRow, AgencyId, RoutesFileRow, ShapeId, StopTimesFileRow, TripsFileRow
+}
 import me.chadrs.gtfstools.validators.Validators
 
 object ValidateCmd extends CaseApp[Validate] {
@@ -24,8 +27,46 @@ object ValidateCmd extends CaseApp[Validate] {
       validateFile(gtfsZip.routes, extendedValidators.routes) ++
       validateFile(gtfsZip.calendars, Validators.calendar) ++
       validateFile(gtfsZip.calendarDates, Validators.calendarDates) ++
-      validateFile(gtfsZip.shapes, Validators.shapes)).foreach(println)
+      validateFile(gtfsZip.shapes, Validators.shapes) ++
+      validateUniqueIds(gtfsZip)).foreach(println)
 
+  }
+
+  def validateUniqueIds(gtfs: GtfsZipFile): Iterator[String] = {
+    def prefixError[F](prefix: String)(nec: NonEmptyChain[(F, Int)]): NonEmptyChain[String] =
+      nec.map(field => prefix ++ s" found ${field._2} with id ${field._1}")
+    val validation =
+      validateUniqueField(gtfs.agencies)(_.agencyId).leftMap(prefixError("agency.txt: ")) |+|
+        validateUniqueField(gtfs.trips)(_.tripId).leftMap(prefixError("trips.txt: ")) |+|
+        validateUniqueField(gtfs.routes)(_.routeId).leftMap(prefixError("routes.txt: ")) |+|
+        validateUniqueField(gtfs.stops)(_.stopId).leftMap(prefixError("stops.txt: ")) |+|
+        validateUniqueField(gtfs.calendars)(_.serviceId).leftMap(prefixError("calendars.txt: ")) |+|
+        validateUniqueField(gtfs.shapes)(
+          shape => (shape.shapeId, shape.shapePtSequence).mapN((_, _))
+        ).leftMap { dupShapes =>
+          implicit val orderShapeId: Order[ShapeId] = Order.by(_.toString)
+          val byShapeId = dupShapes.groupBy(_._1._1).map(dups => dups.map(_._1._1))
+          NonEmptyChain.fromNonEmptyList(byShapeId.toNel).map {
+            case (shapeId, dups) =>
+              val samples = dups.toList.take(5).mkString(", ")
+              s"shapes.txt: shape $shapeId has ${dups.size} non-unique sequence numbers (examples: $samples)"
+          }
+        }
+
+    // TODO: would be nice if this could return Validated and the errors to iterator[String] could happen all in one place
+    validation.fold(_.iterator, _ => Iterator.empty)
+  }
+
+  def validateUniqueField[C, F](
+      data: Either[String, IndexedSeq[C]]
+  )(field: C => Either[String, F]): ValidatedNec[(F, Int), Unit] = {
+    val counts =
+      data.getOrElse(IndexedSeq.empty).groupMapReduce(field)(_ => 1)(_ + _).collect {
+        case (Right(field), count) if count > 1 => (field, count)
+      }
+    NonEmptyChain
+      .fromSeq(counts.toList)
+      .toInvalid(())
   }
 
   def validateFile[R, C](input: Either[String, IndexedSeq[R]], f: R => ValidatedNec[String, C]) =

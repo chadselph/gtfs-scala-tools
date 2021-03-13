@@ -45,7 +45,7 @@ object ValidateCmd extends CaseApp[Validate] {
           shape => (shape.shapeId, shape.shapePtSequence).mapN((_, _))
         ).leftMap { dupShapes =>
           implicit val orderShapeId: Order[ShapeId] = Order.by(_.toString)
-          val byShapeId = dupShapes.groupBy(_._1._1).map(dups => dups.map(_._1._1))
+          val byShapeId = dupShapes.groupBy(_._1._1).map(dups => dups.map(_._1._2))
           NonEmptyChain.fromNonEmptyList(byShapeId.toNel).map {
             case (shapeId, dups) =>
               val samples = dups.toList.take(5).mkString(", ")

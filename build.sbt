@@ -45,6 +45,7 @@ lazy val cli = project
       "com.univocity" % "univocity-parsers" % "2.8.4",
       "com.github.alexarchambault" %% "case-app" % "2.0.0-M16",
       "com.googlecode.lanterna" % "lanterna" % "3.0.3",
+      "org.scala-lang.modules" %% "scala-java8-compat" % "0.9.1",
       "org.typelevel" %% "cats-core" % catsVersion
     ),
     graalVMNativeImageOptions ++= Seq(

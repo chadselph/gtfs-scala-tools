@@ -48,4 +48,17 @@ object GtfsOptions {
 
   case class Validate() extends GtfsOptions
 
+  @ProgName("gtfs")
+  @CommandName("expires")
+  @ArgsName("path/to/feed.zip | http://url/to/feed.zip")
+  case class ExpiresOptions(serviceId: Option[String]) extends GtfsOptions
+
+  @ProgName("gtfs")
+  @CommandName("service")
+  @ArgsName("path/to/feed.zip | http://url/to/feed.zip")
+  case class ServiceOptions(
+      @HelpMessage("service_ids to include. Defaults to all.") serviceId: List[String],
+      @HelpMessage("Max dates to list, default 20") limit: Int = 20
+  ) extends GtfsOptions
+
 }

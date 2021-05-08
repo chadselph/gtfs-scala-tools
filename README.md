@@ -1,4 +1,6 @@
-## Gtfs Scala Toolkit
+# Gtfs Scala Toolkit
+
+[![Release](https://jitpack.io/v/me.chadrs/gtfs-scala-tools.svg)](https://jitpack.io/#me.chadrs/gtfs-scala-tools)
 
 I basically wrote this to learn GTFS (static). I learn best by doing so
 
@@ -21,7 +23,8 @@ Type  gtfs command --help  for help on an individual command
 * browse - console GUI to browse gtfs file
 * calendar - read calendar.txt
 * calendar-dates - read calendar_dates.txt
-* draw-shape - output a shape as an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
+* draw-shape - output a shape as
+  an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
 * expires - output the final date of service according to calendar.txt and calendar_dates.txt
 * hash - hash each file in feed (for comparing files)
 * routes - read routes.txt
@@ -47,19 +50,17 @@ $ cs bootstrap -r jitpack me.chadrs.gtfs-scala-tools:gtfs-tools-cli_2.13:latest.
 
 Generates Scala case classes for gtfs files
 
-
 ### CSV
-CSV parser in parboiled2; used for both parsing gtfs files and parsing the gtfs spec
-by the codegen.
- 
- 
+
+CSV parser in parboiled2; used for both parsing gtfs files and parsing the gtfs spec by the codegen.
+
 ### Types
-This module was generated manually by codegen module; it's not yet automated
-and the generated code is currently in source control.
- 
- 
+
+This module was generated manually by codegen module; it's not yet automated and the generated code is currently in
+source control.
+
 ### TODO
-I'd like to use scalajs to make a chrome plugin
-for a very basic gtfs reader in chrome.
-Alternatively, I might try using javafx to make a GTFS GUI.
+
+I'd like to use scalajs to make a chrome plugin for a very basic gtfs reader in chrome. Alternatively, I might try using
+javafx to make a GTFS GUI.
 

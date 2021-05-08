@@ -2,15 +2,12 @@ package me.chadrs.gtfstools.cli.subcommands
 
 import caseapp.core.RemainingArgs
 import caseapp.core.app.CaseApp
-import cats.data.{NonEmptyChain, Validated, ValidatedNec}
+import cats.data.{NonEmptyChain, ValidatedNec}
 import cats.implicits._
 import cats.kernel.Order
 import me.chadrs.gtfstools.cli.GtfsOptions.Validate
 import me.chadrs.gtfstools.cli.{GtfsInput, GtfsZipFile}
-import me.chadrs.gtfstools.types.{
-  Agency, AgencyFileRow, AgencyId, LocationType, RoutesFileRow, ShapeId, StopId, StopTimesFileRow,
-  StopsFileRow, TripId, TripsFileRow, ZoneId
-}
+import me.chadrs.gtfstools.types._
 import me.chadrs.gtfstools.validators.Validators
 
 object ValidateCmd extends CaseApp[Validate] {
@@ -22,14 +19,14 @@ object ValidateCmd extends CaseApp[Validate] {
     val gtfsZip = gtfsInput.toGtfsZipFile
     val extendedValidators = new ExtendedValidators(gtfsZip)
 
-    (validateFile(gtfsZip.agencies, Validators.agency) ++
-      validateFile(gtfsZip.stopTimes, extendedValidators.stopTimes) ++
-      validateFile(gtfsZip.stops, extendedValidators.stops) ++
-      validateFile(gtfsZip.trips, extendedValidators.trips) ++
-      validateFile(gtfsZip.routes, extendedValidators.routes) ++
-      validateFile(gtfsZip.calendars, Validators.calendar) ++
-      validateFile(gtfsZip.calendarDates, Validators.calendarDates) ++
-      validateFile(gtfsZip.shapes, Validators.shapes) ++
+    (validateFile(gtfsZip.agencies, Validators.agency, "agency.txt") ++
+      validateFile(gtfsZip.stopTimes, extendedValidators.stopTimes, "stoptimes.txt") ++
+      validateFile(gtfsZip.stops, extendedValidators.stops, "stops.txt") ++
+      validateFile(gtfsZip.trips, extendedValidators.trips, "trips.txt") ++
+      validateFile(gtfsZip.routes, extendedValidators.routes, "routes.txt") ++
+      validateFile(gtfsZip.calendars, Validators.calendar, "calendar.txt") ++
+      validateFile(gtfsZip.calendarDates, Validators.calendarDates, "calendar_dates.txt") ++
+      validateFile(gtfsZip.shapes, Validators.shapes, "shapes.txt") ++
       validateUniqueIds(gtfsZip)).foreach(println)
 
   }
@@ -80,10 +77,14 @@ object ValidateCmd extends CaseApp[Validate] {
       .toInvalid(())
   }
 
-  def validateFile[R, C](input: Either[String, IndexedSeq[R]], f: R => ValidatedNec[String, C]) =
+  def validateFile[R, C](
+      input: Either[String, IndexedSeq[R]],
+      f: R => ValidatedNec[String, C],
+      filename: String
+  ) =
     input.toValidatedNec
       .andThen(rows => rows.toVector.map(f).sequence)
-      .fold(_.iterator, _ => Iterator.empty)
+      .fold(_.iterator.map(s"$filename: " ++ _), _ => Iterator.empty)
 
   class ExtendedValidators(gtfsZip: GtfsZipFile) {
 
@@ -169,7 +170,7 @@ object ValidateCmd extends CaseApp[Validate] {
       ): Either[String, Unit] =
         Either.cond(field.apply(stop).forall(_.isDefined) || !isRequired.apply(stop), (), msg)
 
-      import LocationType.{Stop, EntranceOrExit, Station, GenericNode, BoardingArea}
+      import LocationType.{BoardingArea, EntranceOrExit, GenericNode, Station, Stop}
 
       val typesThatRequireName = Set(None, Some(Stop), Some(Station), Some(EntranceOrExit))
       val typesThatRequireParentStation: Set[Option[LocationType]] =
@@ -201,8 +202,10 @@ object ValidateCmd extends CaseApp[Validate] {
           stop.locationType.exists(typesThatRequireParentStation.contains)
         }
 
-      latLonValidation.toValidatedNec |+| stopNameValidation.toValidatedNec |+| parentStationValidation.toValidatedNec
-
+      latLonValidation.toValidatedNec |+|
+        stopNameValidation.toValidatedNec |+|
+        parentStationValidation.toValidatedNec |+|
+        Validators.stops(stop).map(_ => ())
     }
 
   }

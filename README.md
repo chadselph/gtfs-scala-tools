@@ -2,22 +2,36 @@
 
 I basically wrote this to learn GTFS (static). I learn best by doing so
 
+Everything is done in-memory, so it might be very slow for huge files if you don't give java enough heap space.
+
 ### CLI Tools
 
 ```console
 $ gtfs --help
 
+gtfs
 Usage: gtfs [options] [command] [command-options]
 
-Available commands: agency, hash, routes, stops, stoptimes, trips
+Available commands: agency, browse, calendar, calendar-dates, draw-shape, expires, hash, routes, rt, service, shapes, stops, stoptimes, trips, validate
+
+Type  gtfs command --help  for help on an individual command
 ```
 
 * agency - read agency.txt
+* browse - console GUI to browse gtfs file
+* calendar - read calendar.txt
+* calendar-dates - read calendar_dates.txt
+* draw-shape - output a shape as an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
+* expires - output the final date of service according to calendar.txt and calendar_dates.txt
 * hash - hash each file in feed (for comparing files)
 * routes - read routes.txt
+* rt - outputs human readable representation of gtfs realtime
+* service - outputs the dates for each service according to calendar.txt and calendar_dates.txt
+* shapes - read shapes.txt
 * stops - read stops.txt
 * stoptimes - read stoptimes.txt
 * trips - read trips.txt
+* validate - runs validation for all the fields and files
 
 Install:
 

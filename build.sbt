@@ -28,7 +28,8 @@ lazy val validators = (project in file("validators"))
   .settings(
     commonSettings,
     module("validators"),
-    libraryDependencies += "org.typelevel" %% "cats-core" % catsVersion
+    libraryDependencies += "org.typelevel" %% "cats-core" % catsVersion,
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.8" % Test
   )
   .dependsOn(types)
 

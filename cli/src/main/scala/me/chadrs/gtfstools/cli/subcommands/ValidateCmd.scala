@@ -8,7 +8,8 @@ import cats.kernel.Order
 import me.chadrs.gtfstools.cli.GtfsOptions.Validate
 import me.chadrs.gtfstools.cli.{GtfsInput, GtfsZipFile}
 import me.chadrs.gtfstools.types.{
-  Agency, AgencyFileRow, AgencyId, RoutesFileRow, ShapeId, StopTimesFileRow, TripsFileRow
+  Agency, AgencyFileRow, AgencyId, LocationType, RoutesFileRow, ShapeId, StopId, StopTimesFileRow,
+  StopsFileRow, TripId, TripsFileRow, ZoneId
 }
 import me.chadrs.gtfstools.validators.Validators
 
@@ -23,6 +24,7 @@ object ValidateCmd extends CaseApp[Validate] {
 
     (validateFile(gtfsZip.agencies, Validators.agency) ++
       validateFile(gtfsZip.stopTimes, extendedValidators.stopTimes) ++
+      validateFile(gtfsZip.stops, extendedValidators.stops) ++
       validateFile(gtfsZip.trips, extendedValidators.trips) ++
       validateFile(gtfsZip.routes, extendedValidators.routes) ++
       validateFile(gtfsZip.calendars, Validators.calendar) ++
@@ -51,7 +53,16 @@ object ValidateCmd extends CaseApp[Validate] {
               val samples = dups.toList.take(5).mkString(", ")
               s"shapes.txt: shape $shapeId has ${dups.size} non-unique sequence numbers (examples: $samples)"
           }
-        }
+        } |+|
+        validateUniqueField(gtfs.stopTimes)(st => (st.tripId, st.stopSequence).mapN((_, _)))
+          .leftMap { dupStopTimes =>
+            val tripsWithDups = dupStopTimes.groupBy(_._1._1)(Order.by(_.toString))
+            NonEmptyChain.fromNonEmptyList(tripsWithDups.toNel).map {
+              case (tripId, dups) =>
+                val samples = dups.map(_._1._2).sorted.toList.take(5).mkString(", ")
+                s"stoptimes.txt: $tripId has ${dups.size} non-unique stop_sequence numbers (examples: $samples)"
+            }
+          }
 
     // TODO: would be nice if this could return Validated and the errors to iterator[String] could happen all in one place
     validation.fold(_.iterator, _ => Iterator.empty)
@@ -139,6 +150,7 @@ object ValidateCmd extends CaseApp[Validate] {
     }
 
     def stopTimes(stoptime: StopTimesFileRow): ValidatedNec[String, Unit] = {
+      // Logic for "conditionally required" fields
       stoptime.stopId
         .validRef(stops.contains)
         .leftMap(stop => s"Invalid stop_id $stop referenced in stop_times.txt")
@@ -148,6 +160,49 @@ object ValidateCmd extends CaseApp[Validate] {
           .leftMap(trip => s"Invalid trip_id $trip referenced in stop_times.txt")
           .toValidatedNec |+|
         Validators.stopTimes(stoptime).map(_ => ())
+    }
+
+    def stops(stop: StopsFileRow): ValidatedNec[String, Unit] = {
+
+      def conditionallyRequired[F](field: StopsFileRow => Either[String, Option[F]], msg: String)(
+          isRequired: StopsFileRow => Boolean
+      ): Either[String, Unit] =
+        Either.cond(field.apply(stop).forall(_.isDefined) || !isRequired.apply(stop), (), msg)
+
+      import LocationType.{Stop, EntranceOrExit, Station, GenericNode, BoardingArea}
+
+      val typesThatRequireName = Set(None, Some(Stop), Some(Station), Some(EntranceOrExit))
+      val typesThatRequireParentStation: Set[Option[LocationType]] =
+        Set(Some(EntranceOrExit), Some(GenericNode), Some(BoardingArea))
+
+      val stopIdString = stop.stopId.map(stopId => s"stop_id: $stopId").getOrElse("some stop")
+      val locationType = stop.locationType.getOrElse(None)
+      val (latOpt, lonOpt) = (stop.stopLon.getOrElse(None), stop.stopLat.getOrElse(None))
+      val latLonValidation: Either[String, Unit] = (locationType, latOpt, lonOpt) match {
+        case (_, Some(_), Some(_)) => Right(())
+        case (None | Some(Stop | EntranceOrExit | Station), lon, lat) =>
+          val missingFields =
+            List(lon.map(_ => "").getOrElse("stop_lon"), lat.map(_ => "").getOrElse("stop_lat"))
+              .mkString(" and ")
+          Left(s"For $stopIdString, missing required $missingFields.")
+        case _ => Right(())
+      }
+      val stopNameValidation: Either[String, Unit] = conditionallyRequired[String](
+        _.stopName,
+        s"$stopIdString: stop_name required for locationType"
+      ) { stop =>
+        stop.locationType.exists(typesThatRequireName.contains)
+      }
+      val parentStationValidation: Either[String, Unit] =
+        conditionallyRequired[StopId](
+          _.parentStation,
+          s"$stopIdString: parent_station required for locationType"
+        ) { stop =>
+          stop.locationType.exists(typesThatRequireParentStation.contains)
+        }
+
+      latLonValidation.toValidatedNec |+| stopNameValidation.toValidatedNec |+| parentStationValidation.toValidatedNec
+
     }
 
   }

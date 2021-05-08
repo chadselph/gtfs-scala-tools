@@ -155,6 +155,13 @@ case class LocationType(toValue: Int) extends AnyVal {
 object LocationType {
   implicit val csvFromString: CsvFromString[LocationType] =
     implicitly[CsvFromString[Int]].map(LocationType.apply)
+
+  // TODO: generate this
+  val Stop: LocationType = LocationType(0)
+  val Station: LocationType = LocationType(1)
+  val EntranceOrExit: LocationType = LocationType(2)
+  val GenericNode: LocationType = LocationType(3)
+  val BoardingArea: LocationType = LocationType(4)
 }
 case class DropOffType(toValue: Int) extends AnyVal {
   override def toString: String = {

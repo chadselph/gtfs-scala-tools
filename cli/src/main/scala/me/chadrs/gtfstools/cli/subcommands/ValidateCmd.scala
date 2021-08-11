@@ -114,21 +114,43 @@ object ValidateCmd extends CaseApp[Validate] {
       gtfsZip.calendarDates.getOrElse(Vector.empty).flatMap(_.serviceId.toList).toSet ++
         gtfsZip.calendars.getOrElse(Vector.empty).flatMap(_.serviceId.toList).toSet
 
+    private val stopTimesForTrip = gtfsZip.stopTimes
+      .getOrElse(Vector.empty)
+      .groupBy(_.tripId)
+      .collect {
+        case (Right(tripId), stopTimes) => tripId -> stopTimes.sortBy(_.stopSequence.getOrElse(-1))
+      }
+
     def trips(trip: TripsFileRow): ValidatedNec[String, Unit] = {
-      val tripId = trip.tripId.map(t => s"Trip $t").getOrElse("Trip with invalid id")
+      val tripIdLabel = trip.tripId.map(t => s"Trip $t").getOrElse("Trip with invalid id")
+      val stopTimes =
+        trip.tripId.toList.toVector.flatMap(id => stopTimesForTrip.getOrElse(id, Vector.empty))
+      val arrivals = (stopTimes.headOption, stopTimes.lastOption)
+        .mapN {
+          case (firstStop, lastStop) =>
+            val firstStopArrival = firstStop.arrivalTime
+              .flatMap(_.toRight(s"$tripIdLabel first stop_time is missing required arrival_time"))
+              .map(_ => ())
+            val lastStopArrival = lastStop.arrivalTime
+              .flatMap(_.toRight(s"$tripIdLabel last stop_time is missing required arrival_time"))
+              .map(_ => ())
+            firstStopArrival.toValidatedNec |+| lastStopArrival.toValidatedNec
+        }
+        .getOrElse(s"$tripIdLabel has no listed stop_times".invalidNec)
       trip.shapeId
         .flatMap(_.toRight("n/a"))
         .validRef(shapes.contains)
-        .leftMap(shapeId => s"$tripId has invalid reference to non-existent shape $shapeId")
+        .leftMap(shapeId => s"$tripIdLabel has invalid reference to non-existent shape $shapeId")
         .toValidatedNec |+|
         trip.routeId
           .validRef(routes.contains)
-          .leftMap(routeId => s"$tripId has invalid reference to non-existent route $routeId")
+          .leftMap(routeId => s"$tripIdLabel has invalid reference to non-existent route $routeId")
           .toValidatedNec |+|
         trip.serviceId
           .validRef(services.contains)
-          .leftMap(routeId => s"$tripId has invalid reference to non-existent route $routeId")
+          .leftMap(routeId => s"$tripIdLabel has invalid reference to non-existent route $routeId")
           .toValidatedNec |+|
+        arrivals |+|
         Validators.trips(trip).map(_ => ())
 
     }

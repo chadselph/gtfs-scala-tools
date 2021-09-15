@@ -29,7 +29,8 @@ object TripsPerDayCmd extends CaseApp[TripsPerDayOptions] {
         val datesAndServiceId = service.toVector.flatMap {
           case (id, dates) => dates.activeDates.filter(!isOutsideDate(_)).toVector.map(_ -> id)
         }
-        val tripIdsByDate = datesAndServiceId.groupMapReduce(_._1)(row => trips(row._2))(_ ++ _)
+        val tripIdsByDate = datesAndServiceId
+          .groupMapReduce(_._1)(row => trips.getOrElse(row._2, IndexedSeq.empty))(_ ++ _)
         val (min, max) = (
           options.startDate.getOrElse(tripIdsByDate.keys.min),
           options.endDate.getOrElse(tripIdsByDate.keys.max)

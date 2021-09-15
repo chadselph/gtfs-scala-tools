@@ -14,7 +14,7 @@ $ gtfs --help
 gtfs
 Usage: gtfs [options] [command] [command-options]
 
-Available commands: agency, browse, calendar, calendar-dates, draw-shape, expires, hash, routes, rt, service, shapes, stops, stoptimes, trips, validate
+Available commands: agency, browse, calendar, calendar-dates, draw-shape, expires, hash, routes, rt, service, shapes, stops, stoptimes, trips, trips-per-day, validate
 
 Type  gtfs command --help  for help on an individual command
 ```
@@ -34,6 +34,7 @@ Type  gtfs command --help  for help on an individual command
 * stops - read stops.txt
 * stoptimes - read stoptimes.txt
 * trips - read trips.txt
+* trips-per-date - counts the number of trips per day for a given range
 * validate - runs validation for all the fields and files
 
 Install:

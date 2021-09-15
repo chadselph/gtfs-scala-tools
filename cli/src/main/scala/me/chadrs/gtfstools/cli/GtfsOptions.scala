@@ -2,9 +2,11 @@ package me.chadrs.gtfstools.cli
 
 import caseapp._
 
+import java.time.LocalDate
+
 sealed trait GtfsOptions
 
-object GtfsOptions {
+object GtfsOptions extends ArgParsers {
 
   @ProgName("gtfs")
   @CommandName("hash")
@@ -59,6 +61,17 @@ object GtfsOptions {
   case class ServiceOptions(
       @HelpMessage("service_ids to include. Defaults to all.") serviceId: List[String],
       @HelpMessage("Max dates to list, default 20") limit: Int = 20
+  ) extends GtfsOptions
+
+  @ProgName("gtfs")
+  @CommandName("trips-per-day")
+  @ArgsName("path/to/feed.zip | http://url/to/feed.zip")
+  case class TripsPerDayOptions(
+      @HelpMessage("First date to get trips per day of") startDate: Option[LocalDate],
+      @HelpMessage("Last date to get trips per day of") endDate: Option[LocalDate],
+      @HelpMessage(
+        "Ignore calendar_dates outside of the range of the calendars"
+      ) ignoreOutsideCalendarDates: Boolean = false
   ) extends GtfsOptions
 
 }

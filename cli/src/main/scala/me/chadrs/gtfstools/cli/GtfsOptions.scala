@@ -74,4 +74,11 @@ object GtfsOptions extends ArgParsers {
       ) ignoreOutsideCalendarDates: Boolean = false
   ) extends GtfsOptions
 
+  @ProgName("gtfs")
+  @CommandName("trips-for-day")
+  @ArgsName("path/to/feed.zip | http://url/to/feed.zip")
+  case class TripsForDayOptions(
+      @HelpMessage("Date to get trips of, default to today, local time") day: Option[LocalDate]
+  ) extends GtfsOptions
+
 }

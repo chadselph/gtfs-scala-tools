@@ -35,6 +35,7 @@ Type  gtfs command --help  for help on an individual command
 * stoptimes - read stoptimes.txt
 * trips - read trips.txt
 * trips-per-date - counts the number of trips per day for a given range
+* trips-for-date - lists all the active trips for a given day
 * validate - runs validation for all the fields and files
 
 Install:

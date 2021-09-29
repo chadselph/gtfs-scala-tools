@@ -107,6 +107,8 @@ object Time {
   def fromSeconds(seconds: Int): Time =
     new Time((seconds / 3600).toByte, ((seconds % 3600) / 60).toByte, (seconds % 60).toByte)
 
+  implicit val ordering: Ordering[Time] = (x: Time, y: Time) => x.compareTo(y)
+
   implicit val csvFromString: CsvFromString[Time] =
     CsvFromString.fromTrimmedString.flatmapF { str =>
       Time.parse(str).left.map(_.getMessage)

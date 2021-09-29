@@ -6,9 +6,9 @@ import caseapp.core.RemainingArgs
 import me.chadrs.gtfstools.cli.GtfsOptions.TripsPerDayOptions
 import me.chadrs.gtfstools.cli.calendar.Service
 import me.chadrs.gtfstools.types.TripsFileRow
-import ArgParsers.dateArgParser
+import ArgParsers.dateArgParser // used by macro-generated code
 
-import java.time.LocalDate // used by macro-generated code
+import java.time.LocalDate
 
 object TripsPerDayCmd extends CaseApp[TripsPerDayOptions] {
   def run(options: TripsPerDayOptions, remainingArgs: RemainingArgs): Unit = {

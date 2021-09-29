@@ -22,6 +22,7 @@ object Launcher extends CommandApp[GtfsOptions] {
       case e: ExpiresOptions     => ExpiresCmd.run(e, remainingArgs)
       case s: ServiceOptions     => ServiceCmd.run(s, remainingArgs)
       case t: TripsPerDayOptions => TripsPerDayCmd.run(t, remainingArgs)
+      case t: TripsForDayOptions => TripsForDayCmd.run(t, remainingArgs)
       case _                     => println("Why not a match error")
     }
   }

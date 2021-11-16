@@ -32,7 +32,12 @@ object TripsForDayCmd extends CaseApp[TripsForDayOptions] {
         activeTrips
           .map(trip => {
             val start = tripFirstStopTimes.apply(trip.tripId.toOption.get)
-            s"$start\t${trip.routeId.toOption.get}\t${trip.tripId.toOption.get}\t${trip.tripShortName.toOption.get.get}"
+            List(
+              start,
+              trip.routeId.toOption.get,
+              trip.tripId.toOption.get,
+              trip.tripShortName.toOption.get.getOrElse("")
+            ).mkString("\t")
           })
           .sorted
           .foreach(println)

@@ -1,9 +1,9 @@
 package me.chadrs.gtfstools.cli.calendar
 
-import me.chadrs.gtfstools.cli.GtfsZipFile
 import me.chadrs.gtfstools.cli.calendar.Extensions._
-import me.chadrs.gtfstools.types.{Calendar, CalendarDates, ExceptionType, ServiceId}
+import me.chadrs.gtfstools.types.{ExceptionType, Calendar, CalendarDates, ServiceId}
 import me.chadrs.gtfstools.validators.Validators
+import me.chadrs.gtfstools.parsing.GtfsZipFile
 
 import scala.compat.java8.StreamConverters._
 import java.time.{DayOfWeek, LocalDate}

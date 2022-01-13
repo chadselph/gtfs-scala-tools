@@ -2,11 +2,12 @@ package me.chadrs.gtfstools.cli.subcommands
 
 import caseapp._
 import caseapp.core.RemainingArgs
-import me.chadrs.gtfstools.cli.{ArgParsers, GtfsInput}
+import me.chadrs.gtfstools.cli.ArgParsers
 import me.chadrs.gtfstools.cli.GtfsOptions.{TripsPerDayOptions, TripsForDayOptions}
 import me.chadrs.gtfstools.cli.calendar.Service
 import me.chadrs.gtfstools.types.{TripsFileRow, StopTimesFileRow, ServiceId, Time, TripId}
 import ArgParsers.dateArgParser
+import me.chadrs.gtfstools.parsing.GtfsInput
 import me.chadrs.gtfstools.validators.Validators
 
 import java.time.LocalDate

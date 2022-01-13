@@ -2,9 +2,9 @@ package me.chadrs.gtfstools.cli.subcommands
 
 import caseapp.CaseApp
 import caseapp.core.RemainingArgs
-import me.chadrs.gtfstools.cli.GtfsInput
 import me.chadrs.gtfstools.cli.GtfsOptions.ExpiresOptions
-import me.chadrs.gtfstools.types.{CalendarDatesFileRow, CalendarFileRow, ExceptionType, ServiceId}
+import me.chadrs.gtfstools.parsing.GtfsInput
+import me.chadrs.gtfstools.types.{CalendarDatesFileRow, ExceptionType, CalendarFileRow, ServiceId}
 
 import java.time.LocalDate
 

@@ -1,9 +1,10 @@
 package me.chadrs.gtfstools.cli.subcommands
 
 import caseapp.RemainingArgs
-import me.chadrs.gtfstools.cli.GtfsOptions.{CommonFileOptions, FileCommandOptions}
-import me.chadrs.gtfstools.cli.{GtfsInput, GtfsOptions, TablePrinter, UnivocityCsvParser}
+import me.chadrs.gtfstools.cli.GtfsOptions.{FileCommandOptions, CommonFileOptions}
+import me.chadrs.gtfstools.cli.{TablePrinter, GtfsOptions}
 import me.chadrs.gtfstools.csv.CsvReader
+import me.chadrs.gtfstools.parsing.{UnivocityCsvParser, GtfsInput}
 import me.chadrs.gtfstools.types._
 
 import scala.reflect.ClassTag

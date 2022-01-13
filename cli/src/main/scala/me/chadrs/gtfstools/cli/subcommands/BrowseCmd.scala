@@ -5,9 +5,9 @@ import caseapp.core.RemainingArgs
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI
 import com.googlecode.lanterna.screen.TerminalScreen
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory
-import me.chadrs.gtfstools.cli.GtfsInput
 import me.chadrs.gtfstools.cli.GtfsOptions.Browse
 import me.chadrs.gtfstools.cli.browse.MainWindow
+import me.chadrs.gtfstools.parsing.GtfsInput
 
 object BrowseCmd extends CaseApp[Browse] {
   override def run(options: Browse, remainingArgs: RemainingArgs): Unit = {

@@ -4,7 +4,8 @@ import caseapp.CaseApp
 import caseapp.core.RemainingArgs
 import me.chadrs.gtfstools.cli.GtfsOptions.ServiceOptions
 import me.chadrs.gtfstools.cli.calendar.Service
-import me.chadrs.gtfstools.cli.{GtfsInput, TablePrinter}
+import me.chadrs.gtfstools.cli.TablePrinter
+import me.chadrs.gtfstools.parsing.GtfsInput
 import me.chadrs.gtfstools.types.ServiceId
 
 import java.time.LocalDate

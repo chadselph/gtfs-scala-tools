@@ -1,8 +1,8 @@
 package me.chadrs.gtfstools.cli.browse
 
-import com.googlecode.lanterna.gui2.{ActionListBox, BasicWindow, Window, WindowBasedTextGUI}
-import me.chadrs.gtfstools.cli.GtfsZipFile
+import com.googlecode.lanterna.gui2.{Window, ActionListBox, BasicWindow, WindowBasedTextGUI}
 import me.chadrs.gtfstools.csv.CsvRowViewer
+import me.chadrs.gtfstools.parsing.GtfsZipFile
 import me.chadrs.gtfstools.types.{RoutesFileRow, TripsFileRow}
 
 class MainWindow(gtfsFile: GtfsZipFile) extends BasicWindow("Main Window") with VimArrows {

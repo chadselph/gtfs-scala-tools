@@ -1,12 +1,11 @@
 package me.chadrs.gtfstools.cli.subcommands
 
 import java.security.{DigestInputStream, MessageDigest}
-
 import better.files._
 import caseapp.CaseApp
 import caseapp.core.RemainingArgs
-import me.chadrs.gtfstools.cli.GtfsInput
 import me.chadrs.gtfstools.cli.GtfsOptions.HashOptions
+import me.chadrs.gtfstools.parsing.GtfsInput
 
 object HashCmd extends CaseApp[HashOptions] {
 

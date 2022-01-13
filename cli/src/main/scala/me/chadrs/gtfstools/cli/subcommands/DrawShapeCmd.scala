@@ -2,10 +2,10 @@ package me.chadrs.gtfstools.cli.subcommands
 
 import caseapp.CaseApp
 import caseapp.core.RemainingArgs
-import me.chadrs.gtfstools.cli.GtfsInput
 import me.chadrs.gtfstools.cli.GtfsOptions.DrawShape
-import me.chadrs.gtfstools.types.{ShapeId, Shapes, ShapesFileRow}
+import me.chadrs.gtfstools.types.{ShapeId, ShapesFileRow, Shapes}
 import cats.implicits._
+import me.chadrs.gtfstools.parsing.GtfsInput
 
 object DrawShapeCmd extends CaseApp[DrawShape] {
   override def run(options: DrawShape, remainingArgs: RemainingArgs): Unit = {

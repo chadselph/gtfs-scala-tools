@@ -6,7 +6,7 @@ import cats.data.{NonEmptyChain, ValidatedNec}
 import cats.implicits._
 import cats.kernel.Order
 import me.chadrs.gtfstools.cli.GtfsOptions.Validate
-import me.chadrs.gtfstools.cli.{GtfsInput, GtfsZipFile}
+import me.chadrs.gtfstools.parsing.{GtfsInput, GtfsZipFile}
 import me.chadrs.gtfstools.types._
 import me.chadrs.gtfstools.validators.Validators
 

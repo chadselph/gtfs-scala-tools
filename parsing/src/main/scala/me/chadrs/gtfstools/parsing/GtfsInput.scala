@@ -1,15 +1,15 @@
-package me.chadrs.gtfstools.cli
+package me.chadrs.gtfstools.parsing
 
 import better.files._
 import com.google.transit.realtime.gtfs_realtime.FeedMessage
 import me.chadrs.gtfstools.csv.CsvRowViewer
 import me.chadrs.gtfstools.types._
 
-import java.io.{FileInputStream, InputStream}
+import java.io.{InputStream, FileInputStream}
 import java.net.URI
 import java.net.http.HttpClient.Redirect
 import java.net.http.HttpResponse.BodyHandlers
-import java.net.http.{HttpClient, HttpRequest, HttpResponse}
+import java.net.http.{HttpRequest, HttpClient, HttpResponse}
 import java.nio.file.{Path, Paths}
 import java.util.zip.ZipInputStream
 import scala.jdk.CollectionConverters._

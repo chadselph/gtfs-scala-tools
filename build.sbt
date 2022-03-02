@@ -131,4 +131,4 @@ lazy val rtViewer = project
     libraryDependencies ++= javaFXModules,
     fork := true
   )
-  .dependsOn(types, rtBindings)
+  .dependsOn(types, rtBindings, parsing)

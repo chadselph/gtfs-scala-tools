@@ -101,14 +101,14 @@ class GtfsZipFile(inputStream: InputStream) {
       .map(CsvRowViewer.mapFile[T])
   }
 
+  lazy val agencies = parseFile[AgencyFileRow]("agency.txt")
+  lazy val calendarDates = parseFile[CalendarDatesFileRow]("calendar_dates.txt")
+  lazy val calendars = parseFile[CalendarFileRow]("calendar.txt")
+  lazy val routes = parseFile[RoutesFileRow]("routes.txt")
+  lazy val shapes = parseFile[ShapesFileRow]("shapes.txt")
   lazy val stopTimes = parseFile[StopTimesFileRow]("stop_times.txt")
   lazy val stops = parseFile[StopsFileRow]("stops.txt")
   lazy val trips = parseFile[TripsFileRow]("trips.txt")
-  lazy val agencies = parseFile[AgencyFileRow]("agency.txt")
-  lazy val shapes = parseFile[ShapesFileRow]("shapes.txt")
-  lazy val routes = parseFile[RoutesFileRow]("routes.txt")
-  lazy val calendars = parseFile[CalendarFileRow]("calendar.txt")
-  lazy val calendarDates = parseFile[CalendarDatesFileRow]("calendar_dates.txt")
 
   def tripsForRoute(routeId: String): Either[String, Seq[TripsFileRow]] = {
     trips.map { t => t.filter(_.routeId.contains(RouteId(routeId))) }

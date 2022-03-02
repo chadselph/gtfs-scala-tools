@@ -9,13 +9,14 @@ import me.chadrs.gtfstools.parsing.GtfsInput
 
 object DrawShapeCmd extends CaseApp[DrawShape] {
   override def run(options: DrawShape, remainingArgs: RemainingArgs): Unit = {
-    for {
+    val result = for {
       input <- GtfsInput.fromString(remainingArgs.remaining.head)
       allShapeRows <- input.toGtfsZipFile.parseFile[ShapesFileRow]("shapes.txt")
       shape <- filterShape(allShapeRows, ShapeId(options.shapeId))
     } yield {
-      System.out.println(encode(shape))
+      encode(shape)
     }
+    result.fold(System.err.println, println)
   }
 
   def filterShape(

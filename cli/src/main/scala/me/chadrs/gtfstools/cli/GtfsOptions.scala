@@ -81,4 +81,9 @@ object GtfsOptions extends ArgParsers {
       @HelpMessage("Date to get trips of, default to today, local time") day: Option[LocalDate]
   ) extends GtfsOptions
 
+  @ProgName("gtfs")
+  @CommandName("fix-zip")
+  @ArgsName("path/to/feed.zip | http://url/to/feed.zip")
+  case class FixZipOptions(@HelpMessage("Output file name") output: String) extends GtfsOptions
+
 }

@@ -15,16 +15,17 @@ object Launcher extends CommandApp[GtfsOptions] {
       case h: HashOptions => HashCmd.run(h, remainingArgs)
       case fileOptions: FileCommandOptions =>
         FileCmd.run(fileOptions, remainingArgs)
-      case b: Browse             => BrowseCmd.run(b, remainingArgs)
-      case rt: Rt                => RealtimeCmd.run(rt, remainingArgs)
-      case d: DrawShape          => DrawShapeCmd.run(d, remainingArgs)
-      case v: Validate           => ValidateCmd.run(v, remainingArgs)
-      case e: ExpiresOptions     => ExpiresCmd.run(e, remainingArgs)
-      case s: ServiceOptions     => ServiceCmd.run(s, remainingArgs)
-      case t: TripsPerDayOptions => TripsPerDayCmd.run(t, remainingArgs)
-      case t: TripsForDayOptions => TripsForDayCmd.run(t, remainingArgs)
-      case f: FixZipOptions      => FixZipCmd.run(f, remainingArgs)
-      case _                     => println("Why not a match error")
+      case b: Browse               => BrowseCmd.run(b, remainingArgs)
+      case rt: Rt                  => RealtimeCmd.run(rt, remainingArgs)
+      case d: DrawShape            => DrawShapeCmd.run(d, remainingArgs)
+      case v: Validate             => ValidateCmd.run(v, remainingArgs)
+      case e: ExpiresOptions       => ExpiresCmd.run(e, remainingArgs)
+      case s: ServiceOptions       => ServiceCmd.run(s, remainingArgs)
+      case t: TripsPerDayOptions   => TripsPerDayCmd.run(t, remainingArgs)
+      case t: TripsForDayOptions   => TripsForDayCmd.run(t, remainingArgs)
+      case f: FixZipOptions        => FixZipCmd.run(f, remainingArgs)
+      case c: CompareStaticRtTrips => CompareStaticRtTripsCmd.run(c, remainingArgs)
+      case _                       => println("Why not a match error")
     }
   }
 }

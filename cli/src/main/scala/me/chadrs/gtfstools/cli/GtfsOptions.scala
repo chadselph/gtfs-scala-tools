@@ -86,4 +86,8 @@ object GtfsOptions extends ArgParsers {
   @ArgsName("path/to/feed.zip | http://url/to/feed.zip")
   case class FixZipOptions(@HelpMessage("Output file name") output: String) extends GtfsOptions
 
+  @ProgName("gtfs")
+  @CommandName("compare-static-rt-trips")
+  @ArgsName("<path to gtfs> <path to gtfs vehicle-positions>")
+  case class CompareStaticRtTrips() extends GtfsOptions
 }

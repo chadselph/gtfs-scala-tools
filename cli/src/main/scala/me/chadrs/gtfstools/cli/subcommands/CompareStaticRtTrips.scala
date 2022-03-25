@@ -15,7 +15,7 @@ object CompareStaticRtTripsCmd extends CaseApp[CompareStaticRtTrips] {
 
     remainingArgs.remaining.map(GtfsInput.fromString) match {
       case Seq(Right(gtfs), Right(gtfsRt)) =>
-        compare(gtfs.toGtfsZipFile, gtfsRt.toGtfsRtFeed)
+        compare(gtfs.toGtfsZipFile, gtfsRt.toGtfsRtFeed, options)
       case Seq(Left(err), _) => System.err.println(err)
       case Seq(_, Left(err)) => System.err.println(err)
       case _ =>
@@ -25,7 +25,11 @@ object CompareStaticRtTripsCmd extends CaseApp[CompareStaticRtTrips] {
 
   }
 
-  def compare(gtfsZipFile: GtfsZipFile, gtfsRtFeed: FeedMessage): Unit = {
+  def compare(
+      gtfsZipFile: GtfsZipFile,
+      gtfsRtFeed: FeedMessage,
+      options: CompareStaticRtTrips
+  ): Unit = {
     val tripIdsInRt =
       gtfsRtFeed.entity.flatMap(_.vehicle.flatMap(_.trip)).flatMap(_.tripId).map(TripId(_))
 
@@ -33,13 +37,17 @@ object CompareStaticRtTripsCmd extends CaseApp[CompareStaticRtTrips] {
       .fold(s => throw new Exception(s), _.flatMap(_.tripId.toSeq).toSet)
 
     val (matches, nonMatches) = tripIdsInRt.partition(tripsInStatic.contains)
-
-    val sampleTrips =
-      if (nonMatches.nonEmpty) nonMatches.take(10).mkString("Samples: ", ",", ".") else ""
-    println(s"""
-        |${matches.size} trips match.
-        |${nonMatches.size} trips do not. $sampleTrips
-        |""".stripMargin)
+    if (options.verbose) {
+      matches.foreach(tripId => println(s"match: ${tripId.toString}"))
+      nonMatches.foreach(tripId => println(s"nonmatch: ${tripId.toString}"))
+    } else {
+      val sampleTrips =
+        if (nonMatches.nonEmpty) nonMatches.take(10).mkString("Samples: ", ",", ".") else ""
+      println(s"""
+                 |${matches.size} trips match.
+                 |${nonMatches.size} trips do not. $sampleTrips
+                 |""".stripMargin)
+    }
 
   }
 

@@ -89,5 +89,7 @@ object GtfsOptions extends ArgParsers {
   @ProgName("gtfs")
   @CommandName("compare-static-rt-trips")
   @ArgsName("<path to gtfs> <path to gtfs vehicle-positions>")
-  case class CompareStaticRtTrips() extends GtfsOptions
+  case class CompareStaticRtTrips(
+      @HelpMessage("Actually show the matching trip_ids") verbose: Boolean
+  ) extends GtfsOptions
 }

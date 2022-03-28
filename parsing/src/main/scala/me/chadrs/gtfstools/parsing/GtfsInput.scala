@@ -2,7 +2,7 @@ package me.chadrs.gtfstools.parsing
 
 import better.files._
 import com.google.transit.realtime.gtfs_realtime.FeedMessage
-import me.chadrs.gtfstools.csv.CsvRowViewer
+import me.chadrs.gtfstools.csv.{CsvRowViewer, CsvFile}
 import me.chadrs.gtfstools.types._
 
 import java.io.{InputStream, FileInputStream}

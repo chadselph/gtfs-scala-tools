@@ -1,11 +1,10 @@
 package me.chadrs.gtfstools.graphql
 
 import java.util.concurrent.TimeUnit
-
-import com.github.benmanes.caffeine.cache.{Caffeine, LoadingCache}
-import me.chadrs.gtfstools.cli.GtfsInput
+import com.github.benmanes.caffeine.cache.{LoadingCache, Caffeine}
 import me.chadrs.gtfstools.csv.CsvRowViewer
-import me.chadrs.gtfstools.types.{RouteId, RoutesFileRow, TripId, TripsFileRow}
+import me.chadrs.gtfstools.parsing.GtfsInput
+import me.chadrs.gtfstools.types.{RoutesFileRow, RouteId, TripsFileRow, TripId}
 import sangria.schema._
 
 object Schemas {

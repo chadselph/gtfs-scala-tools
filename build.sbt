@@ -37,6 +37,20 @@ lazy val codegen = (project in file("codegen"))
   )
   .dependsOn(csv, types)
 
+lazy val graphql = (project in file("graphql"))
+  .settings(
+    commonSettings,
+    module("graphql"),
+    libraryDependencies ++= Seq(
+      "org.sangria-graphql" %% "sangria" % "2.0.0",
+      "org.sangria-graphql" %% "sangria-circe" % "1.3.0",
+      "com.typesafe.akka" %% "akka-stream" % "2.6.8",
+      "com.typesafe.akka" %% "akka-http" % "10.2.0",
+      "de.heikoseeberger" %% "akka-http-circe" % "1.31.0"
+    )
+  )
+  .dependsOn(csv, types, cli)
+
 lazy val validators = (project in file("validators"))
   .settings(
     commonSettings,

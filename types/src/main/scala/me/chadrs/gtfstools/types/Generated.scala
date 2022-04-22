@@ -281,6 +281,7 @@ case class Stops(
     stopUrl: Option[java.net.URI],
     locationType: Option[LocationType],
     parentStation: Option[StopId],
+    ttsStopName: Option[String],
     stopTimezone: Option[java.time.ZoneId],
     wheelchairBoarding: Option[WheelchairBoarding],
     levelId: Option[LevelId],
@@ -475,6 +476,7 @@ object Agency {
     "agency_email"
   )
 }
+
 object Stops {
   implicit val csvReader: CsvReader[Stops] = (c: CsvCursor) =>
     for {
@@ -488,6 +490,7 @@ object Stops {
       stopUrl <- c.optionally[java.net.URI]("stop_url")
       locationType <- c.optionally[LocationType]("location_type")
       parentStation <- c.optionally[StopId]("parent_station")
+      ttsStopName <- c.optionally[String]("tts_stop_name")
       stopTimezone <- c.optionally[java.time.ZoneId]("stop_timezone")
       wheelchairBoarding <- c.optionally[WheelchairBoarding]("wheelchair_boarding")
       levelId <- c.optionally[LevelId]("level_id")
@@ -503,6 +506,7 @@ object Stops {
       stopUrl,
       locationType,
       parentStation,
+      ttsStopName,
       stopTimezone,
       wheelchairBoarding,
       levelId,
@@ -519,12 +523,14 @@ object Stops {
     "stop_url",
     "location_type",
     "parent_station",
+    "tts_stop_name",
     "stop_timezone",
     "wheelchair_boarding",
     "level_id",
     "platform_code"
   )
 }
+
 object Routes {
   implicit val csvReader: CsvReader[Routes] = (c: CsvCursor) =>
     for {

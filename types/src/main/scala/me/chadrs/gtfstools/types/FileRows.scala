@@ -33,6 +33,7 @@ class StopsFileRow(cursor: me.chadrs.gtfstools.csv.CsvCursor) {
     cursor.optionally[LocationType]("location_type")
   lazy val parentStation: Either[String, Option[StopId]] =
     cursor.optionally[StopId]("parent_station")
+  lazy val ttsStopName: Either[String, Option[String]] = cursor.optionally[String]("tts_stop_name")
   lazy val stopTimezone: Either[String, Option[java.time.ZoneId]] =
     cursor.optionally[java.time.ZoneId]("stop_timezone")
   lazy val wheelchairBoarding: Either[String, Option[WheelchairBoarding]] =

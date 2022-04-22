@@ -2,7 +2,8 @@ package me.chadrs.gtfstools.codegen
 
 object Spec {
 
-  val text = """agency.txt,,,
+  val text =
+    """agency.txt,,,
                |,,,
                |File: Required,,,
                |,,,
@@ -60,6 +61,7 @@ object Spec {
                |• Required for locations which are entrances (location_type=2), generic nodes (location_type=3) or boarding areas (location_type=4).
                |• Optional for stops/platforms (location_type=0).
                |• Forbidden for stations (location_type=1)."
+               |tts_stop_name,Text,Optional,"Readable version of the stop_name. See ""Text-to-speech field"" in the Term Definitions for more."
                |stop_timezone,Timezone,Optional,"Timezone of the location. If the location has a parent station, it inherits the parent station’s timezone instead of applying its own. Stations and parentless stops with empty stop_timezone inherit the timezone specified by agency.agency_timezone. If stop_timezone values are provided, the times in stop_times.txt should be entered as the time since midnight in the timezone specified by agency.agency_timezone. This ensures that the time values in a trip always increase over the course of a trip, regardless of which timezones the trip crosses."
                |wheelchair_boarding,Enum,Optional,"Indicates whether wheelchair boardings are possible from the location. Valid options are:
                |
@@ -459,6 +461,5 @@ object Spec {
                |attribution_url,URL,Optional,The URL of the organization.
                |attribution_email,Email,Optional,The email of the organization.
                |attribution_phone,Phone number,Optional,The phone number of the organization.""".stripMargin
-
 
 }

@@ -71,7 +71,12 @@ trait GtfsTypesGenerator {
   def generateClasses(input: Seq[GtfsFileSpec]): String
 
   def main(args: Array[String]): Unit = {
-    println(GtfsSpecParser.runParser(Spec.text).map(generateClasses).getOrElse(""))
+    println(
+      GtfsSpecParser
+        .runParser(Spec.text)
+        .map(generateClasses)
+        .fold(err => throw new Exception(err), identity)
+    )
   }
 
 }

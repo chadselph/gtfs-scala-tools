@@ -2,7 +2,6 @@ package me.chadrs.gtfstools.codegen
 
 import scala.meta._
 import scala.meta.Term.{ForYield, Param}
-import scala.util.matching.Regex
 
 
 object ScalaCaseClassGtfsGenerator extends GtfsTypesGenerator {

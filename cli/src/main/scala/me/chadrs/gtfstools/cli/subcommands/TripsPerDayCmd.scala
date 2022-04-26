@@ -22,10 +22,10 @@ object TripsPerDayCmd extends CaseApp[TripsPerDayOptions] {
       } yield {
         val calendars = service.values.map(_.calendar).collect { case Some(calendar) => calendar }
         val (minCalDate, maxCalDate) =
-          (calendars.map(_.startDate).min, calendars.map(_.endDate).max)
+          (calendars.map(_.startDate).minOption, calendars.map(_.endDate).maxOption)
         def isOutsideDate(date: LocalDate): Boolean =
-          options.ignoreOutsideCalendarDates && (date.isAfter(maxCalDate) || date
-            .isBefore(minCalDate))
+          options.ignoreOutsideCalendarDates && (maxCalDate.exists(date.isAfter) || minCalDate
+            .exists(date.isBefore))
 
         val datesAndServiceId = service.toVector.flatMap {
           case (id, dates) => dates.activeDates.filter(!isOutsideDate(_)).toVector.map(_ -> id)

@@ -1,7 +1,6 @@
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.7.0")
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.10")
-addSbtPlugin("pl.project13.scala" % "sbt-jmh" % "0.3.7")
-addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.12")
-addSbtPlugin("com.thesamet" % "sbt-protoc" % "1.0.0")
+addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.9.16")
+addSbtPlugin("pl.project13.scala" % "sbt-jmh" % "0.4.4")
+addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.17")
+addSbtPlugin("com.thesamet" % "sbt-protoc" % "1.0.6")
 
-libraryDependencies += "com.thesamet.scalapb" %% "compilerplugin" % "0.10.10"
+libraryDependencies += "com.thesamet.scalapb" %% "compilerplugin" % "0.11.13"

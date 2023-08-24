@@ -38,8 +38,9 @@ trait GtfsTypesGenerator {
   val IdReferencing: Regex = """ID referencing (\w+)\.(\w+)""".r
 
   /**
-   * @return for required params, the same type twice. For optional, first
-   *         Option[ReturnType] and then ReturnType
+   * @return
+   *   for required params, the same type twice. For optional, first Option[ReturnType] and then
+   *   ReturnType
    */
   def determineType(field: GtfsFieldSpec): (Type, Type) = {
     val rawType = field.`type` match {
@@ -53,7 +54,7 @@ trait GtfsTypesGenerator {
       case "Float" | "Positive Float" | "Non-negative float" | "Non-negative Float" =>
         Type.Name("Double")
       case "Non-negative integer" | "Non-null Integer" | "Positive Integer" => t"Int"
-      case "URL"                                                            => Type.Select(q"java.net", t"URI")
+      case "URL" => Type.Select(q"java.net", t"URI")
       case "Enum" =>
         field.name match {
           case _ if field.name == "transfers"    => t"String" // TODO: transfer type

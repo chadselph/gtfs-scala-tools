@@ -5,7 +5,7 @@ val commonSettings =
 
 def module(name: String) = moduleName := s"gtfs-tools-$name"
 
-val catsVersion = "2.3.1"
+val catsVersion = "2.9.0"
 
 lazy val rtBindings = project
   .in(file("rt-bindings"))
@@ -21,18 +21,18 @@ lazy val rtBindings = project
 lazy val csv = (project in file("csv")).settings(
   commonSettings,
   module("csv"),
-  libraryDependencies += "org.parboiled" %% "parboiled" % "2.2.0"
+  libraryDependencies += "org.parboiled" %% "parboiled" % "2.4.1"
 )
 
 lazy val types = (project in file("types"))
-  .settings(module("types"), scalaVersion := "2.13.2")
+  .settings(module("types"), scalaVersion := "2.13.7")
   .dependsOn(csv)
 
 lazy val codegen = (project in file("codegen"))
   .settings(
     commonSettings,
     module("codegen"),
-    libraryDependencies += "org.scalameta" %% "scalameta" % "4.3.8"
+    libraryDependencies += "org.scalameta" %% "scalameta" % "4.7.6"
     // TODO: https://github.com/typelevel/paiges for docstrings
   )
   .dependsOn(csv, types)
@@ -42,7 +42,7 @@ lazy val validators = (project in file("validators"))
     commonSettings,
     module("validators"),
     libraryDependencies += "org.typelevel" %% "cats-core" % catsVersion,
-    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.8" % Test
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % Test
   )
   .dependsOn(types)
 
@@ -51,8 +51,8 @@ lazy val parsing = (project in file("parsing"))
     commonSettings,
     module("parsing"),
     libraryDependencies ++= Seq(
-      "com.github.pathikrit" %% "better-files" % "3.9.1",
-      "com.univocity" % "univocity-parsers" % "2.8.4"
+      "com.github.pathikrit" %% "better-files" % "3.9.2",
+      "com.univocity" % "univocity-parsers" % "2.9.1"
     )
   )
   .dependsOn(types, rtBindings)
@@ -65,11 +65,11 @@ lazy val cli = project
     commonSettings,
     module("cli"),
     libraryDependencies ++= Seq(
-      "com.github.pathikrit" %% "better-files" % "3.9.1",
+      "com.github.pathikrit" %% "better-files" % "3.9.2",
       "com.jakewharton.fliptables" % "fliptables" % "1.1.0",
-      "com.github.alexarchambault" %% "case-app" % "2.0.0-M16",
-      "com.googlecode.lanterna" % "lanterna" % "3.0.3",
-      "org.scala-lang.modules" %% "scala-java8-compat" % "0.9.1",
+      "com.github.alexarchambault" %% "case-app" % "2.0.6",
+      "com.googlecode.lanterna" % "lanterna" % "3.1.1",
+      "org.scala-lang.modules" %% "scala-java8-compat" % "1.0.2",
       "org.typelevel" %% "cats-core" % catsVersion
     ),
     graalVMNativeImageOptions ++= Seq(
@@ -100,7 +100,7 @@ lazy val benchmarks = project
   .settings(
     commonSettings,
     module("benchmarks"),
-    libraryDependencies += "com.univocity" % "univocity-parsers" % "2.8.4"
+    libraryDependencies += "com.univocity" % "univocity-parsers" % "2.9.1"
   )
   .dependsOn(types)
   .enablePlugins(JmhPlugin)
@@ -125,8 +125,8 @@ lazy val rtViewer = project
     module("rt-viewer"),
     libraryDependencies ++= Seq(
       "org.scalafx" %% "scalafx" % "17.0.1-R26",
-      "org.kordamp.ikonli" % "ikonli-subway-pack" % "12.3.0",
-      "org.kordamp.ikonli" % "ikonli-javafx" % "12.3.0"
+      "org.kordamp.ikonli" % "ikonli-subway-pack" % "12.3.1",
+      "org.kordamp.ikonli" % "ikonli-javafx" % "12.3.1"
     ),
     libraryDependencies ++= javaFXModules,
     fork := true

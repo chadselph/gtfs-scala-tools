@@ -16,7 +16,8 @@ import cats.implicits._
 import scala.util.Try
 
 /**
- * @tparam T the type of CSV row we're displaying in a table.
+ * @tparam T
+ *   the type of CSV row we're displaying in a table.
  */
 trait CsvRowTableView[T] {
   def columns: IndexedSeq[CsvRowTableView.Column[T]]

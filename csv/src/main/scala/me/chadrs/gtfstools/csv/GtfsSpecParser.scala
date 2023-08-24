@@ -18,7 +18,7 @@ class CsvParser(val input: ParserInput) extends Parser {
   def NL: Rule0 = rule(optional('\r') ~ '\n')
 
   def csvFile: Rule1[CsvFile] = rule {
-    (csvRow ~ NL ~ zeroOrMore(csvRow).separatedBy(NL)) ~>  CsvFile
+    (csvRow ~ NL ~ zeroOrMore(csvRow).separatedBy(NL)) ~> CsvFile
   }
 
   def csvRow: Rule1[Seq[String]] = rule {
@@ -29,8 +29,7 @@ class CsvParser(val input: ParserInput) extends Parser {
     csvQuoted | csvNotQuoted
   }
   def csvQuoted: Rule1[String] = rule {
-    (DQUOTE ~ zeroOrMore(quotedData | escapeQuote) ~ DQUOTE) ~> (
-      (x: Seq[String]) => x.mkString)
+    (DQUOTE ~ zeroOrMore(quotedData | escapeQuote) ~ DQUOTE) ~> ((x: Seq[String]) => x.mkString)
   }
 
   def csvNotQuoted: Rule1[String] = rule {
@@ -52,4 +51,3 @@ object CsvParser {
     parser.csvFile.run()
   }
 }
-

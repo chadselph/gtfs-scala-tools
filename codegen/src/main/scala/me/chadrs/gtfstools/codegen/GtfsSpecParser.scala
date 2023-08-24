@@ -10,30 +10,36 @@ case object Optional extends IsRequired
 
 case class GtfsFieldSpec(name: String, `type`: String, required: IsRequired, description: String)
 
-case class GtfsFileSpec(filename: String, required: IsRequired, description: String, fields: Seq[GtfsFieldSpec])
+case class GtfsFileSpec(
+    filename: String,
+    required: IsRequired,
+    description: String,
+    fields: Seq[GtfsFieldSpec]
+)
 
 class GtfsSpecParser(input: ParserInput) extends CsvParser(input) {
 
-
-  def spec : Rule1[Seq[GtfsFileSpec]] = rule {
+  def spec: Rule1[Seq[GtfsFileSpec]] = rule {
     oneOrMore(gtfsFile).separatedBy(NL) ~ EOI
   }
 
   def gtfsFile: Rule1[GtfsFileSpec] = rule {
-    (textFileLine ~ NL ~ emptyLine ~ NL ~ fileRequiredLine ~ NL ~ 
-      docLines ~ NL ~ fileFieldsHeaderRow ~ NL ~ oneOrMore(gtfsField).separatedBy(NL)) ~> GtfsFileSpec
+    (textFileLine ~ NL ~ emptyLine ~ NL ~ fileRequiredLine ~ NL ~
+      docLines ~ NL ~ fileFieldsHeaderRow ~ NL ~ oneOrMore(gtfsField).separatedBy(
+        NL
+      )) ~> GtfsFileSpec
   }
-  
+
   def gtfsField: Rule1[GtfsFieldSpec] = rule {
     (csvValue ~ "," ~ csvValue ~ "," ~ isRequired ~ "," ~ csvValue) ~> GtfsFieldSpec
   }
-  
+
   def fileRequiredLine: Rule1[IsRequired] = rule {
     "File: " ~ isRequired ~ ",,,"
   }
 
   def emptyLine: Rule0 = rule(",,,")
-  
+
   def docLine: Rule1[String] = rule {
     csvValue ~ ",,,"
   }
@@ -54,7 +60,7 @@ class GtfsSpecParser(input: ParserInput) extends CsvParser(input) {
   def fileFieldsHeaderRow: Rule0 = rule {
     "Field Name,Type,Required,Description"
   }
-  
+
   val validFileNameChars: CharPredicate = CharPredicate.Alpha ++ "_"
 
   def textFileName: Rule0 = rule {

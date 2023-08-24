@@ -8,16 +8,13 @@ import java.time.temporal.{
 import java.time.{DateTimeException, Duration, LocalTime}
 
 /**
- * GTFS's time type.
- * Time in the HH:MM:SS format (H:MM:SS is also accepted).
- * The time is measured from "noon minus 12h" of the service day
- * (effectively midnight except for days on which daylight savings
- * time changes occur). For times occurring after midnight, enter
- * the time as a value greater than 24:00:00 in HH:MM:SS local time
- * for the day on which the trip schedule begins.
+ * GTFS's time type. Time in the HH:MM:SS format (H:MM:SS is also accepted). The time is measured
+ * from "noon minus 12h" of the service day (effectively midnight except for days on which daylight
+ * savings time changes occur). For times occurring after midnight, enter the time as a value
+ * greater than 24:00:00 in HH:MM:SS local time for the day on which the trip schedule begins.
  *
- * Implements Temporal, but it might have some surprising results due to ambiguity
- * when converting to a LocalTime.
+ * Implements Temporal, but it might have some surprising results due to ambiguity when converting
+ * to a LocalTime.
  */
 class Time private (hour: Byte, minute: Byte, seconds: Byte)
     extends Comparable[Time]

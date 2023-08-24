@@ -10,10 +10,9 @@ import scala.util.Try
 trait CsvReader[F] {
   def readFile(file: CsvFile): Seq[Result[F]] = {
     val indices = file.headers.zipWithIndex.toMap
-    file.rows.zipWithIndex.map {
-      case (row, rowNum) =>
-        // TODO get extra columns
-        readRow(new IndexedSeqCsvCursor(indices, row.toIndexedSeq, rowNum + 2))
+    file.rows.zipWithIndex.map { case (row, rowNum) =>
+      // TODO get extra columns
+      readRow(new IndexedSeqCsvCursor(indices, row.toIndexedSeq, rowNum + 2))
     }
   }
 
@@ -30,18 +29,16 @@ object CsvReader {
 }
 
 /**
- * Similar to [[CsvReader]] but the validation is deferred
- * so [[CsvRowViewer]].fromCsvCursor cannot fail, but actually
- * reading the column might. This makes more lenient apps possible
- * since we can just skip validation on columns we don't care about.
+ * Similar to [[CsvReader]] but the validation is deferred so [[CsvRowViewer]].fromCsvCursor cannot
+ * fail, but actually reading the column might. This makes more lenient apps possible since we can
+ * just skip validation on columns we don't care about.
  */
 trait CsvRowViewer[F] {
 
   def mapFile(file: CsvFile): IndexedSeq[F] = {
     val indices = file.headers.zipWithIndex.toMap
-    file.rows.zipWithIndex.map {
-      case (row, rowNum) =>
-        fromCsvCursor(new IndexedSeqCsvCursor(indices, row.toIndexedSeq, rowNum + 2))
+    file.rows.zipWithIndex.map { case (row, rowNum) =>
+      fromCsvCursor(new IndexedSeqCsvCursor(indices, row.toIndexedSeq, rowNum + 2))
     }
   }.toIndexedSeq
 
@@ -114,13 +111,13 @@ object CsvFromString {
   val fromTrimmedString: CsvFromString[String] = stringfromString.map(_.trim)
 
   implicit val intFromString: CsvFromString[Int] =
-    fromTrimmedString.flatmapF(
-      nonEmptyStr => Either.cond(nonEmptyStr.forall(_.isDigit), nonEmptyStr.toInt, "not a number")
+    fromTrimmedString.flatmapF(nonEmptyStr =>
+      Either.cond(nonEmptyStr.forall(_.isDigit), nonEmptyStr.toInt, "not a number")
     )
 
   implicit val doubleFromString: CsvFromString[Double] =
-    fromTrimmedString.flatmapF(
-      nonEmptyStr => nonEmptyStr.toDoubleOption.toRight("not a floating point number")
+    fromTrimmedString.flatmapF(nonEmptyStr =>
+      nonEmptyStr.toDoubleOption.toRight("not a floating point number")
     )
 
   implicit val boolFromString: CsvFromString[Boolean] = fromTrimmedString.flatmapF {

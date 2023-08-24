@@ -298,16 +298,15 @@ object Validators {
       csv.originId.toValidatedNec,
       csv.destinationId.toValidatedNec,
       csv.containsId.toValidatedNec
-    ).mapN({
-      case (fareId, routeId, originId, destinationId, containsId) =>
-        FareRules(
-          fareId,
-          routeId,
-          originId,
-          destinationId,
-          containsId,
-          csv.toMap.removedAll(FareRules.Fields)
-        )
+    ).mapN({ case (fareId, routeId, originId, destinationId, containsId) =>
+      FareRules(
+        fareId,
+        routeId,
+        originId,
+        destinationId,
+        containsId,
+        csv.toMap.removedAll(FareRules.Fields)
+      )
     })
   }
   def shapes(csv: ShapesFileRow): ValidationResult[Shapes] = {
@@ -317,16 +316,15 @@ object Validators {
       csv.shapePtLon.toValidatedNec,
       csv.shapePtSequence.toValidatedNec,
       csv.shapeDistTraveled.toValidatedNec
-    ).mapN({
-      case (shapeId, shapePtLat, shapePtLon, shapePtSequence, shapeDistTraveled) =>
-        Shapes(
-          shapeId,
-          shapePtLat,
-          shapePtLon,
-          shapePtSequence,
-          shapeDistTraveled,
-          csv.toMap.removedAll(Shapes.Fields)
-        )
+    ).mapN({ case (shapeId, shapePtLat, shapePtLon, shapePtSequence, shapeDistTraveled) =>
+      Shapes(
+        shapeId,
+        shapePtLat,
+        shapePtLon,
+        shapePtSequence,
+        shapeDistTraveled,
+        csv.toMap.removedAll(Shapes.Fields)
+      )
     })
   }
   def frequencies(csv: FrequenciesFileRow): ValidationResult[Frequencies] = {
@@ -336,16 +334,15 @@ object Validators {
       csv.endTime.toValidatedNec,
       csv.headwaySecs.toValidatedNec,
       csv.exactTimes.toValidatedNec
-    ).mapN({
-      case (tripId, startTime, endTime, headwaySecs, exactTimes) =>
-        Frequencies(
-          tripId,
-          startTime,
-          endTime,
-          headwaySecs,
-          exactTimes,
-          csv.toMap.removedAll(Frequencies.Fields)
-        )
+    ).mapN({ case (tripId, startTime, endTime, headwaySecs, exactTimes) =>
+      Frequencies(
+        tripId,
+        startTime,
+        endTime,
+        headwaySecs,
+        exactTimes,
+        csv.toMap.removedAll(Frequencies.Fields)
+      )
     })
   }
   def transfers(csv: TransfersFileRow): ValidationResult[Transfers] = {
@@ -354,15 +351,14 @@ object Validators {
       csv.toStopId.toValidatedNec,
       csv.transferType.toValidatedNec,
       csv.minTransferTime.toValidatedNec
-    ).mapN({
-      case (fromStopId, toStopId, transferType, minTransferTime) =>
-        Transfers(
-          fromStopId,
-          toStopId,
-          transferType,
-          minTransferTime,
-          csv.toMap.removedAll(Transfers.Fields)
-        )
+    ).mapN({ case (fromStopId, toStopId, transferType, minTransferTime) =>
+      Transfers(
+        fromStopId,
+        toStopId,
+        transferType,
+        minTransferTime,
+        csv.toMap.removedAll(Transfers.Fields)
+      )
     })
   }
   def pathways(csv: PathwaysFileRow): ValidationResult[Pathways] = {

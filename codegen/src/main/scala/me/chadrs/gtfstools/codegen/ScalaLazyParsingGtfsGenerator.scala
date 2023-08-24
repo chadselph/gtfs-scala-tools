@@ -2,10 +2,9 @@ package me.chadrs.gtfstools.codegen
 import scala.meta._
 
 /**
- * Generates classes that wrap a raw csv row (IndexSeq of Strings)
- * and don't do any validation until the last possible moment.
- * The idea is that if you never even look at a field, you might not
- * care it has an invalid value.
+ * Generates classes that wrap a raw csv row (IndexSeq of Strings) and don't do any validation until
+ * the last possible moment. The idea is that if you never even look at a field, you might not care
+ * it has an invalid value.
  */
 object ScalaLazyParsingGtfsGenerator extends GtfsTypesGenerator {
   import CodeGenUtil._

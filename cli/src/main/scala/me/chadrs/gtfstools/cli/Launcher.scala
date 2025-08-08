@@ -25,6 +25,7 @@ object Launcher extends CommandApp[GtfsOptions] {
       case t: TripsForDayOptions   => TripsForDayCmd.run(t, remainingArgs)
       case f: FixZipOptions        => FixZipCmd.run(f, remainingArgs)
       case c: CompareStaticRtTrips => CompareStaticRtTripsCmd.run(c, remainingArgs)
+      case d: DiffBlocks           => DiffBlocksCmd.run(d, remainingArgs)
       case _                       => println("Why not a match error")
     }
   }

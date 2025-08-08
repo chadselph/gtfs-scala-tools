@@ -48,6 +48,8 @@ object GtfsOptions extends ArgParsers {
 
   case class DrawShape(shapeId: String) extends GtfsOptions
 
+  case class DiffBlocks() extends GtfsOptions
+
   case class Validate() extends GtfsOptions
 
   @ProgName("gtfs")

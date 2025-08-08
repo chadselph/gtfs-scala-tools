@@ -2,6 +2,7 @@ package me.chadrs.gtfstools.cli.subcommands
 
 import caseapp.core.RemainingArgs
 import caseapp.core.app.CaseApp
+import cats.data.Validated.{Invalid, Valid}
 import cats.data.{NonEmptyChain, ValidatedNec}
 import cats.implicits._
 import cats.kernel.Order
@@ -9,6 +10,9 @@ import me.chadrs.gtfstools.cli.GtfsOptions.Validate
 import me.chadrs.gtfstools.parsing.{GtfsInput, GtfsZipFile}
 import me.chadrs.gtfstools.types._
 import me.chadrs.gtfstools.validators.Validators
+import me.chadrs.gtfstools.validators.Validators.ValidationResult
+
+import scala.math.Ordering.Implicits.infixOrderingOps
 
 object ValidateCmd extends CaseApp[Validate] {
   override def run(options: Validate, remainingArgs: RemainingArgs): Unit = {
@@ -40,24 +44,22 @@ object ValidateCmd extends CaseApp[Validate] {
         validateUniqueField(gtfs.routes)(_.routeId).leftMap(prefixError("routes.txt: ")) |+|
         validateUniqueField(gtfs.stops)(_.stopId).leftMap(prefixError("stops.txt: ")) |+|
         validateUniqueField(gtfs.calendars)(_.serviceId).leftMap(prefixError("calendars.txt: ")) |+|
-        validateUniqueField(gtfs.shapes)(
-          shape => (shape.shapeId, shape.shapePtSequence).mapN((_, _))
+        validateUniqueField(gtfs.shapes)(shape =>
+          (shape.shapeId, shape.shapePtSequence).mapN((_, _))
         ).leftMap { dupShapes =>
           implicit val orderShapeId: Order[ShapeId] = Order.by(_.toString)
           val byShapeId = dupShapes.groupBy(_._1._1).map(dups => dups.map(_._1._2))
-          NonEmptyChain.fromNonEmptyList(byShapeId.toNel).map {
-            case (shapeId, dups) =>
-              val samples = dups.toList.take(5).mkString(", ")
-              s"shapes.txt: shape $shapeId has ${dups.size} non-unique sequence numbers (examples: $samples)"
+          NonEmptyChain.fromNonEmptyList(byShapeId.toNel).map { case (shapeId, dups) =>
+            val samples = dups.toList.take(5).mkString(", ")
+            s"shapes.txt: shape $shapeId has ${dups.size} non-unique sequence numbers (examples: $samples)"
           }
         } |+|
         validateUniqueField(gtfs.stopTimes)(st => (st.tripId, st.stopSequence).mapN((_, _)))
           .leftMap { dupStopTimes =>
             val tripsWithDups = dupStopTimes.groupBy(_._1._1)(Order.by(_.toString))
-            NonEmptyChain.fromNonEmptyList(tripsWithDups.toNel).map {
-              case (tripId, dups) =>
-                val samples = dups.map(_._1._2).sorted.toList.take(5).mkString(", ")
-                s"stoptimes.txt: $tripId has ${dups.size} non-unique stop_sequence numbers (examples: $samples)"
+            NonEmptyChain.fromNonEmptyList(tripsWithDups.toNel).map { case (tripId, dups) =>
+              val samples = dups.map(_._1._2).sorted.toList.take(5).mkString(", ")
+              s"stoptimes.txt: $tripId has ${dups.size} non-unique stop_sequence numbers (examples: $samples)"
             }
           }
 
@@ -86,64 +88,85 @@ object ValidateCmd extends CaseApp[Validate] {
       .andThen(rows => rows.toVector.map(f).sequence)
       .fold(_.iterator.map(s"$filename: " ++ _), _ => Iterator.empty)
 
+  def sequenceValid[R, T](validator: R => ValidationResult[T], items: Seq[R]): Seq[T] =
+    items.map(validator).collect { case Valid(v) => v }
+
   class ExtendedValidators(gtfsZip: GtfsZipFile) {
 
     // agency_id field is required when the dataset contains
     // data for multiple transit agencies, otherwise it is optional.
 
-    private val agencies = gtfsZip.agencies
+    private val agencyIds: Set[AgencyId] = gtfsZip.agencies
       .getOrElse(Vector.empty)
       .flatMap(_.agencyId.toList.flatten)
       .toSet
 
-    private val shapes = gtfsZip.shapes
+    private val shapeIds: Set[ShapeId] = gtfsZip.shapes
       .getOrElse(Vector.empty)
       .flatMap(_.shapeId.toList)
       .toSet
 
-    private val stops = gtfsZip.stops
+    private val stopIds: Set[StopId] = gtfsZip.stops
       .getOrElse(Vector.empty)
       .flatMap(_.stopId.toList)
       .toSet
 
-    private val trips = gtfsZip.trips.getOrElse(Vector.empty).flatMap(_.tripId.toList).toSet
+    private val tripIds: Set[TripId] =
+      gtfsZip.trips.getOrElse(Vector.empty).flatMap(_.tripId.toList).toSet
 
-    private val routes = gtfsZip.routes.getOrElse(Vector.empty).flatMap(_.routeId.toList).toSet
+    private val routeIds: Set[RouteId] =
+      gtfsZip.routes.getOrElse(Vector.empty).flatMap(_.routeId.toList).toSet
 
     private val services =
       gtfsZip.calendarDates.getOrElse(Vector.empty).flatMap(_.serviceId.toList).toSet ++
         gtfsZip.calendars.getOrElse(Vector.empty).flatMap(_.serviceId.toList).toSet
 
     private val stopTimesForTrip = gtfsZip.stopTimes
+      .map(rows => sequenceValid(Validators.stopTimes, rows))
       .getOrElse(Vector.empty)
       .groupBy(_.tripId)
-      .collect {
-        case (Right(tripId), stopTimes) => tripId -> stopTimes.sortBy(_.stopSequence.getOrElse(-1))
-      }
+      .view
+      .mapValues(_.sortBy(_.stopSequence))
+      .toMap
 
     def trips(trip: TripsFileRow): ValidatedNec[String, Unit] = {
       val tripIdLabel = trip.tripId.map(t => s"Trip $t").getOrElse("Trip with invalid id")
       val stopTimes =
-        trip.tripId.toList.toVector.flatMap(id => stopTimesForTrip.getOrElse(id, Vector.empty))
+        trip.tripId.toList.toVector
+          .flatMap(id => stopTimesForTrip.getOrElse(id, Vector.empty))
       val arrivals = (stopTimes.headOption, stopTimes.lastOption)
-        .mapN {
-          case (firstStop, lastStop) =>
-            val firstStopArrival = firstStop.arrivalTime
-              .flatMap(_.toRight(s"$tripIdLabel first stop_time is missing required arrival_time"))
-              .map(_ => ())
-            val lastStopArrival = lastStop.arrivalTime
-              .flatMap(_.toRight(s"$tripIdLabel last stop_time is missing required arrival_time"))
-              .map(_ => ())
-            firstStopArrival.toValidatedNec |+| lastStopArrival.toValidatedNec
+        .mapN { case (firstStop, lastStop) =>
+          val firstStopArrival = firstStop.arrivalTime
+            .toRight(s"$tripIdLabel first stop_time is missing required arrival_time")
+            .map(_ => ())
+          val lastStopArrival = lastStop.arrivalTime
+            .toRight(s"$tripIdLabel last stop_time is missing required arrival_time")
+            .map(_ => ())
+          firstStopArrival.toValidatedNec |+| lastStopArrival.toValidatedNec
         }
         .getOrElse(s"$tripIdLabel has no listed stop_times".invalidNec)
+      val stopTimesAreOrdered: ValidatedNec[String, Time] =
+        stopTimes.foldLeft(Time.fromSeconds(0).validNec[String]) {
+          case (Invalid(e), _) => Invalid(e) // only going to report the first failure for this case
+          case (Valid(lastTime), stopTime) =>
+            (stopTime.arrivalTime, stopTime.departureTime) match {
+              case (Some(arrivalTime), _) if arrivalTime < lastTime =>
+                s"$tripIdLabel stop sequence ${stopTime.stopSequence} (id = ${stopTime.stopId}) has an arrival_time of $arrivalTime, before a previous stop ($lastTime).".invalidNec
+              case (_, Some(departureTime)) if departureTime < lastTime =>
+                s"$tripIdLabel stop sequence ${stopTime.stopSequence} (id = ${stopTime.stopId}) has a departure_time of $departureTime, before a previous stop ($lastTime).".invalidNec
+              case (maybeArr, maybeDep) =>
+                maybeDep.orElse(maybeArr).getOrElse(lastTime).validNec[String]
+              case (maybeArr, maybeDep) =>
+                (maybeDep ++ maybeArr ++ List(lastTime)).max.validNec[String]
+            }
+        }
       trip.shapeId
         .flatMap(_.toRight("n/a"))
-        .validRef(shapes.contains)
+        .validRef(shapeIds.contains)
         .leftMap(shapeId => s"$tripIdLabel has invalid reference to non-existent shape $shapeId")
         .toValidatedNec |+|
         trip.routeId
-          .validRef(routes.contains)
+          .validRef(routeIds.contains)
           .leftMap(routeId => s"$tripIdLabel has invalid reference to non-existent route $routeId")
           .toValidatedNec |+|
         trip.serviceId
@@ -151,7 +174,8 @@ object ValidateCmd extends CaseApp[Validate] {
           .leftMap(routeId => s"$tripIdLabel has invalid reference to non-existent route $routeId")
           .toValidatedNec |+|
         arrivals |+|
-        Validators.trips(trip).map(_ => ())
+        Validators.trips(trip).map(_ => ()) |+|
+        stopTimesAreOrdered.map(_ => ())
 
     }
 
@@ -159,12 +183,12 @@ object ValidateCmd extends CaseApp[Validate] {
       val routeId = route.routeId.map(_.toString).getOrElse("Route with invalid id")
       route.agencyId
         .flatMap(_.toRight("n/a"))
-        .validRef(agencies.contains)
+        .validRef(agencyIds.contains)
         .leftMap(id => s"$routeId has invalid reference to agency $id")
         .toValidatedNec |+|
         Either
           .cond(
-            agencies.size <= 1 || route.agencyId.exists(_.isDefined),
+            agencyIds.size <= 1 || route.agencyId.exists(_.isDefined),
             (),
             s"$routeId has no agency_id defined which is required with more than one agency in agencies.txt"
           )
@@ -175,11 +199,11 @@ object ValidateCmd extends CaseApp[Validate] {
     def stopTimes(stoptime: StopTimesFileRow): ValidatedNec[String, Unit] = {
       // Logic for "conditionally required" fields
       stoptime.stopId
-        .validRef(stops.contains)
+        .validRef(stopIds.contains)
         .leftMap(stop => s"Invalid stop_id $stop referenced in stop_times.txt")
         .toValidatedNec |+|
         stoptime.tripId
-          .validRef(trips.contains)
+          .validRef(tripIds.contains)
           .leftMap(trip => s"Invalid trip_id $trip referenced in stop_times.txt")
           .toValidatedNec |+|
         Validators.stopTimes(stoptime).map(_ => ())
@@ -235,8 +259,8 @@ object ValidateCmd extends CaseApp[Validate] {
   implicit class ValidateRefIfExists[L, R](either: Either[L, R]) {
 
     /**
-     * Returns Left(routeId) if the ID is included in the file but does not exist
-     * otherwise Right(unit)
+     * Returns Left(routeId) if the ID is included in the file but does not exist otherwise
+     * Right(unit)
      */
     def validRef(exist: R => Boolean): Either[R, Unit] = {
       either
